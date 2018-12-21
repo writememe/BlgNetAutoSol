@@ -4,7 +4,5 @@ This repository is a collection of exercises and work completed for the Building
 # Lab Documentation
 Documentation regarding the topology can be found in this repository at:
 
-# Diagram
 Lab/Network Topology.png
-# Inventory/Physical Connectivity
 Lab/topology.txt
