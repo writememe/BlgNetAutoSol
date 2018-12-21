@@ -1,0 +1,104 @@
+NETWORK TOPOLOGY
+Author: Daniel Teycheney
+
+This document describes the network topology which will be used to perform various exercises for the Building Network Automation Solutions course.
+
+
+The following devices are deployed in the environment:
+
+
+DEVICE LIST
+
+
+Hostname: lab-arista-01
+OS: EOS
+Management IP: 10.0.0.11
+Management Interface: Mgmt1
+
+Hostname: lab-iosv-01
+OS: IOS
+Management IP: 10.0.0.12
+Management Interface: Eth0/0
+
+Hostname: lab-iosv-02
+OS: IOS
+Management IP: 10.0.0.13
+Management Interface: Eth0/0
+
+Hostname: lab-nxos-01
+OS: NX-OS
+Management IP: 10.0.0.14
+Management Interface: Mgmt0
+
+Hostname: lab-junos-01
+OS: NX-OS
+Management IP: 10.0.0.19
+Management Interface: ge-0/0/0
+
+
+PHYSICAL CONNECTIVITY
+
+The following convention is used to describe physical connectivity:
+
+LOCAL_HOSTNAME [LOCAL_INTERFACE] <--> [REMOTE_INTERFACE] REMOTE_HOSTNAME
+
+LOCAL_HOSTNAME - The first host in the physical connectivity being described.
+LOCAL_INTERFACE - The local physical interface which connects to the remote physical interface.
+REMOTE_INTERFACE - The remote physical interface which connects to the local physical interface.
+REMOTE_HOSTNAME - The first host in the physical connectivity being described.
+
+
+The physical connectivity for the environment is as follows:
+
+lab-arista-01 [Eth2] <--> [Eth0/2] lab-iosv-01
+lab-arista-01 [Mgmt1] <--> [Not applicable] ManagementNet
+
+lab-iosv-01 [Eth0/0] <--> [Not applicable] ManagementNet
+lab-iosv-01 [Eth0/1] <--> [Not applicable] ExternalLab
+lab-iosv-01 [Eth0/2] <--> [Eth2] lab-arista-01
+lab-iosv-01 [Eth0/3] <--> [Eth0/3] lab-iosv-02
+
+lab-iosv-02 [Eth0/0] <--> [Not applicable] ManagementNet
+lab-iosv-02 [Eth0/1] <--> [Not applicable] ExternalLab
+lab-iosv-02 [Eth0/2] <--> [Eth1/2] lab-nxos-01
+lab-iosv-02 [Eth0/3] <--> [Eth0/3] lab-iosv-01
+
+lab-nxos-01 [Eth2] <--> [Eth0/2] lab-iosv-02
+lab-nxos-01 [Mgmt0] <--> [Not applicable] ManagementNet
+
+lab-junos-01 [ge-0/0/0] <--> [Not applicable] ManagementNet
+
+
+
+LOGICAL NETWORKS
+
+
+The following networks have been deployed in the environment:
+
+Network Name: OOB Management Network
+Subnet: 10.0.0.0/24
+Description: Used for managing devices out of band.
+
+Network Name: External Lab Network
+Subnet: 192.168.11.0/24
+Description: Used for connecting external to the lab network. Will be used to simulate the Internet.
+
+Network Name: Transit Network 1
+Subnet: 192.168.30.8/30
+Description: Point-to-point network for connecting devices.
+
+Network Name: Transit Network 2
+Subnet: 192.168.30.4/30
+Description: Point-to-point network for connecting devices.
+
+
+DEVICE SELECTION
+
+
+When electing devices for the environment, I made a pragmatic selection between IOS diversity and resource requirements. It would have been ideal to add other vendors to this environment (namely Cumulus), but unfortunately I simply don't have enough compute resources. My other reasoning for electing platforms which I rarely use is to upskill in the usage of NAPALM and Nornir, which look to be great tools. My current automation skills are being used on IOS, HP Procurve, Riverbed and Aruba, which with the exception of IOS are difficult and limited to automate.
+
+
+HARDWARE
+
+I'm using a Intel NUC which frankly is a great way to provide you with a level of compute in a very small form factor. I am running this environment on this using ESXi. My network topology is running on Eve-NG on this NUC which allows me to leave this environment on and allow me to use my laptop for other purposes. 
+
