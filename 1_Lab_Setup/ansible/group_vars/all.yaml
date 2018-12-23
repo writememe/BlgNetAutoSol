@@ -1,0 +1,3 @@
+---
+ansible_user: svc-ansible
+ansible_ssh_pass: Aut0m@t3
