@@ -1,0 +1,13 @@
+[ios]
+lab-iosv-01.lab.dfjt.local
+lab-iosv-02.lab.dfjt.local
+
+[eos]
+lab-arista-01.lab.dfjt.local
+
+[nxos]
+lab-nxos-01.lab.dfjt.local
+
+[junos]
+lab-junos-01.lab.dfjt.local
+
