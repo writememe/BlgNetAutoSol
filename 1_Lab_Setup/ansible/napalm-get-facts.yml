@@ -10,7 +10,7 @@
         username: "{{ username }}"
         dev_os: "{{ os }}"
         password: "{{ password }}"
-        filter: ['facts']                
+        filter: ['facts','lldp_neighbors_detail']                
       register: napalm_facts
     - name: Print gathered facts
       debug:
