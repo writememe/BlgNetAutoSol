@@ -1,3 +1,5 @@
 ---
 ansible_user: svc-ansible
 ansible_ssh_pass: Aut0m@t3
+username: svc-ansible
+password: Aut0m@t3
