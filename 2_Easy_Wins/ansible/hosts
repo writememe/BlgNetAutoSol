@@ -1,13 +1,28 @@
 [ios]
-lab-iosv-01.lab.dfjt.local os=ios
-lab-iosv-02.lab.dfjt.local os=ios
+lab-iosv-01.lab.dfjt.local
+lab-iosv-02.lab.dfjt.local
 
 [eos]
-lab-arista-01.lab.dfjt.local os=eos
+lab-arista-01.lab.dfjt.local
 
 [nxos]
-lab-nxos-01.lab.dfjt.local os=nxos
+lab-nxos-01.lab.dfjt.local
 
 [junos]
-lab-junos-01.lab.dfjt.local os=junos
+lab-junos-01.lab.dfjt.local
 
+[ios:vars]
+os=ios
+
+[eos:vars]
+os=eos
+
+[nxos:vars]
+os=nxos
+
+[junos:vars]
+os=junos
+
+[all:vars]
+username=svc-ansible
+password=Aut0m@t3

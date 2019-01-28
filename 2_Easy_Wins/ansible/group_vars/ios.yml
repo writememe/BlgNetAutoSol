@@ -1,4 +1,5 @@
 ---
+os_version: 15.4(1)T
 snmp_server: 10.0.0.11
 snmp_community: DfjT!
 syslog_servers:
