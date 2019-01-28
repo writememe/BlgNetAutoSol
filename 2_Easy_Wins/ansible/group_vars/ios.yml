@@ -1,0 +1,17 @@
+---
+snmp_server: 10.0.0.11
+snmp_community: DfjT!
+syslog_servers:
+  - 10.0.0.11
+  - 10.0.0.12
+dns_servers:
+  - 10.0.0.1
+  - 8.8.8.8
+ntp_servers:
+  - 10.0.0.1
+  - 8.8.8.8
+ip_domain_name: lab.dfjt.local
+line_vty:
+  - transport_input: ssh
+  - login: local
+

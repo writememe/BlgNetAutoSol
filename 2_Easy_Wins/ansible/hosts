@@ -1,0 +1,13 @@
+[ios]
+lab-iosv-01.lab.dfjt.local os=ios
+lab-iosv-02.lab.dfjt.local os=ios
+
+[eos]
+lab-arista-01.lab.dfjt.local os=eos
+
+[nxos]
+lab-nxos-01.lab.dfjt.local os=nxos
+
+[junos]
+lab-junos-01.lab.dfjt.local os=junos
+
