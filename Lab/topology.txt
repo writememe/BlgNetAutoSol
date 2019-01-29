@@ -85,9 +85,11 @@ Network Name: Transit Network 2
 Subnet: 192.168.30.4/30
 Description: Point-to-point network for connecting devices.
 
-Network Name: Transit Network 3
-Subnet: 192.168.30.0/30
+Network Name: Transit Network 4
+Subnet: 192.168.30.12/30
 Description: Point-to-point network for connecting devices.
+
+
 
 
 
