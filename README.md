@@ -7,4 +7,4 @@ Documentation regarding the topology can be found in this repository at:
 Lab/Network Topology.png  
 Lab/topology.txt  
 
-[[https://github.com/writememe/BlgNetAutoSol/blob/master/Lab/Lab%20Diagram%20-%20v1.0.jpg]]
+![Network Topology](https://github.com/writememe/BlgNetAutoSol/blob/master/Lab/Lab%20Diagram%20-%20v1.0.jpg]
