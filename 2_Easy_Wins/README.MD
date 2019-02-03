@@ -62,7 +62,7 @@ This playbook performs various compliance checks and reports against non-complia
 #### Variable Usage
 
 In order to get the best value out of the compliance check, I would recommend adhering to these guidelines:    
-_group_vars/all.yml_ - Define all global standards here. NTP, DNS, Syslog and NTP are examples of values which should be in here  
+_group_vars/all.yml_ - Define all global standards here. NTP, DNS, Syslog and SNMP are examples of values which should be in here  
 _group_vars/<os>.yml_ - Define all standards unique to that OS or vendor. OS versions, vendor specific features are examples of values which should be in here  
 _host_vars/hostname_ - Define all values which are unique to that device. Serial numbers should ideally be the only device in here, although possibly an ancient router running an approved legacy OS could be in here as an 'override' to the OS standards  
 
