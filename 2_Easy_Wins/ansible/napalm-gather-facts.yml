@@ -1,0 +1,22 @@
+---
+- name: Get facts using NAPALM
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    results: outputs/facts
+    hostname: "{{ inventory_hostname.split('.')[0] }}"
+  tasks:
+    - name: Get facts from device
+      napalm_get_facts:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        dev_os: "{{ os }}"
+        password: "{{ password }}"
+        filter: ['facts']                
+      register: napalm_facts
+    - copy: content="{{napalm_facts.ansible_facts}}" dest={{results}}/{{hostname}}.json
+    - name: Print gathered IOS facts
+      debug:
+        msg: "{{ napalm_facts.ansible_facts['napalm_os_version']|to_nice_json }}"
+

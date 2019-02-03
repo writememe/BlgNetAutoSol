@@ -1,0 +1,12 @@
+# This playbook gathers the basic facts gathered by another playbook on each device and assemble these individual report into a single report
+---
+- name: Collating basic facts into a summary report.
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    results: outputs/facts/info
+  tasks:
+  - assemble:
+      src: outputs/facts/info/
+      dest: reports/Basic-Facts-Summary-Report.txt

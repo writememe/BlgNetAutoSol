@@ -1,0 +1,7 @@
+# Check whether recorded serial number matches against device serial number for JUNOS devices.
+---
+- junos_command:
+    commands: "show chassis hardware"
+  register: result
+- set_fact: error_wrong_serial_number="Recorded serial number - {{serial_number}} does not match with device serial number."
+  when: "not(serial_number in result.stdout[0])"

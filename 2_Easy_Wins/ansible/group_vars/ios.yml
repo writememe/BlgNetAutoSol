@@ -1,0 +1,7 @@
+---
+os_version: 15.4(1)T
+ip_domain_name: lab.dfjt.local
+line_vty:
+  - transport_input: ssh
+  - login: local
+

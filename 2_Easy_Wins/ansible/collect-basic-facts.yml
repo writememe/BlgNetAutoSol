@@ -1,0 +1,36 @@
+# This playbook is made to gather some simple facts and put them into a text file.
+# This is ideally intended for non-programmers such as management or procurement teams for maintainance renewal
+# This playbook collect six key facts about the device; hostname, vendor, model, OS version, serial number and uptime.
+# A second playbook can assemble all devices into one text file.
+---
+- name: Collect basic facts from devices
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    results: outputs/facts/info
+    hostname: "{{ inventory_hostname.split('.')[0] }}"
+  tasks:
+    - name: Get basic information from devices
+      napalm_get_facts:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        dev_os: "{{ os }}"
+        password: "{{ password }}"
+        filter: ['facts']                
+      register: napalm_facts
+    - set_fact: device_hostname={{ napalm_facts.ansible_facts['napalm_hostname']}}
+    - set_fact: device_vendor={{ napalm_facts.ansible_facts['napalm_vendor']}}
+    - set_fact: device_model={{ napalm_facts.ansible_facts['napalm_model']}}
+    - set_fact: os_version={{ napalm_facts.ansible_facts['napalm_os_version']}}
+    - set_fact: serial_number={{ napalm_facts.ansible_facts['napalm_serial_number']}}
+    - set_fact: uptime={{ napalm_facts.ansible_facts['napalm_uptime']}}
+    - name: Save results to file
+      copy: |
+              content="DEVICE AUDIT\nINVENTORY HOSTNAME - {{hostname}}\nVENDOR - {{device_vendor}}\nMODEL - {{device_model}}
+              OS VERSION - {{os_version}}\nSERIAL NUMBER - {{serial_number}}\nUPTIME -- {{uptime}}\n\n"
+              dest={{results}}/{{hostname}}-key-info.txt
+    - name: Print details
+      debug:
+        msg: "INVENTORY HOSTNAME - {{hostname}} VENDOR - {{device_vendor}} MODEL - {{device_model}}
+              OS VERSION - {{os_version}}SERIAL NUMBER - {{serial_number}} UPTIME - {{uptime}}"

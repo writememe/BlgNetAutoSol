@@ -1,0 +1,12 @@
+# This playbook executes a collection of tests over multiple vendors. It supports junos, ios, eos and nxos.
+# Please note that the resulting report only reports non-compliance. If the report is empty than everything
+# is compliant.
+---
+- name:  Conducting multi-vendor compliance report. Any non-compliance will be reported.
+  hosts: all
+  tasks:
+  - set_fact: results={{ results|default(playbook_dir ~ '/results') }}
+  - include_tasks: "{{item}}"
+    with_fileglob: [ "tests/{{ansible_network_os}}/*.yml" ] 
+  - include_tasks: "reports/{{fmt|default('template')}}.yml"
+

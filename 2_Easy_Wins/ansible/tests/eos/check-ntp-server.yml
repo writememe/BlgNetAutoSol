@@ -1,0 +1,8 @@
+# Check whether NTP Server(s) are configured on EOS Devices
+---
+- eos_command:
+    commands: "show run | include ntp server"
+  register: result
+- set_fact: error_no_ntp_server="{{ntp_server}} is not configured as a NTP server"
+  when: "not(ntp_server in result.stdout[0])"
+

@@ -1,0 +1,7 @@
+# Check whether Syslog Server(s) are configured on IOS Devices
+---
+- ios_command:
+    commands: "show run | include logging host"
+  register: result
+- set_fact: error_no_syslog_server="{{syslog_server}} is not configured as a syslog server"
+  when: "not(syslog_server in result.stdout[0])"
