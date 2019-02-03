@@ -1,0 +1,7 @@
+# Check whether recorded serial number matches against device serial number for NXOS devices.
+---
+- nxos_command:
+    commands: "show version"
+  register: result
+- set_fact: error_wrong_serial_number="Recorded serial number - {{serial_number}} does not match with device serial number."
+  when: "not('  Processor Board ID '~serial_number in result.stdout[0])"

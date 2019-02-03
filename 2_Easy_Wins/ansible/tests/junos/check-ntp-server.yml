@@ -1,0 +1,8 @@
+# Check whether NTP Server(s) are configured on JUNOS Devices
+---
+- junos_command:
+    commands: "show configuration system ntp"
+  register: result
+- set_fact: error_no_ntp_server="{{ntp_server}} is not configured as a NTP server"
+  when: "not(ntp_server in result.stdout[0])"
+

@@ -1,0 +1,18 @@
+# This playbook will gather the startup configs from all devices
+- name: Get startup configs using NAPALM
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    results: outputs/configs/startup
+    hostname: "{{ inventory_hostname.split('.')[0] }}"
+  tasks:
+    - name: Get startup config from device
+      napalm_get_facts:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        dev_os: "{{ os }}"
+        password: "{{ password }}"
+        filter: ['config']                
+      register: napalm_facts
+    - copy: content="{{napalm_facts.ansible_facts['napalm_config']['startup']}}" dest={{results}}/{{hostname}}.txt

@@ -1,0 +1,7 @@
+# Check whether OS Version matches against the approved version on EOS devices.
+---
+- eos_command:
+    commands: "show version"
+  register: result
+- set_fact: error_wrong_os_version="{{os_version}} is mismatched against approved OS version."
+  when: "not(os_version in result.stdout[0])"
