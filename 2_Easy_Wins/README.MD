@@ -27,10 +27,10 @@ Below is an example of my /etc/hosts file:
 10.0.0.19 lab-junos-01.lab.dfjt.local  
 
 ## Playbooks
-There are six playbooks into this projects, which are broken into three functions and they are described below:
+There are six playbooks in this project, which are broken into three functions and they are described below:
 
 ### Fact Gathering
-`gather-facts.yml` - Used to gather NAPALM facts about all devices, store them in both JSON and YAML format in the `outputs/facts/` directory using the hostname to name the file. The output of this playbook is typically for programmers to peform more operations with the data.
+`gather-facts.yml` - Used to gather NAPALM facts about all devices, store them in both JSON and YAML format in the `outputs/facts/` directory using the hostname to name the file. The output of this playbook is typically for programmers to perform more operations with the data.
 
 `collect-basic-facts.yml` - This is the first playbook used to collect basic fact data about device(s) and store them into a text file in the `outputs/facts/info`directory using the hostname to name the file. The output is meant to be more human readable, and something you could give to a non-programmer for their persual.  
 `assemble-basic-report.yml` - This is the second playbook, to be used after `collect-basic-facts.yml` has been executed. It retrieves all the text files in the `outputs/facts/info`directory and assembles them into the file `reports/Basic-Facts-Summary-Report.txt` file.
@@ -39,7 +39,7 @@ Both these playbooks were split intentionally because there may be times when yo
 
 ### Configuration Retrieval
 `collect-running-config.yml` - This playbook collects all the running configurations from devices(s) and stores them into a text file based on their hostname `outputs/configs/running`.  
-`collect-startup-config.yml` - This playbook collects all the running configurations from devices(s) and stores them into a text file based on their hostname `outputs/configs/startup`.  
+`collect-startup-config.yml` - This playbook collects all the startup configurations from devices(s) and stores them into a text file based on their hostname `outputs/configs/startup`.  
 
 ### Compliance
 
