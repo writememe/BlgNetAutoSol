@@ -1,0 +1,27 @@
+---
+serial_number: " "
+
+common:
+ - os_version: 4.17.5M
+
+routing:
+ - bgp: 65011
+ 
+# Initial interface configuration
+interfaces:
+ - name: Management1
+   ip: 10.0.0.11
+   subnet_mask: 255.255.255.0
+   description: OOB Management
+ - name: Ethernet2
+   ip: 192.168.30.10
+   subnet_mask: 255.255.255.252
+   description: To lab-iosv-01 - Ethernet0/2
+ - name: Ethernet3
+   ip: 192.168.30.13
+   subnet_mask: 255.255.255.252
+   description: To lab-nxos-01 - Ethernet1/3
+ - name: Loopback0
+   ip: 192.168.40.11
+   subnet_mask: 255.255.255.255
+   description: Loopback Interface
