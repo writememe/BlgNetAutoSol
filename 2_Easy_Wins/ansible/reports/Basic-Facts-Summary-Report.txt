@@ -1,5 +1,5 @@
-*
-!.gitignore
+# Below is a sample output of this report #
+
 DEVICE AUDIT
 INVENTORY HOSTNAME - lab-arista-01
 VENDOR - Arista
