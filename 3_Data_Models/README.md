@@ -1,11 +1,11 @@
 # Module 3 - Data Models
 
-In this module, I plan to create a data model, of which I will leverage to perform numerous operations. The activities which I want to address are:
+In this module, I plan to create a data model, which I will leverage to perform numerous operations. The activities which I want to address are:  
 
 - Create a data model, abstracted from device configuration(s)
+- Develop tools which allow the data model to be vendor agnostic
 - Build a data model which can be used to deploy the intent across the network
 - Build a data model which can be used to validate against device configuration(s)
-- Develop tools which allow the data model to be vendor agnostic
 
 ## Pre-requisites
 
@@ -20,7 +20,7 @@ Below is an example of my /etc/hosts file:
 10.0.0.13 lab-iosv-02.lab.dfjt.local  
 10.0.0.14 lab-nxos-01.lab.dfjt.local  
 10.0.0.19 lab-junos-01.lab.dfjt.local 
-10.0.0.1 dfjt-r001.lab.dfjt.local
+10.0.0.1 dfjt-r001.lab.dfjt.local  
 
 ## Caveats
 
