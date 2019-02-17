@@ -1,5 +1,5 @@
 # Building Network Automation Solutions
-This repository is a collection of exercises and work completed for the Building Network Automation Solutions course provided by IPSpace.
+This repository is a collection of exercises and work completed for the [Building Network Automation Solutions](https://www.ipspace.net/Building_Network_Automation_Solutions) course provided by [IPSpace](https://www.ipspace.net/Main_Page).
 
 # Lab Documentation
 Documentation regarding the topology can be found below
