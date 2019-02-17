@@ -50,7 +50,7 @@
      dest: "{{ host_dir }}/assembled.conf"
     changed_when: False
 
-- name: Load configuration into the device
+- name: Compare data model with configuration on device, report the differences
   hosts: all
   tasks:
   - napalm_install_config:

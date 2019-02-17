@@ -1,3 +1,0 @@
-syslog_server: 10.0.0.101
-dns_server: 10.0.0.1
-ntp_server: 8.8.8.8
