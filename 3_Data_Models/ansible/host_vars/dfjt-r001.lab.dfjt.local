@@ -1,0 +1,17 @@
+hostname: dfjt-r001
+serial_number: FTX183680V0
+os_version: 15.2(4)M7
+
+bgp:
+  - asn: 65001
+   
+# Initial interface configuration
+interfaces:
+  - name: Vlan300
+    ip: 192.168.199.1
+    subnet_mask: 255.255.255.0
+    description: Test Network
+  - name: Loopback0
+    ip: 192.168.40.1
+    subnet_mask: 255.255.255.255
+    description: Loopback Interface

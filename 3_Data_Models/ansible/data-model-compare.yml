@@ -1,0 +1,66 @@
+---
+- name: Building configuration from data model
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+      config_dir: "configs"
+      build_dir: "compiled"
+      hostname: "{{ inventory_hostname.split('.')[0] }}"
+  tasks:
+     - name: Set some global facts
+       set_fact:
+          host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
+       changed_when: False
+       check_mode: yes
+     - name: Checking config directory is created
+       file: path={{ config_dir }} state=directory
+       check_mode: no
+       run_once: yes
+     - name: Checking build directory is created
+       file: path={{ build_dir }} state=directory
+       check_mode: no
+       run_once: yes
+     - name: Clearing old build configuration files
+       file: path={{ host_dir }} state=absent
+       changed_when: false
+       check_mode: no
+     - name: Rebuild build configuration directories
+       file: path={{ host_dir }} state=directory
+       changed_when: false
+       check_mode: no     
+
+- name: Base configuration
+  hosts: all
+  connection: local
+  roles:
+    - base
+
+- name: Common configuration
+  hosts: all
+  connection: local
+  roles:
+    - common
+
+- name: Assembling configuration components
+  hosts: all
+  tasks:
+  - assemble:
+     src: "{{ host_dir }}"
+     dest: "{{ host_dir }}/assembled.conf"
+    changed_when: False
+
+- name: Load configuration into the device
+  hosts: all
+  tasks:
+  - napalm_install_config:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      dev_os: "{{ os }}"
+      config_file: "{{ host_dir }}/assembled.conf"
+      replace_config: false
+      get_diffs: True
+      commit_changes: False
+      diff_file: "{{ host_dir }}/config-diff"
+  tags: [print_action]

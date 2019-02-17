@@ -1,0 +1,7 @@
+---
+- name: Configure Routing
+  template:
+    src: "{{ os }}/routing.j2"
+    dest: "{{ host_dir }}/routing.conf"
+  changed_when: False
+  check_mode: yes

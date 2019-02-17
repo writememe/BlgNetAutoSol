@@ -1,0 +1,9 @@
+hostname {{ hostname }}
+!
+ip domain-name {{ ip_domain_name }}
+!
+clock timezone {{ timezone }}
+!
+{% for entry in feature %}
+feature {{ entry }}
+{% endfor %}

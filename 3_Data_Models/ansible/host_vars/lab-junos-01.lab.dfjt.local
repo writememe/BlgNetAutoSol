@@ -1,0 +1,6 @@
+---
+hostname: lab-junos-01
+serial_number: 98a34365d1de
+
+bgp:
+ - asn: 65019

@@ -1,0 +1,5 @@
+---
+- name: Common Configuration Paramters
+  template:
+    src: "{{ os }}/common.j2"
+    dest: "{{ host_dir }}/05-common.conf"

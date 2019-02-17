@@ -1,9 +1,9 @@
 ---
-hostname: lab-iosv-02
+hostname: lab-iosv-01
 serial_number: 67108912
 
 bgp:
-  - asn: 65013
+  - asn: 65012
  
 # Initial interface configuration
 interfaces:
