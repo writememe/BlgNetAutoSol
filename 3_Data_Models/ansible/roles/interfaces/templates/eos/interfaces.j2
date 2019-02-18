@@ -1,0 +1,8 @@
+{% for interface in interfaces %}
+interface {{ interface.name }}
+   description {{ interface.description }}
+   no shutdown
+   {{ 'no switchport' if not interface.name.startswith("lo") else "" }}
+   ip address {{ interface.ip }} {{interface.subnet_mask}}
+!
+{% endfor %}

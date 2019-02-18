@@ -4,7 +4,9 @@ serial_number: 67108912
 
 bgp:
   - asn: 65013
- 
+  - rid: 192.168.40.13
+  - auth: lab
+
 # Initial interface configuration
 interfaces:
   - name: Ethernet0/0
@@ -24,6 +26,21 @@ interfaces:
     subnet_mask: 255.255.255.252
     description: To lab-iosv-02 - Ethernet0/3
   - name: Loopback0
-    ip: 192.168.40.12
+    ip: 192.168.40.13
     subnet_mask: 255.255.255.255
     description: Loopback Interface
+
+
+peers:
+  - ip: 192.168.11.1
+    asn: 65001
+    description: dfjt-r001
+  - ip: 192.168.11.11
+    asn: 65012
+    description: lab-iosv-02
+  - ip: 192.168.30.10
+    asn: 65011
+    description: lab-arista-01
+  - ip: 192.168.30.6
+    asn: 65014
+    description: lab-nxos-01

@@ -36,7 +36,7 @@ peers:
     asn: 65001
     description: dfjt-r001
   - ip: 192.168.11.13
-    asn: 65012
+    asn: 65013
     description: lab-iosv-02
   - ip: 192.168.30.10
     asn: 65011
