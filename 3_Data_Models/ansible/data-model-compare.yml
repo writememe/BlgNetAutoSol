@@ -41,6 +41,11 @@
   connection: local
   roles:
     - common
+- name: Interface configuration
+  hosts: all
+  connection: local
+  roles:
+    - interfaces
 
 - name: Assembling configuration components
   hosts: all

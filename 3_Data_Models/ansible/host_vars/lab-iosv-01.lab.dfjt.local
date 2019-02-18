@@ -2,9 +2,12 @@
 hostname: lab-iosv-01
 serial_number: 67108912
 
+
 bgp:
   - asn: 65012
- 
+  - rid: 192.168.40.12
+  - auth: lab
+
 # Initial interface configuration
 interfaces:
   - name: Ethernet0/0
@@ -27,3 +30,17 @@ interfaces:
     ip: 192.168.40.12
     subnet_mask: 255.255.255.255
     description: Loopback Interface
+
+peers:
+  - ip: 192.168.11.1
+    asn: 65001
+    description: dfjt-r001
+  - ip: 192.168.11.13
+    asn: 65012
+    description: lab-iosv-02
+  - ip: 192.168.30.10
+    asn: 65011
+    description: lab-arista-01
+  - ip: 192.168.30.6
+    asn: 65014
+    description: lab-nxos-01   
