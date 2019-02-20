@@ -3,31 +3,26 @@ hostname: lab-iosv-02
 serial_number: 67108912
 
 bgp:
-  - asn: 65013
-  - rid: 192.168.40.13
-  - auth: lab
+  asn: 65013
+  rid: 192.168.40.13
+  auth: lab
 
 # Initial interface configuration
 interfaces:
   - name: Ethernet0/0
-    ip: 10.0.0.12
-    subnet_mask: 255.255.255.0
+    ip: 10.0.0.13/24
     description: OOB Management
   - name: Ethernet0/1
-    ip: 192.168.11.12
-    subnet_mask: 255.255.255.0
+    ip: 192.168.11.13/24
     description: To Internet
   - name: Ethernet0/2
-    ip: 192.168.30.9
-    subnet_mask: 255.255.255.252
-    description: To lab-arista-01 - Ethernet2
+    ip: 192.168.30.1/30
+    description: To lab-nxos-01 - Ethernet1/2
   - name: Ethernet0/3
-    ip: 192.168.30.5
-    subnet_mask: 255.255.255.252
-    description: To lab-iosv-02 - Ethernet0/3
+    ip: 192.168.30.6/30
+    description: To lab-iosv-01 - Ethernet0/3
   - name: Loopback0
-    ip: 192.168.40.13
-    subnet_mask: 255.255.255.255
+    ip: 192.168.40.13/32
     description: Loopback Interface
 
 
@@ -35,12 +30,9 @@ peers:
   - ip: 192.168.11.1
     asn: 65001
     description: dfjt-r001
-  - ip: 192.168.11.11
+  - ip: 192.168.30.5
     asn: 65012
-    description: lab-iosv-02
-  - ip: 192.168.30.10
-    asn: 65011
-    description: lab-arista-01
-  - ip: 192.168.30.6
+    description: lab-iosv-01
+  - ip: 192.168.30.2
     asn: 65014
     description: lab-nxos-01

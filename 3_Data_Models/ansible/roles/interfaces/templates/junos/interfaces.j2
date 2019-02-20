@@ -1,10 +1,13 @@
 {% for interface in interfaces %}
-{{ interface.name }} {
-    description {{ interface.description }};
-    unit 0 {
-        family inet {
-            address {{ interface.ip }} {{interface.subnet_mask}};
-        }
-    }
-}    
+interfaces {
+    {{ interface.name }} {
+        description {{ interface.description }};
+	unit 0 {
+            family inet {
+                address {{ interface.ip }};
+            }
+        }    
+    } 
+}
+
 {% endfor %}

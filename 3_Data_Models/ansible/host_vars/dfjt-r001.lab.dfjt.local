@@ -3,15 +3,23 @@ serial_number: FTX183680V0
 os_version: 15.2(4)M7
 
 bgp:
-  - asn: 65001
-   
+  asn: 65001
+  rid: 192.168.40.1
+  auth: lab
+ 
 # Initial interface configuration
 interfaces:
-  - name: Vlan300
-    ip: 192.168.199.1
-    subnet_mask: 255.255.255.0
-    description: Test Network
+  - name: Vlan101
+    ip: 192.168.11.1/24
+    description: Lab External Network
   - name: Loopback0
-    ip: 192.168.40.1
-    subnet_mask: 255.255.255.255
+    ip: 192.168.40.1/32
     description: Loopback Interface
+
+peers:
+  - ip: 192.168.11.12
+    asn: 65012
+    description: lab-iosv-01
+  - ip: 192.168.11.13
+    asn: 65013
+    description: lab-iosv-03

@@ -4,3 +4,19 @@ serial_number: 98a34365d1de
 
 bgp:
  - asn: 65019
+ - rid: 10.0.0.19
+ - auth: lab
+
+# Initial interface configuration
+interfaces:
+  - name: ge-0/0/0
+    ip: 10.0.0.19/24
+    description: OOB_Management
+  - name: ge-0/0/1
+    ip: 192.168.31.1/30
+    description: OtherInterface
+
+peers:
+  - ip: 192.168.31.2
+    asn: 65020
+    description: fake peer
