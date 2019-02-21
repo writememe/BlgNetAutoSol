@@ -3,13 +3,13 @@ hostname: lab-nxos-01
 serial_number: 9238C9BU8O8
 
 bgp:
- - asn: 65014
- - rid: 192.168.40.14
- - auth: lab
+ asn: 65014
+ rid: 192.168.40.14
+ auth: lab
  
 # Initial interface configuration
 interfaces:
-  - name: Management0
+  - name: mgmt0
     ip: 10.0.0.14/24
     description: OOB Management
   - name: Ethernet1/2

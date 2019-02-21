@@ -3,12 +3,13 @@
   hosts: all
   connection: local
   gather_facts: no
+  tags: [ 'validate' ]
   vars:
       config_dir: "configs"
       build_dir: "compiled"
       hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
-     - name: Set some global facts
+     - name: Set global facts, cleanup old files and directories
        set_fact:
           host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
        changed_when: False
@@ -23,27 +24,30 @@
        run_once: yes
      - name: Clearing old build configuration files
        file: path={{ host_dir }} state=absent
-       changed_when: false
+       changed_when: False
        check_mode: no
      - name: Rebuild build configuration directories
        file: path={{ host_dir }} state=directory
-       changed_when: false
-       check_mode: no     
+       changed_when: False
+       check_mode: no
 
 - name: Base configuration
   hosts: all
   connection: local
+  tags: [ 'validate' ]
   roles:
     - base
 
 - name: Common configuration
   hosts: all
   connection: local
+  tags: [ 'validate' ]
   roles:
     - common
 
 - name: Interface configuration
   hosts: all
+  tags: [ 'validate' ]
   connection: local
   roles:
     - interfaces
@@ -51,11 +55,13 @@
 - name: Routing configuration
   hosts: all
   connection: local
+  tags: [ 'validate' ]
   roles:
    - routing
 
 - name: Assembling configuration components
   hosts: all
+  tags: [ 'validate' ]
   tasks:
   - assemble:
      src: "{{ host_dir }}"
@@ -64,6 +70,7 @@
 
 - name: Compare data model with configuration on device, report the differences
   hosts: all
+  tags: [ 'validate' ]
   tasks:
   - napalm_install_config:
       hostname: "{{ inventory_hostname }}"
@@ -71,8 +78,22 @@
       password: "{{ password }}"
       dev_os: "{{ os }}"
       config_file: "{{ host_dir }}/assembled.conf"
-      replace_config: false
+      replace_config: False
       get_diffs: True
       commit_changes: False
       diff_file: "{{ host_dir }}/config-diff"
-  tags: [print_action]
+
+- name: Deploy configuration differences
+  hosts: all
+  tags: [ 'deploy' ]
+  tasks:
+  - napalm_install_config:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      dev_os: "{{ os }}"
+      config_file: "{{ host_dir }}/assembled.conf"
+      replace_config: False
+      get_diffs: True
+      commit_changes: True
+      diff_file: "{{ host_dir }}/deployed-config-diff"

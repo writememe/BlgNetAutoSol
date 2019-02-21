@@ -2,7 +2,6 @@
 interface {{ interface.name }}
    description {{ interface.description }}
    no shutdown
-   {{ 'no switchport' if not interface.name.startswith("Lo") else "" }}
+   {{ 'no switchport' if interface.name.startswith("Ethernet") else "" }}
    ip address {{ interface.ip }}
-!
 {% endfor %}

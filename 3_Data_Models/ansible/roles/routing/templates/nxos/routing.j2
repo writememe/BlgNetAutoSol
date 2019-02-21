@@ -1,0 +1,9 @@
+router bgp {{ bgp.asn }}
+  router-id {{ bgp.rid }}
+  log-neighbor-changes
+{% for entry in peers %}
+  neighbor {{ entry.ip }}
+    remote-as {{ entry.asn }}
+    description {{ entry.description }}
+    password 0 {{ bgp.auth }}
+{% endfor %}

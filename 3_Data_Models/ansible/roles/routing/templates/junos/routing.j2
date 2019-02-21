@@ -1,0 +1,19 @@
+routing-options {
+   router-id {{ bgp.rid }};
+   autonomous-system {{ bgp.asn }};
+}
+
+{% for entry in peers %}
+protocols {
+    bgp {
+        log-updown
+        group {{ entry.description }} {
+        description {{ entry.description }};
+        authentication-key {{ bgp.auth }};
+        neighbor {{ entry.ip }} {
+            peer-as {{ entry.asn }} ;
+            }
+       }
+   }
+}
+{% endfor %}
