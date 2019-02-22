@@ -5,7 +5,8 @@ serial_number: 9238C9BU8O8
 bgp:
  asn: 65014
  rid: 192.168.40.14
- auth: lab
+# Encrypted password
+ auth: 57a158d981181c20
  
 # Initial interface configuration
 interfaces:

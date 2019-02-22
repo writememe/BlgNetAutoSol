@@ -1,9 +1,8 @@
 {% for interface in interfaces %}
 interface {{ interface.name }}
-  description {{ interface.description }}
-  no shutdown
-  {{ 'no switchport' if not interface.name.startswith("lo") else "" }}
-  ip address {{ interface.ip | ipaddr('address') }} {{ interface.ip | ipaddr('netmask') }}
+ description {{ interface.description }}
+ no shutdown
+ ip address {{ interface.ip | ipaddr('address') }} {{ interface.ip | ipaddr('netmask') }}
 !
 {% endfor %}
 
