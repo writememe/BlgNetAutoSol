@@ -2,7 +2,8 @@ router bgp {{ bgp.asn }}
   router-id {{ bgp.rid }}
   log-neighbor-changes
 {% for entry in peers %}
-  neighbor {{ entry.ip }} remote-as {{ entry.asn }}
+  neighbor {{ entry.ip }}
+    remote-as {{ entry.asn }}
     description {{ entry.description }}
     password 3 {{ bgp.auth }}
     address-family ipv4 unicast

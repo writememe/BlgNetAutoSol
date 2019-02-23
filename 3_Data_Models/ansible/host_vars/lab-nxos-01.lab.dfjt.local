@@ -5,7 +5,7 @@ serial_number: 9238C9BU8O8
 bgp:
  asn: 65014
  rid: 192.168.40.14
-# Encrypted password
+# Encrypted password - Encryption type 3
  auth: 57a158d981181c20
  
 # Initial interface configuration
@@ -19,7 +19,7 @@ interfaces:
   - name: Ethernet1/3
     ip: 192.168.30.14/30
     description: To lab-arista-01 - Ethernet3
-  - name: Loopback0
+  - name: loopback0
     ip: 192.168.40.14/32
     description: Loopback Interface
 

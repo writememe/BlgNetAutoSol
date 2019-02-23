@@ -3,7 +3,7 @@
   hosts: all
   connection: local
   gather_facts: no
-  tags: [ 'validate' ]
+  tags: [ 'build','validate' ]
   vars:
       config_dir: "configs"
       build_dir: "compiled"
@@ -34,20 +34,20 @@
 - name: Base configuration
   hosts: all
   connection: local
-  tags: [ 'validate' ]
+  tags: [ 'build','validate' ]
   roles:
     - base
 
 - name: Common configuration
   hosts: all
   connection: local
-  tags: [ 'validate' ]
+  tags: [ 'build','validate' ]
   roles:
     - common
 
 - name: Interface configuration
   hosts: all
-  tags: [ 'validate' ]
+  tags: [ 'build','validate' ]
   connection: local
   roles:
     - interfaces
@@ -55,13 +55,13 @@
 - name: Routing configuration
   hosts: all
   connection: local
-  tags: [ 'validate' ]
+  tags: [ 'build','validate' ]
   roles:
    - routing
 
 - name: Assembling configuration components
   hosts: all
-  tags: [ 'validate' ]
+  tags: [ 'build','validate' ]
   tasks:
   - assemble:
      src: "{{ host_dir }}"
@@ -82,18 +82,6 @@
       get_diffs: True
       commit_changes: False
       diff_file: "{{ host_dir }}/config-diff"
-
-- name: Deploy configuration differences
-  hosts: all
-  tags: [ 'deploy' ]
-  tasks:
-  - napalm_install_config:
-      hostname: "{{ inventory_hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      dev_os: "{{ os }}"
-      config_file: "{{ host_dir }}/assembled.conf"
-      replace_config: False
-      get_diffs: True
-      commit_changes: True
-      diff_file: "{{ host_dir }}/deployed-config-diff"
+      
+      
+      
