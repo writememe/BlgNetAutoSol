@@ -4,6 +4,6 @@ router bgp {{ bgp.asn }}
 {% for entry in peers %}
  neighbor {{ entry.ip }} remote-as {{ entry.asn }}
  neighbor {{ entry.ip }} description {{ entry.description }}
- neighbor {{ entry.ip }} password 0 {{ bgp.auth }}
+ neighbor {{ entry.ip }} password 7 {{ bgp.auth }}
 {% endfor %}
 !
