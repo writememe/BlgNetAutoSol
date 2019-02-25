@@ -5,7 +5,12 @@ serial_number: 67108912
 bgp:
   asn: 65013
   rid: 192.168.40.13
-  auth: lab
+  # Encrypted password - password type 7  
+  auth: 060A0E23
+
+connected_rm:
+  name: CONNECTED 
+  interface: Loopback0
 
 # Initial interface configuration
 interfaces:

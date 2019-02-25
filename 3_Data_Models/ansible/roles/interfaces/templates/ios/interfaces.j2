@@ -1,7 +1,6 @@
 {% for interface in interfaces %}
 interface {{ interface.name }}
  description {{ interface.description }}
- no shutdown
  ip address {{ interface.ip | ipaddr('address') }} {{ interface.ip | ipaddr('netmask') }}
 !
 {% endfor %}

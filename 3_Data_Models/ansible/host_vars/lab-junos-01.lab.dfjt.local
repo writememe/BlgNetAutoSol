@@ -4,8 +4,12 @@ serial_number: 98a34365d1de
 
 bgp:
  asn: 65019
- rid: 10.0.0.19
- auth: lab
+ rid: 192.168.40.19
+ auth: $9$rwxlMX7NbY2a
+
+connected_rm:
+  name: CONNECTED 
+  interface: lo0
 
 # Initial interface configuration
 interfaces:
@@ -15,6 +19,9 @@ interfaces:
   - name: ge-0/0/1
     ip: 192.168.12.19/24
     description: Lab_Interface
+  - name: lo0
+    ip: 192.168.40.19
+    description: Loopback_Interface
 
 peers:
   - ip: 192.168.12.1

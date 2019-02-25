@@ -1,6 +1,12 @@
+route-map {{ connected_rm.name }} permit 20
+  description "Redistributing {{ connected_rm.interface }}
+  match interface {{ connected_rm.interface}}
+
 router bgp {{ bgp.asn }}
   router-id {{ bgp.rid }}
   log-neighbor-changes
+  address-family ipv4 unicast
+    redistribute direct route-map {{ connected_rm.name }}
 {% for entry in peers %}
   neighbor {{ entry.ip }}
     remote-as {{ entry.asn }}

@@ -6,7 +6,11 @@ bgp:
   asn: 65011
   rid: 192.168.40.11
   auth: lab
- 
+
+connected_rm:
+  name: CONNECTED 
+  interface: Loopback0
+
 # Initial interface configuration
 interfaces:
   - name: Management1

@@ -7,12 +7,20 @@ bgp:
   rid: 192.168.40.1
 # Encrypted password - password type 7  
   auth: 060A0E23
- 
+
+connected_rm:
+  name: CONNECTED 
+  interface: Loopback0
+
+
 # Initial interface configuration
 interfaces:
   - name: Vlan101
     ip: 192.168.11.1/24
     description: Lab External Network
+  - name: Vlan102
+    ip: 192.168.12.1/23
+    description: Alternative Lab Subnet
   - name: Loopback0
     ip: 192.168.40.1/32
     description: Loopback Interface
@@ -24,3 +32,6 @@ peers:
   - ip: 192.168.11.13
     asn: 65013
     description: lab-iosv-03
+  - ip: 192.168.12.19
+    asn: 65019
+    description: lab-junos-01

@@ -3,10 +3,24 @@ routing-options {
    autonomous-system {{ bgp.asn }};
 }
 
+policy-options {
+    policy-statement {{ connected_rm.name }} {
+        from interface {{connected_rm.interface}}.0;
+        then accept;
+    }
+    policy-statement IMPORT-ALL {
+        from protocol bgp;
+        then accept;
+    }
+}
+
+
 {% for entry in peers %}
 protocols {
     bgp {
-        log-updown
+        log-updown;
+        import IMPORT-ALL;
+        export {{ connected_rm.name }};
         group {{ entry.description }} {
         description {{ entry.description }};
         authentication-key {{ bgp.auth }};
