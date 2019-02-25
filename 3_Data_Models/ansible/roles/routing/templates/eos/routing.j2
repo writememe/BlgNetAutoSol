@@ -1,0 +1,16 @@
+route-map {{ connected_rm.name }} permit 20
+   description "Redistributing {{ connected_rm.interface }}"
+   match interface {{ connected_rm.interface }}
+
+no router bgp
+router bgp {{ bgp.asn }}
+   router-id {{ bgp.rid }}
+   bgp log-neighbor-changes
+   redistribute connected route-map {{ connected_rm.name }}
+{% for entry in peers %}
+   neighbor {{ entry.ip }} remote-as {{ entry.asn }}
+   neighbor {{ entry.ip }} description {{ entry.description }}
+   neighbor {{ entry.ip }} password 0 {{ bgp.auth }}
+   neighbor {{ entry.ip }} maximum-routes 12000
+{% endfor %}
+!

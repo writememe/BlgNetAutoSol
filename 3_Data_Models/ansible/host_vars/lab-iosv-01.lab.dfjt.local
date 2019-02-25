@@ -2,28 +2,42 @@
 hostname: lab-iosv-01
 serial_number: 67108912
 
+
 bgp:
-  - asn: 65012
- 
+  asn: 65012
+  rid: 192.168.40.12
+  # Encrypted password - password type 7  
+  auth: 060A0E23
+
+connected_rm:
+  name: CONNECTED 
+  interface: Loopback0
+
 # Initial interface configuration
 interfaces:
   - name: Ethernet0/0
-    ip: 10.0.0.12
-    subnet_mask: 255.255.255.0
+    ip: 10.0.0.12/24
     description: OOB Management
   - name: Ethernet0/1
-    ip: 192.168.11.12
-    subnet_mask: 255.255.255.0
+    ip: 192.168.11.12/24
     description: To Internet
   - name: Ethernet0/2
-    ip: 192.168.30.9
-    subnet_mask: 255.255.255.252
+    ip: 192.168.30.9/30
     description: To lab-arista-01 - Ethernet2
   - name: Ethernet0/3
-    ip: 192.168.30.5
-    subnet_mask: 255.255.255.252
+    ip: 192.168.30.5/30
     description: To lab-iosv-02 - Ethernet0/3
   - name: Loopback0
-    ip: 192.168.40.12
-    subnet_mask: 255.255.255.255
+    ip: 192.168.40.12/32
     description: Loopback Interface
+
+peers:
+  - ip: 192.168.11.1
+    asn: 65001
+    description: dfjt-r001
+  - ip: 192.168.30.6
+    asn: 65013
+    description: lab-iosv-02
+  - ip: 192.168.30.10
+    asn: 65011
+    description: lab-arista-01   

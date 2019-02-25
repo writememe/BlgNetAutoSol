@@ -1,5 +1,5 @@
 {% for entry in ntp_servers %}
-ntp server {{ entry }}
+ntp server {{ entry }} use-vrf default
 {% endfor %}
 {% for entry in dns_servers %}
 ip name-server {{ entry }}

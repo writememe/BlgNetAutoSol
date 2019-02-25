@@ -3,23 +3,33 @@ hostname: lab-arista-01
 serial_number: " "
 
 bgp:
-  - asn: 65011
- 
+  asn: 65011
+  rid: 192.168.40.11
+  auth: lab
+
+connected_rm:
+  name: CONNECTED 
+  interface: Loopback0
+
 # Initial interface configuration
 interfaces:
   - name: Management1
-    ip: 10.0.0.11
-    subnet_mask: 255.255.255.0
+    ip: 10.0.0.11/24
     description: OOB Management
   - name: Ethernet2
-    ip: 192.168.30.10
-    subnet_mask: 255.255.255.252
+    ip: 192.168.30.10/30
     description: To lab-iosv-01 - Ethernet0/2
   - name: Ethernet3
-    ip: 192.168.30.13
-    subnet_mask: 255.255.255.252
+    ip: 192.168.30.13/30
     description: To lab-nxos-01 - Ethernet1/3
   - name: Loopback0
-    ip: 192.168.40.11
-    subnet_mask: 255.255.255.255
+    ip: 192.168.40.11/32
     description: Loopback Interface
+
+peers:
+  - ip: 192.168.30.9
+    asn: 65012
+    description: lab-iosv-01
+  - ip: 192.168.30.14
+    asn: 65014
+    description: lab-nxos-01

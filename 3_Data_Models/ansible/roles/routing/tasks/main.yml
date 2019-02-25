@@ -1,7 +1,5 @@
 ---
-- name: Configure Routing
+- name: Compiling routing configuration
   template:
     src: "{{ os }}/routing.j2"
-    dest: "{{ host_dir }}/routing.conf"
-  changed_when: False
-  check_mode: yes
+    dest: "{{ host_dir }}/15-routing.conf"
