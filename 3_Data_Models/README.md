@@ -28,9 +28,9 @@ Below is an example of my /etc/hosts file:
 
 At present, there are two playbooks which are used for the solution. They are explained in order below:  
 
-### data-model-compare.yml
+### Playbook One - data-model-compare.yml
 
-`data-model-compare.yml` - This playbook performs a few operations
+This playbook performs a few operations:
 
 Firstly, it generates configurations from the data model in the respective `host_vars\devicename.yml` and the `group_vars\all.yml` using Ansible roles and Jinja2 templates and output them to the `configs/compiled/<hostname>` folder. There are four roles at present in this playbook and overall solution.
 
@@ -69,6 +69,7 @@ As a result, the device `dfjt-r001.lab.dfjt.local - 10.0.0.1` is a physical IOS 
 
 ### Learnings
 
+- Checking for directories, cleaning up directories and creation of non-existent directories
 - Learned usage of Jinja2 templates
 - Learned usage of Ansible roles
 - Trialling tags
