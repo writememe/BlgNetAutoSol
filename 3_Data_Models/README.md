@@ -34,14 +34,15 @@ Firstly, it generates configurations from the data model in the respective `host
 
 # Roles
 
-`base`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (00-base.conf) containing the hostname, domain-name and timezone across all operating systems.
-`common`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (05-common.conf) containing the NTP server(s), DNS server(s) and syslog servers across all operating systems.
-`interfaces`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (10-interfaces.conf) containing the interfaces across all operating systems. Some basic standards have been enforced in the data model, namely the interface description.
-`routing` - This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (15-interfaces.conf) containing the routing across all operating systems. BGP has been elected as the routing protocol of choice, however the structure and naming convention would allow to elect any other routing protocol. 
-Each BGP instance is configured with the following standards
-- Loopback0 is the router-id for each device and the example 'customer route', which is subsequent advertise throughout the BGP fabric by using a route-map or export-map.
-- Every BGP neighbor session has a password set. In my example, it's 'lab' and it's across all neighbours.
-- Every BGP neighbor must contain a description.  
+`base`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (00-base.conf) containing the hostname, domain-name and timezone across all operating systems.  
+`common`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (05-common.conf) containing the NTP server(s), DNS server(s) and syslog servers across all operating systems.  
+`interfaces`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (10-interfaces.conf) containing the interfaces across all operating systems. Some basic standards have been enforced in the data model, namely the interface description.  
+`routing` - This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (15-interfaces.conf) containing the routing across all operating systems. BGP has been elected as the routing protocol of choice, however the structure and naming convention would allow to elect any other routing protocol.  
+
+Each BGP instance is configured with the following standards:
+- Loopback0 is the router-id for each device and the example 'customer route', which is subsequent advertise throughout the BGP fabric by using a route-map or export-map  
+- Every BGP neighbor session has a password set. In my example, it's 'lab' and it's across all neighbours  
+- Every BGP neighbor must contain a description      
 
 I chose BGP as I plan in future to use NAPALM Validate to perform testing to verify the detailed operation of the BGP neighbourships in a subsequent unit testing module of the course.  
 
