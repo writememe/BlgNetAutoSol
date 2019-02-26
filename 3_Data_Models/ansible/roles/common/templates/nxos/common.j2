@@ -1,9 +1,7 @@
 {% for entry in ntp_servers %}
 ntp server {{ entry }} use-vrf default
 {% endfor %}
-{% for entry in dns_servers %}
-ip name-server {{ entry }}
-{% endfor %}
+ip name-server {{dns_servers|join(" ")}}
 {% for entry in syslog_servers %}
 logging server {{ entry }}
 {% endfor %}
