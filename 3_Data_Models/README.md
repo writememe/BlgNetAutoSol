@@ -57,7 +57,7 @@ There are four roles at present in this playbook and overall solution:
 
 `routing` - This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (`15-interfaces.conf`) containing the routing across all operating systems. BGP has been elected as the routing protocol of choice, however the structure and naming convention would allow one to elect any other routing protocol.  
 Each BGP instance is configured with the following standards:
-- Loopback0 is the router-id for each device and the example 'customer route', which is subsequent advertise throughout the BGP fabric by using a route-map or export-map  
+- Loopback0 is the router-id for each device and the example 'customer route', which is subsequently advertised throughout the BGP fabric by using a route-map or export-map  
 - Every BGP neighbor session has a password set. In my example, it's 'lab' and it's across all neighbours  
 - Every BGP neighbor must contain a description      
 
@@ -89,7 +89,7 @@ Depending on the vendor, each password has a different method of encryption type
 | EOS     | Type 0                  |
 ^ Unsure, tested on version junosv-firefly 12.1X44-D20.3.
 
-There's two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, use that value in your host_vars file.
+There is two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, use that value in your host_vars file.
 
 The second way is to modify the Jinja2 `roles/routing/templates/{{os}}/routing.j2` template to deploy your BGP password in clear-text. If you have password encryption turned on, it will then display the encrypted password for use in your host_vars file.
 
@@ -129,6 +129,7 @@ Finally, it wasn't all skittles and rainbows. I learned some other valuable less
 
 ### Summary
 
-I'm not entirely happy with the solution, as there is some data duplication in my data model, which I would optimise if I was using in production. Also, adding import/export/route-maps to every BGP neighbor would be a great improvement
+I'm not entirely happy with the solution, as there is some data duplication in my data model, which I would optimise if I was using in production. Also, adding import/export/route-maps to every BGP neighbor would be a great improvement. Finally, I would also assign each host an identifier which I could use to prepopulate the BGP ASN and the Loopback IP addressing.
+
 
 
