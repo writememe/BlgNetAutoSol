@@ -129,7 +129,8 @@ Finally, it wasn't all skittles and rainbows. I learned some other valuable less
 
 ### Summary
 
-I'm not entirely happy with the solution, as there is some data duplication in my data model, which I would optimise if I was using in production. Also, adding import/export/route-maps to every BGP neighbor would be a great improvement. Finally, I would also assign each host an identifier which I could use to prepopulate the BGP ASN and the Loopback IP addressing.
+I'm not entirely happy with the solution, as there is some data duplication in my data model, which I would optimise if I was using in production. Also, adding import/export/route-maps to every BGP neighbor would be a great improvement. I would also assign each host an identifier which I could use to prepopulate the BGP ASN and the Loopback IP addressing.
 
+All in all, I addressed the activites which I wanted to achieve and the solution does meet the levels of abstraction which I had aimed for.
 
 
