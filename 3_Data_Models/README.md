@@ -24,6 +24,12 @@ Below is an example of my /etc/hosts file:
 10.0.0.19 lab-junos-01.lab.dfjt.local  
 10.0.0.1 dfjt-r001.lab.dfjt.local  
 
+## Assumptions
+
+The following assumptions are made when using this playbook:  
+- There is no existing BGP routing process on these routers, other than the ones specified in the data model.
+
+
 ## Playbooks
 
 At present, there are two playbooks which are used for the solution. They are explained in order below:  
@@ -32,7 +38,9 @@ At present, there are two playbooks which are used for the solution. They are ex
 
 This playbook performs a few operations:
 
-Firstly, it generates configurations from the data model in the respective `host_vars\devicename.yml` and the `group_vars\all.yml` using Ansible roles and Jinja2 templates and output them to the `configs/compiled/<hostname>` folder. There are four roles at present in this playbook and overall solution.
+Firstly, it generates configurations from the data model in the respective `host_vars/hostname.yml` and the `group_vars/all.yml` using Ansible roles and Jinja2 templates and output them to the `configs/compiled/<hostname>` folder.  
+
+There are four roles at present in this playbook and overall solution.
 
 #### Roles
 
@@ -59,6 +67,25 @@ The _napalm_install_config_ module is used to perform this comparision. At this 
 
 This playbook will take the output of the first playbook file `configs/compiled/<hostname>/config-diff`, use this as the config file and install it onto the applicable device.  
 For the sake of auditing purposes, all differences are reported to a file named `configs/deployed/<hostname>-deployed-config-diff`
+
+## Known Issues
+
+Due to the vagaries of various operating systems, you may see that 'changes' are needed to be performed or deployed when running both  playbooks. Without investing time and resources into a highly complex set of conditional programming, I've decided rather to document these known issues which I've deemed minor enough to not be a functional problem. These are:  
+
+ ### Junos - `routing` role
+
+Due to the way which Junos stores the encrypted BGP authentication password, we cannot store this as a standard text string value. This results in the `data-model-compare.yml` playbook reporting that it doesn't match and that a change is required. I've redeployed this configuration several times over the top of the existing BGP neighbourship and it hasn't dropped the session.
+
+### IOS - `interfaces` role
+
+The version of IOS I was testing with did not show the `no shutdown` statement in the running configuration with SVIs and Loopback interfaces. I had three options:   
+
+ 1) Eliminate the `no shutdown` statement entirely from the Jinja2 interface template. Run the risk of other interfaces EthernetX/X not being enabled when provisioned. 
+ 2) Add the `no shutdown` statement into the interface template, and accept that SVI and loopbacks will always report that they require changes.
+ 3) Write some crazy multiple if/elif statements to properly deal with this.
+ 
+ I've already spent an inordinate amount of time on this assignment, so for my purposes I've gone with option 2.
+
 
 ## Caveats
 
