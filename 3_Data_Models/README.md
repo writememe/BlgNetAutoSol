@@ -7,7 +7,11 @@ The activities which I want to address are:
 - Create a data model, abstracted from device configuration(s)
 - Develop tools which allow the data model to be vendor agnostic (IOS, Junos, EOS and NXOS )
 - Build a data model which can be used to deploy the intent across the network
-- Build a data model which can be used to validate against device configuration(s)
+- Build a data model which can be used to validate against device configuration(s)  
+
+A successful abstraction of the data model will only be deemed successful if the following is met:  
+- Ability to successfully replace a device from another vendor. i.e hostnameX, vendorY with hostnameX, vendorZ
+- Ability to add another device to the topology, with the requisite information required for the data model.
 
 ## Pre-requisites
 
@@ -96,11 +100,18 @@ As a result, the device `dfjt-r001.lab.dfjt.local - 10.0.0.1` is a physical IOS 
 
 ### Learnings
 
-- Checking for directories, cleaning up directories and creation of non-existent directories
-- Learned usage of Jinja2 templates
-- Learned usage of Ansible roles
-- Trialling tags
-- Data modelling and the pitfalls
+Reflecting on the learning that I have made between module two and module three, I have been able to upskill my playbooks in the following areas:
+
+- Checking for directories, cleaning up directories and creation of non-existent directories. This allows the playbooks to be more dynamic and graceful.
+- Implemented usage of Jinja2 templates, to provide the appropriate level of abstraction for the end user.
+- Implemented usage of Ansible roles, which cut the volume of code in the main playbook. In addition, this allows me to reuse these roles in future playbooks, or extend the code to include other roles.
+- Trialling the implementation of tags. In the playbooks I've written, I need to consider them again before using them as a reliable function.
+
+Finally, it wasn't all skittles and rainbows. I learned some other valuable lessons which were equally important as well as challenging.
+
+- Jinja2 is useful, but coming from a Python background it's somewhat limited. I was wary of not making crazy templates to cover corner cases. I'm sure the more Jinja2 I use, the more graceful and elegant my solutions will be.
+
+- Ivan wasn't mucking around when he said you will throw out your first data model. I threw out a few, tweaked some more and at times wasn't getting anywhere fast. 
 
 
 
