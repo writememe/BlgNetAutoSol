@@ -1,6 +1,6 @@
 route-map {{ connected_rm.name }} permit 20
-  description "Redistributing {{ connected_rm.interface }}
-  match interface {{ connected_rm.interface}}
+  description "Redistributing {{ connected_rm.interface }}"
+  match interface {{ connected_rm.interface }} 
 
 router bgp {{ bgp.asn }}
   router-id {{ bgp.rid }}
