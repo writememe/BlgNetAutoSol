@@ -75,7 +75,7 @@ For the sake of auditing purposes, all differences are reported to a file named 
 
 ## Known Issues
 
-Due to the vagaries of various operating systems, you may see that 'changes' are needed to be performed or deployed when running both  playbooks. Without investing time and resources into a highly complex set of conditional programming, I've decided rather to document these known issues which I've deemed minor enough to not be a functional problem. These are:  
+Due to the vagaries of various operating systems, I've had to make some trade offs with the solution. Without investing time and resources into a highly complex set of conditional programming, I've decided rather to document these known issues which I've deemed minor enough to not be a functional problem. These are:  
 
 ### BGP Authentication - Encrypted Passwords
 
@@ -98,21 +98,28 @@ The second way is to modify the Jinja2 `roles/routing/templates/{{os}}/routing.j
 
 The version of IOS I was testing with did not show the `no shutdown` statement in the running configuration with SVIs and Loopback interfaces. I had three options:   
 
- 1) Eliminate the `no shutdown` statement entirely from the Jinja2 interface template. Run the risk of interfaces in a shutdown state not being enabled when provisioned. 
- 2) Add the `no shutdown` statement into the interface template, and accept that SVIs and loopbacks will always report that they require changes.
- 3) Write some crazy multiple if/elif statements to properly deal with this.
+ 1) Add the `no shutdown` statement into the interface template, and accept that SVIs and loopbacks will always report that they require changes.  
+ 2) Add a condition where if the interface name starts with 'Et'(short for 'Ethernet'), add a `no shutdown` statement. In all other instances, do not include the `no shutdown` command. This means any shutdown SVIs or loopbacks will not be enabled by the playbooks.  
+ 3) Write some crazy multiple if/elif statements to properly deal with this.  
  
- I've already spent an inordinate amount of time on this assignment, so for my purposes I've gone with option 2.
+ I've already spent an inordinate amount of time on this assignment, so for my purposes I've gone with option 2. I would like to revisit nested if statements or another graceful way for Option 2 in future.
 
-
-## Caveats - IOS Virtual Devices
+### IOS - Virtual Devices
 
 The playbook `data-model-compare.yml` has been tested against all operating systems. Please note there is an existing NAPALM issue against [IOS Virtual devices](https://github.com/napalm-automation/napalm-ansible/issues/145).  
 I've linked the GitHub issue so that you can track when this will be resolved. 
 
 As a result, the device `dfjt-r001.lab.dfjt.local - 10.0.0.1` is a physical IOS router that I've used to test my playbooks on.
 
-### Learnings
+### ansible.cfg file
+
+I was having issues with my playbooks timing out on appliances. I'm unsure whether there is due to the fact that my lab environment is unable to respond in a timely matter, or that the code is highly inefficient. Either way, there are some entries in the `ansible.cfg` which I configured to get around these.  
+
+`timeout = 180
+[persistent_connection]
+command_timeout = 180`
+
+## Learnings
 
 Reflecting on the learning that I have made between module two and module three, I have been able to upskill my playbooks in the following areas:
 
@@ -121,15 +128,19 @@ Reflecting on the learning that I have made between module two and module three,
 - Implemented usage of Ansible roles, which cut the volume of code in the main playbook. In addition, this allows me to reuse these roles in future playbooks, or extend the code to include other roles.
 - Trialling the implementation of tags. In the playbooks I've written, I need to consider them again before using them as a reliable function.
 
-Finally, it wasn't all skittles and rainbows. I learned some other valuable lessons which were equally important as well as challenging.
+It also wasn't all skittles and rainbows. I learned some other valuable lessons which were equally important as well as challenging.
 
 - Jinja2 is useful, but coming from a Python background it's somewhat limited. I was wary of not making crazy templates to cover corner cases. I'm sure the more Jinja2 I use, the more graceful and elegant my solutions will be.
 - [Ivan](https://github.com/ipspace/) wasn't mucking around when he said you will throw out your first data model. I threw out a few, tweaked some more and at times wasn't getting anywhere fast. An example of this was I started with the subnet mask as a seperate value but soon realised other platforms used CIDR notation for IP addressing on interfaces. I changed my data model to suit and used the ipaddr module in Jinja2 to properly deal with this.
 - Initially, my compare and deploy playbook were one big playbook. Thinking about the tradeoff of accidently deploying changes rather than just checking them,  I decided to split these out. Whilst this may be slower, it's certainly more prudent to give users the option of previewing what will happen.
 
-### Summary
+## Summary
 
-I'm not entirely happy with the solution, as there is some data duplication in my data model, which I would optimise if I was using in production. Also, adding import/export/route-maps to every BGP neighbor would be a great improvement. I would also assign each host an identifier which I could use to prepopulate the BGP ASN and the Loopback IP addressing.
+I'm not entirely happy with the solution, mainly there are four areas which could do with future improvements:
+- There is some data duplication in my data model, which I would optimise if I was using in production. 
+- Adding import/export/route-maps to every BGP neighbor would be a great improvement.
+- Assigning each host an identifier which I could use to prepopulate the BGP ASN and the Loopback IP addressing.
+- Extensively flesh out the `common` and `base` templates which the desired standards for each vendor.
 
 All in all, I addressed the activites which I wanted to achieve and the solution does meet the levels of abstraction which I had aimed for.
 
