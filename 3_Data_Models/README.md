@@ -11,7 +11,7 @@ The activities which I want to address are:
 
 A successful abstraction of the data model will only be deemed successful if the following is met:  
 - Ability to successfully replace an existing device with a device from another vendor. For example, replace hostnameX, vendorY with hostnameX, vendorZ
-- Ability to add another device to the topology, with the requisite information required for the data model and no need for the operator to understand the underlying syntax of each vendor (within reason)
+- Ability to add another device to the topology, with the requisite information required for the data model and little need for the operator to understand the underlying syntax of each vendor (within reason)
 
 ## Pre-requisites
 
@@ -89,7 +89,7 @@ Depending on the vendor, each password has a different method of encryption type
 | EOS     | Type 0                  |
 ^ Unsure, tested on version junosv-firefly 12.1X44-D20.3.
 
-There is two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, use that value in your host_vars file.
+There is two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, show the output and use the encrypted password as the value in your host_vars file.
 
 The second way is to modify the Jinja2 `roles/routing/templates/{{os}}/routing.j2` template to deploy your BGP password in clear-text. If you have password encryption turned on, it will then display the encrypted password for use in your host_vars file.
 
@@ -102,11 +102,11 @@ The version of IOS I was testing with did not show the `no shutdown` statement i
  2) Add a condition where if the interface name starts with 'Et'(short for 'Ethernet'), add a `no shutdown` statement. In all other instances, do not include the `no shutdown` command. This means any shutdown SVIs or loopbacks will not be enabled by the playbooks.  
  3) Write some crazy multiple if/elif statements to properly deal with this.  
  
- I've already spent an inordinate amount of time on this assignment, so for my purposes I've gone with option 2. I would like to revisit nested if statements or another graceful way for Option 2 in future.
+ I've already spent an inordinate amount of time on this assignment, so for my purposes I've gone with Option 2. I would like to revisit nested if statements or another graceful way for Option 3 in future.
 
 ### IOS - Virtual Devices
 
-The playbook `data-model-compare.yml` has been tested against all operating systems. Please note there is an existing NAPALM issue against [IOS Virtual devices](https://github.com/napalm-automation/napalm-ansible/issues/145).  
+Please note there is an existing NAPALM issue against [IOS Virtual devices](https://github.com/napalm-automation/napalm-ansible/issues/145).  
 I've linked the GitHub issue so that you can track when this will be resolved. 
 
 As a result, the device `dfjt-r001.lab.dfjt.local - 10.0.0.1` is a physical IOS router that I've used to test my playbooks on.
@@ -115,9 +115,9 @@ As a result, the device `dfjt-r001.lab.dfjt.local - 10.0.0.1` is a physical IOS 
 
 I was having issues with my playbooks timing out on appliances. I'm unsure whether there is due to the fact that my lab environment is unable to respond in a timely matter, or that the code is highly inefficient. Either way, there are some entries in the `ansible.cfg` which I configured to get around these.  
 
-`timeout = 180
-[persistent_connection]
-command_timeout = 180`
+`timeout = 180`  
+`[persistent_connection]`    
+`command_timeout = 180`  
 
 ## Learnings
 
