@@ -1,0 +1,61 @@
+---
+fabric:
+  - { left: lab-arista-01, left_ip: 192.168.30.13, left_port: Ethernet3, 
+     right: lab-nxos-01, right_ip: 192.168.30.14, right_port: Ethernet1/3 }
+  - {left: lab-arista-01, left_ip: 192.168.30.10, left_port: Ethernet2, 
+     right: lab-iosv-01, right_ip: 192.168.30.9, right_port: Ethernet0/2 }
+  - {left: lab-iosv-01, left_ip: 192.168.30.5, left_port: Ethernet0/3, 
+     right: lab-iosv-02, right_ip: 192.168.30.6, right_port: Ethernet0/3 }
+  - {left: lab-iosv-01, left_ip: 192.168.11.12, left_port: Ethernet0/1, 
+     right: dfjt-r001, right_ip: 192.168.11.1, right_port: Vlan101 }
+  - {left: lab-iosv-02, left_ip: 192.168.11.13, left_port: Ethernet0/1, 
+     right: dfjt-r001, right_ip: 192.168.11.1, right_port: Vlan101 }
+  - {left: lab-iosv-02, left_ip: 192.168.30.1, left_port: Ethernet0/2, 
+     right: lab-nxos-01, right_ip: 192.168.30.2, right_port: Ethernet1/2 }
+  - {left: lab-junos-01, left_ip: 192.168.12.19, left_port: ge-0/0/1, 
+     right: dfjt-r001, right_ip: 192.168.12.1, right_port: Vlan102 }
+
+interas:
+  - {left: E1, left_as: '64500', left_ip: 10.0.0.25, left_port: GigabitEthernet0/3,
+     right: E3, right_as: '64501', right_ip: 10.0.0.26, right_port: GigabitEthernet0/1}
+  - {left: E2, left_as: '64500', left_ip: 10.0.0.33, left_port: GigabitEthernet0/3,
+     right: E4, right_as: '64501', right_ip: 10.0.0.34, right_port: GigabitEthernet0/1}
+
+asn:
+  64500: 
+    members: [ E1,E2,PE1 ]
+    rr:      [ E1,E2 ]
+  64501: 
+    members: [ E3,E4,PE2 ]
+    rr:      [ E3,E4 ]
+
+services: [ IPv4, VPNv4,InterAS ]
+
+# This is correct below this line
+
+nodes:
+  - name: lab-iosv-01
+    mgmt: 10.0.0.12
+    os: ios
+    rid:  192.168.40.12
+  - name: lab-iosv-02
+    mgmt: 10.0.0.13
+    os: ios
+    rid:  192.168.40.13
+  - name: lab-arista-01
+    mgmt: 10.0.0.11
+    os: eos
+    rid:  192.168.40.11
+  - name: lab-nxos-01
+    mgmt: 10.0.0.14
+    os: nxos
+    rid:  192.168.40.14
+  - name: lab-junos-01
+    mgmt: 10.0.0.19
+    os: junos
+    rid:  192.168.40.19
+  - name: dfjt-r001
+    mgmt: 10.0.0.1
+    os: ios
+    rid:  192.168.40.1
+
