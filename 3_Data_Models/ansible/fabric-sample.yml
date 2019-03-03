@@ -44,11 +44,6 @@ asn:
 
 services: [ IPv4, VPNv4,InterAS ]
 
-bob:
- - name: jane
-   rid: 4
- - name: terry
-   rid: 7
 
 nodes:
   - name: lab-iosv-01
