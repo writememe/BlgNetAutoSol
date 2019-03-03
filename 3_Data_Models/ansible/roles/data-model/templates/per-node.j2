@@ -1,0 +1,7 @@
+nodes:
+{% for node in nodes %}
+  {{ node.name }}:
+    mgmt: {{ node.mgmt }}
+    rid: {{ node.rid }}
+    id: {{ node.id }}
+{% endfor %}
