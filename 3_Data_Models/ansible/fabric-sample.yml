@@ -50,30 +50,24 @@ nodes:
     id: 12
     mgmt: 10.0.0.12
     os: ios
-    rid:  192.168.40.12
   - name: lab-iosv-02
     id: 13
     mgmt: 10.0.0.13
     os: ios
-    rid:  192.168.40.13
   - name: lab-arista-01
     id: 11
     mgmt: 10.0.0.11
     os: eos
-    rid:  192.168.40.11
   - name: lab-nxos-01
     id: 14
     mgmt: 10.0.0.14
     os: nxos
-    rid:  192.168.40.14
   - name: lab-junos-01
     id: 19
     mgmt: 10.0.0.19
     os: junos
-    rid:  192.168.40.19
   - name: dfjt-r001
     id: 1
     mgmt: 10.0.0.1
     os: ios
-    rid:  192.168.40.1
 
