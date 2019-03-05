@@ -1,7 +1,6 @@
 
 {% macro internal_link( name,ip,description) %}
-{{ name }}: { ip: {{ip}} description: {{ description }} }
-{% endmacro %}
+{{ name }}: { ip: {{ip}} description: {{ description }} } {% endmacro %}
 
 nodes:
 {% for node in nodes %}
@@ -14,12 +13,13 @@ nodes:
     asn: {{ ( bgp_base_asn | int ) + ( node.id | int ) }}
   
     interfaces:
-    {% for link in fabric %}
-    {% if link.left == node.name %}
-      {{ internal_link(link.left_port,link.left_ip,link.right|default('')) }}
-    {% elif link.right == node.name %}
-      {{ internal_link(link.right_port,link.right_ip, link.left|default('')) }}
-    {% endif %}
-    {% endfor %}
+{%   for link in fabric %}
+{%    if link.left == node.name %}
+     {{ internal_link(link.left_port,link.left_ip,link.right|default('')) }}
+{%    elif link.right == node.name %}
+     {{ internal_link(link.right_port,link.right_ip, link.left|default('')) }}
+{%    endif %}
+{%   endfor %}
+
 {% endfor %}
 
