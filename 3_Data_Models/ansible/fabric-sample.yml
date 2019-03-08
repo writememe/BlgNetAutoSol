@@ -15,7 +15,7 @@ fabric:
   - {left: lab-junos-01, left_ip: 192.168.12.19, left_port: ge-0/0/1, 
      right: dfjt-r001, right_ip: 192.168.12.1, right_port: Vlan102 }
  
-interas:
+routing:
   - {left: lab-arista-01, left_as: '65011', left_ip: 192.168.30.13, left_port: Ethernet3,
      right: lab-nxos-01, right_as: '65014', right_ip: 192.168.30.14, right_port: Ethernet1/3 }
   - {left: lab-arista-01, left_as: '65011', left_ip: 192.168.30.10, left_port: Ethernet2,
@@ -26,7 +26,7 @@ interas:
      right: dfjt-r001, right_as: '65001', right_ip: 192.168.11.1, right_port: Vlan101 }  
   - {left: lab-iosv-02, left_as: '65013', left_ip: 192.168.11.13, left_port: Ethernet0/1,
      right: dfjt-r001, right_as: '65001', right_ip: 192.168.11.1, right_port: Vlan101 }  
-  - {left: lab-iosv-02, left_as: '65012', left_ip: 1192.168.30.1, left_port: Ethernet0/3,
+  - {left: lab-iosv-02, left_as: '65012', left_ip: 192.168.30.1, left_port: Ethernet0/3,
      right: lab-nxos-01, right_as: '65001', right_ip: 192.168.30.2, right_port: Ethernet1/2 }
   - {left: lab-junos-01, left_as: '65019', left_ip: 192.168.12.19, left_port: ge-0/0/1,
      right: dfjt-r001, right_as: '65001', right_ip: 192.168.12.1, right_port: Vlan102 }
@@ -34,40 +34,36 @@ interas:
 loopback_subnet: '192.168.40.0/24'
 bgp_base_asn: 65000
 
-asn:
-  64500: 
-    members: [ E1,E2,PE1 ]
-    rr:      [ E1,E2 ]
-  64501: 
-    members: [ E3,E4,PE2 ]
-    rr:      [ E3,E4 ]
-
-services: [ IPv4, VPNv4,InterAS ]
-
 
 nodes:
   - name: lab-iosv-01
     id: 12
     mgmt: 10.0.0.12
     os: ios
+    auth: 060A0E23
   - name: lab-iosv-02
     id: 13
     mgmt: 10.0.0.13
     os: ios
+    auth: 060A0E23
   - name: lab-arista-01
     id: 11
     mgmt: 10.0.0.11
     os: eos
+    auth: lab
   - name: lab-nxos-01
     id: 14
     mgmt: 10.0.0.14
     os: nxos
+    auth: 57a158d981181c20
   - name: lab-junos-01
     id: 19
     mgmt: 10.0.0.19
     os: junos
+    auth: $9$rwxlMX7NbY2a
   - name: dfjt-r001
     id: 1
     mgmt: 10.0.0.1
     os: ios
+    auth: 060A0E23
 

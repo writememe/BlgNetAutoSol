@@ -1,6 +1,9 @@
 
-{% macro internal_link( name,ip,description) %}
- {{ name }}: { ip: {{ip}} description: {{ description }} } {% endmacro %}
+{% macro internal_link( name,ip,description ) %}
+ {{ name }}: { ip: {{ ip }} description: {{ description }} } {% endmacro %}
+{% macro peer_link( name,ip,asn,description ) %}
+ {{ name }}: { ip: {{ ip }} asn: {{ asn }} description: {{ description }} } {% endmacro %}
+ 
 
 nodes:
 {% for node in nodes %}
@@ -11,13 +14,23 @@ nodes:
     os: {{ node.os }}
     loopback: {{ loopback_subnet |ipsubnet (32, (node.id | int )) }}
     asn: {{ ( bgp_base_asn | int ) + ( node.id | int ) }}
+    auth: {{ node.auth }}
   
     interfaces:
 {%   for link in fabric %}
 {%    if link.left == node.name %}
      {{ internal_link(link.left_port,link.left_ip,link.right|default('')) }}
 {%    elif link.right == node.name %}
-     {{ internal_link(link.right_port,link.right_ip, link.left|default('')) }}
+     {{ internal_link(link.right_port,link.right_ip,link.left|default('')) }}
+{%    endif %}
+{%   endfor %}
+    
+    peers:
+{%   for peer in routing %}
+{%    if peer.left == node.name %}
+     {{ peer_link(peer.right,peer.right_ip,peer.right_as,peer.right|default('')) }}
+{%    elif peer.right == node.name %}
+     {{ peer_link(peer.left,peer.left_ip,peer.left_as,peer.left|default('')) }}
 {%    endif %}
 {%   endfor %}
 
