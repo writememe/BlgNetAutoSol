@@ -1,8 +1,13 @@
-
+# Automatically created from data model
+---
 {% macro internal_link( name,ip,description ) %}
- {{ name }}: { ip: {{ ip }} description: {{ description }} } {% endmacro %}
+ - name: {{ name }}
+        ip: {{ ip }} 
+        description: {{ description }}{% endmacro %}
 {% macro peer_link( name,ip,asn,description ) %}
- {{ name }}: { ip: {{ ip }} asn: {{ asn }} description: {{ description }} } {% endmacro %}
+ - ip: {{ ip }} 
+        asn: {{ asn }}
+        description: {{ description }}{% endmacro %}
  
 
 nodes:

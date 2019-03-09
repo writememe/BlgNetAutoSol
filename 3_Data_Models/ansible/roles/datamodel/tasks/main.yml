@@ -2,4 +2,4 @@
 - name: Compiling per-node data model
   template:
     src: "../templates/per-node.j2"
-    dest: "{{ data_dir }}/01-node.yml"
+    dest: "{{ data_dir }}/node-model.yml"

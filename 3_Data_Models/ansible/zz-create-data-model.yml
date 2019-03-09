@@ -4,7 +4,7 @@
   gather_facts: no
   tags: [ 'build','validate' ]
   vars:
-     model_dir: "data-model"
+     model_dir: "datamodel"
      hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
      - name: Set global facts, cleanup old files and directories
@@ -23,9 +23,9 @@
        changed_when: False
        check_mode: no
 
-- name: Data model configuration
+- name: Render data model
   hosts: localhost
   gather_facts: no
   vars_files: [ fabric-sample.yml ]
   roles:
-    - data-model
+    - datamodel
