@@ -1,4 +1,5 @@
 ---
+# Describe the connectivity within the fabric block.
 fabric:
   - { left: lab-arista-01, left_ip: 192.168.30.13, left_port: Ethernet3, 
      right: lab-nxos-01, right_ip: 192.168.30.14, right_port: Ethernet1/3 }
@@ -7,14 +8,15 @@ fabric:
   - {left: lab-iosv-01, left_ip: 192.168.30.5, left_port: Ethernet0/3, 
      right: lab-iosv-02, right_ip: 192.168.30.6, right_port: Ethernet0/3 }
   - {left: lab-iosv-01, left_ip: 192.168.11.12, left_port: Ethernet0/1, 
-     right: dfjt-r001, right_ip: 192.168.11.1, right_port: Vlan101 }
+     right: dfjt-r001.lab.dfjt.local, right_ip: 192.168.11.1, right_port: Vlan101 }
   - {left: lab-iosv-02, left_ip: 192.168.11.13, left_port: Ethernet0/1, 
-     right: dfjt-r001, right_ip: 192.168.11.1, right_port: Vlan101 }
+     right: dfjt-r001.lab.dfjt.local, right_ip: 192.168.11.1, right_port: Vlan101 }
   - {left: lab-iosv-02, left_ip: 192.168.30.1, left_port: Ethernet0/2, 
      right: lab-nxos-01, right_ip: 192.168.30.2, right_port: Ethernet1/2 }
   - {left: lab-junos-01, left_ip: 192.168.12.19, left_port: ge-0/0/1, 
-     right: dfjt-r001, right_ip: 192.168.12.1, right_port: Vlan102 }
+     right: dfjt-r001.lab.dfjt.local, right_ip: 192.168.12.1, right_port: Vlan102 }
  
+# Describe the routing peers within the routing block
 routing:
   - {left: lab-arista-01, left_as: '65011', left_ip: 192.168.30.13, left_port: Ethernet3,
      right: lab-nxos-01, right_as: '65014', right_ip: 192.168.30.14, right_port: Ethernet1/3 }
@@ -23,15 +25,18 @@ routing:
   - {left: lab-iosv-01, left_as: '65012', left_ip: 192.168.30.5, left_port: Ethernet0/3,
      right: lab-iosv-02, right_as: '65013', right_ip: 192.168.30.6, right_port: Ethernet0/3 }
   - {left: lab-iosv-01, left_as: '65012', left_ip: 192.168.11.12, left_port: Ethernet0/1,
-     right: dfjt-r001, right_as: '65001', right_ip: 192.168.11.1, right_port: Vlan101 }  
+     right: dfjt-r001.lab.dfjt.local, right_as: '65001', right_ip: 192.168.11.1, right_port: Vlan101 }  
   - {left: lab-iosv-02, left_as: '65013', left_ip: 192.168.11.13, left_port: Ethernet0/1,
-     right: dfjt-r001, right_as: '65001', right_ip: 192.168.11.1, right_port: Vlan101 }  
+     right: dfjt-r001.lab.dfjt.local, right_as: '65001', right_ip: 192.168.11.1, right_port: Vlan101 }  
   - {left: lab-iosv-02, left_as: '65012', left_ip: 192.168.30.1, left_port: Ethernet0/3,
      right: lab-nxos-01, right_as: '65001', right_ip: 192.168.30.2, right_port: Ethernet1/2 }
   - {left: lab-junos-01, left_as: '65019', left_ip: 192.168.12.19, left_port: ge-0/0/1,
-     right: dfjt-r001, right_as: '65001', right_ip: 192.168.12.1, right_port: Vlan102 }
+     right: dfjt-r001.lab.dfjt.local, right_as: '65001', right_ip: 192.168.12.1, right_port: Vlan102 }
 
+
+# Specify the loopback subnet from which loopback IP addresses will be allocated 
 loopback_subnet: '192.168.40.0/24'
+# Specify the base BGP ASN number which will be used to generate BGP ASNs
 bgp_base_asn: 65000
 
 
@@ -61,7 +66,7 @@ nodes:
     mgmt: 10.0.0.19
     os: junos
     auth: $9$rwxlMX7NbY2a
-  - name: dfjt-r001
+  - name: dfjt-r001.lab.dfjt.local
     id: 1
     mgmt: 10.0.0.1
     os: ios
