@@ -51,13 +51,10 @@
   connection: local
   vars:
     model_dir: "datamodel"
-  tasks:
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - node-model.yml
-      - "{{ model_dir }}/node-model.yml"
+  vars_files: 
+    - "{{ model_dir }}/node-model.yml"
   roles:
-    - interfaces
+    - ifnew
 
 - name: Routing configuration
   hosts: all
