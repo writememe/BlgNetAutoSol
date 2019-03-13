@@ -8,7 +8,6 @@
  - ip: {{ ip }} 
         asn: {{ asn }}
         description: {{ description }}{% endmacro %}
- 
 
 nodes:
 {% for node in nodes %}
@@ -19,7 +18,7 @@ nodes:
     os: {{ node.os }}
     loopback: {{ loopback_subnet |ipsubnet (32, (node.id | int )) }}
     asn: {{ ( bgp_base_asn | int ) + ( node.id | int ) }}
-    auth: {{ node.auth }}
+    auth: {{ node.auth }} 
   
     interfaces:
 {%   for link in fabric %}

@@ -1,4 +1,6 @@
-{% for interface in interfaces %}
+{% set node = nodes[inventory_hostname] %}
+
+{% for interface in node.interfaces %}
 interface {{ interface.name }}
    description {{ interface.description }}
    no shutdown

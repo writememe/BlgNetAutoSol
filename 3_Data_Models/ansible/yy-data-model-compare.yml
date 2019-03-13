@@ -54,7 +54,7 @@
   vars_files: 
     - "{{ model_dir }}/node-model.yml"
   roles:
-    - ifnew
+    - interfaces
 
 - name: Routing configuration
   hosts: all

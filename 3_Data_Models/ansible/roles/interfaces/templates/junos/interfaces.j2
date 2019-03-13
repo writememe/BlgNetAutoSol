@@ -1,4 +1,6 @@
-{% for interface in interfaces %}
+{% set node = nodes[inventory_hostname] %}
+
+{% for interface in node.interfaces %}
 interfaces {
     {{ interface.name }} {
         description {{ interface.description }};
