@@ -2,7 +2,7 @@
 
 route-map {{ node.connected_rm.name }} permit 20
    description "Redistributing {{ node.connected_rm.interface }}"
-   match interface {{ node/connected_rm.interface }}
+   match interface {{ node.connected_rm.interface }}
 
 no router bgp
 router bgp {{ node.asn }}
