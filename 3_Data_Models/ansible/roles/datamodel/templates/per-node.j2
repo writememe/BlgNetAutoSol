@@ -16,10 +16,22 @@ nodes:
     rid: {{ loopback_subnet |ipsubnet (32,(node.id | int )) }}
     id: {{ node.id }}
     os: {{ node.os }}
-    loopback: {{ loopback_subnet |ipsubnet (32, (node.id | int )) }}
+    loopback_ip: {{ loopback_subnet |ipsubnet (32, (node.id | int )) }}
     asn: {{ ( bgp_base_asn | int ) + ( node.id | int ) }}
-    auth: {{ node.auth }} 
-  
+    auth: {{ node.auth }}
+
+    connected_rm:
+      name: {{ global_connected_rm }}
+{%  if node.os == 'ios' %}
+      interface: Loopback0
+{% elif node.os == 'junos' %}
+      interface: lo0
+{% elif node.os == 'eos' %}
+      interface: Loopback0
+{% elif node.os == 'nxos' %}
+      interface: loopback0
+{% endif %}
+
     interfaces:
 {%   for link in fabric %}
 {%    if link.left == node.name %}

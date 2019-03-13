@@ -38,6 +38,8 @@ routing:
 loopback_subnet: '192.168.40.0/24'
 # Specify the base BGP ASN number which will be used to generate BGP ASNs
 bgp_base_asn: 65000
+# Specify the global route-map/export-map for advertising connected routes
+global_connected_rm: CONNECTED
 
 
 nodes:

@@ -59,7 +59,11 @@
 - name: Routing configuration
   hosts: all
   connection: local
+  vars:
+    model_dir: "datamodel"
   tags: [ 'build','validate' ]
+  vars_files:
+    - "{{ model_dir }}/node-model.yml"
   roles:
    - routing
 

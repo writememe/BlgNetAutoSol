@@ -7,10 +7,14 @@ nodes:
     rid: 192.168.40.12/32
     id: 12
     os: ios
-    loopback: 192.168.40.12/32
+    loopback_ip: 192.168.40.12/32
     asn: 65012
-    auth: 060A0E23 
-  
+    auth: 060A0E23
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
     interfaces:
       - name: Ethernet0/2
         ip: 192.168.30.9/30 
@@ -38,10 +42,14 @@ nodes:
     rid: 192.168.40.13/32
     id: 13
     os: ios
-    loopback: 192.168.40.13/32
+    loopback_ip: 192.168.40.13/32
     asn: 65013
-    auth: 060A0E23 
-  
+    auth: 060A0E23
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
     interfaces:
       - name: Ethernet0/3
         ip: 192.168.30.6/30 
@@ -69,10 +77,14 @@ nodes:
     rid: 192.168.40.11/32
     id: 11
     os: eos
-    loopback: 192.168.40.11/32
+    loopback_ip: 192.168.40.11/32
     asn: 65011
-    auth: lab 
-  
+    auth: lab
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
     interfaces:
       - name: Ethernet3
         ip: 192.168.30.13/30 
@@ -94,10 +106,14 @@ nodes:
     rid: 192.168.40.14/32
     id: 14
     os: nxos
-    loopback: 192.168.40.14/32
+    loopback_ip: 192.168.40.14/32
     asn: 65014
-    auth: 57a158d981181c20 
-  
+    auth: 57a158d981181c20
+
+    connected_rm:
+      name: CONNECTED
+      interface: loopback0
+
     interfaces:
       - name: Ethernet1/3
         ip: 192.168.30.14/30 
@@ -119,10 +135,14 @@ nodes:
     rid: 192.168.40.19/32
     id: 19
     os: junos
-    loopback: 192.168.40.19/32
+    loopback_ip: 192.168.40.19/32
     asn: 65019
-    auth: $9$rwxlMX7NbY2a 
-  
+    auth: $9$rwxlMX7NbY2a
+
+    connected_rm:
+      name: CONNECTED
+      interface: lo0
+
     interfaces:
       - name: ge-0/0/1
         ip: 192.168.12.19/24 
@@ -138,10 +158,14 @@ nodes:
     rid: 192.168.40.1/32
     id: 1
     os: ios
-    loopback: 192.168.40.1/32
+    loopback_ip: 192.168.40.1/32
     asn: 65001
-    auth: 060A0E23 
-  
+    auth: 060A0E23
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
     interfaces:
       - name: Vlan101
         ip: 192.168.11.1/24 
