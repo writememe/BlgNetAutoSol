@@ -12,6 +12,7 @@
 nodes:
 {% for node in nodes %}
   {{ node.name }}:
+    hostname: {{ node.name.partition('.')[0] }}
     mgmt: {{ node.mgmt }}
     rid: {{ loopback_subnet |ipsubnet (32,(node.id | int )) }}
     id: {{ node.id }}
@@ -35,18 +36,18 @@ nodes:
     interfaces:
 {%   for link in fabric %}
 {%    if link.left == node.name %}
-     {{ internal_link(link.left_port,link.left_ip,link.left_description|default('')) }}
+     {{ internal_link(link.left_port,link.left_ip,link.left_description|default('CONFIGURED_BY_ANSIBLE')) }}
 {%    elif link.right == node.name %}
-     {{ internal_link(link.right_port,link.right_ip,link.right_description|default('')) }}
+     {{ internal_link(link.right_port,link.right_ip,link.right_description|default('CONFIGURED_BY_ANSIBLE')) }}
 {%    endif %}
 {%   endfor %}
     
     peers:
 {%   for peer in routing %}
 {%    if peer.left == node.name %}
-     {{ peer_link(peer.right,peer.right_ip,peer.right_as,peer.right|default('')) }}
+     {{ peer_link(peer.right,peer.right_ip,peer.right_as,peer.right|default('CONFIGURED_BY_ANSIBLE')) }}
 {%    elif peer.right == node.name %}
-     {{ peer_link(peer.left,peer.left_ip,peer.left_as,peer.left|default('')) }}
+     {{ peer_link(peer.left,peer.left_ip,peer.left_as,peer.left|default('CONFIGURED_BY_ANSIBLE')) }}
 {%    endif %}
 {%   endfor %}
 

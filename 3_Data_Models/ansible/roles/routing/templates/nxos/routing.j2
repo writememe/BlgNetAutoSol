@@ -1,16 +1,18 @@
-route-map {{ connected_rm.name }} permit 20
-  description "Redistributing {{ connected_rm.interface }}"
-  match interface {{ connected_rm.interface }} 
+{% set node = nodes[inventory_hostname] %}
 
-router bgp {{ bgp.asn }}
-  router-id {{ bgp.rid }}
+route-map {{ node.connected_rm.name }} permit 20
+  description "Redistributing {{ node.connected_rm.interface }}"
+  match interface {{ node.connected_rm.interface }} 
+
+router bgp {{ node.asn }}
+  router-id {{ node.rid | ipaddr('address') }}
   log-neighbor-changes
   address-family ipv4 unicast
-    redistribute direct route-map {{ connected_rm.name }}
+    redistribute direct route-map {{ node.connected_rm.name }}
 {% for entry in peers %}
   neighbor {{ entry.ip }}
     remote-as {{ entry.asn }}
     description {{ entry.description }}
-    password 3 {{ bgp.auth }}
+    password 3 {{ node.auth }}
     address-family ipv4 unicast
 {% endfor %}

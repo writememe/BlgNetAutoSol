@@ -3,6 +3,7 @@
 
 nodes:
   lab-iosv-01.lab.dfjt.local:
+    hostname: lab-iosv-01
     mgmt: 10.0.0.12
     rid: 192.168.40.12/32
     id: 12
@@ -38,6 +39,7 @@ nodes:
         description: dfjt-r001.lab.dfjt.local
 
   lab-iosv-02.lab.dfjt.local:
+    hostname: lab-iosv-02
     mgmt: 10.0.0.13
     rid: 192.168.40.13/32
     id: 13
@@ -73,6 +75,7 @@ nodes:
         description: lab-nxos-01.lab.dfjt.local
 
   lab-arista-01.lab.dfjt.local:
+    hostname: lab-arista-01
     mgmt: 10.0.0.11
     rid: 192.168.40.11/32
     id: 11
@@ -102,6 +105,7 @@ nodes:
         description: lab-iosv-01.lab.dfjt.local
 
   lab-nxos-01.lab.dfjt.local:
+    hostname: lab-nxos-01
     mgmt: 10.0.0.14
     rid: 192.168.40.14/32
     id: 14
@@ -131,6 +135,7 @@ nodes:
         description: lab-iosv-02.lab.dfjt.local
 
   lab-junos-01.lab.dfjt.local:
+    hostname: lab-junos-01
     mgmt: 10.0.0.19
     rid: 192.168.40.19/32
     id: 19
@@ -154,6 +159,7 @@ nodes:
         description: dfjt-r001.lab.dfjt.local
 
   dfjt-r001.lab.dfjt.local:
+    hostname: dfjt-r001
     mgmt: 10.0.0.1
     rid: 192.168.40.1/32
     id: 1
