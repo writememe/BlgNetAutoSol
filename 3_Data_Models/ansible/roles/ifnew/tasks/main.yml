@@ -1,5 +1,0 @@
----
-- name: Compiling interfaces configuration
-  template:
-    src: "{{ os }}/interfaces.j2"
-    dest: "{{ host_dir }}/10-interfaces.conf"
