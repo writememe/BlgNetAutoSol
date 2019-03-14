@@ -37,6 +37,8 @@
 
 - name: Deploy configuration
   hosts: all
+  vars:
+    hostname: "{{ inventory_hostname.split('.')[0] }}"
   tags: [ 'deploy' ]
   tasks:
   - napalm_install_config:

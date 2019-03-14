@@ -1,5 +1,6 @@
+{% set node = nodes[inventory_hostname] %}
 !
-hostname {{ hostname }}
+hostname {{ node.hostname }}
 !
 ip domain-name {{ ip_domain_name }}
 !

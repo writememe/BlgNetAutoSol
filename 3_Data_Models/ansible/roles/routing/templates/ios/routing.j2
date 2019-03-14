@@ -13,5 +13,5 @@ router bgp {{ node.asn }}
  neighbor {{ entry.ip }} description {{ entry.description }}
  neighbor {{ entry.ip }} password 7 {{ node.auth }}
 {% endfor %}
- network {{ bgp.rid }} mask 255.255.255.255
+ network {{ node.rid | ipaddr('address') }} mask 255.255.255.255
 !

@@ -9,7 +9,7 @@ router bgp {{ node.asn }}
   log-neighbor-changes
   address-family ipv4 unicast
     redistribute direct route-map {{ node.connected_rm.name }}
-{% for entry in peers %}
+{% for entry in node.peers %}
   neighbor {{ entry.ip }}
     remote-as {{ entry.asn }}
     description {{ entry.description }}

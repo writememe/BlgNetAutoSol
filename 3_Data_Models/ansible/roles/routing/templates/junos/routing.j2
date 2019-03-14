@@ -17,7 +17,7 @@ policy-options {
 }
 
 
-{% for entry in peers %}
+{% for entry in node.peers %}
 protocols {
     bgp {
         log-updown;
