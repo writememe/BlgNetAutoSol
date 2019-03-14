@@ -26,6 +26,6 @@
 - name: Render data model
   hosts: localhost
   gather_facts: no
-  vars_files: [ fabric-sample.yml ]
+  vars_files: [ fabric-model.yml ]
   roles:
     - datamodel

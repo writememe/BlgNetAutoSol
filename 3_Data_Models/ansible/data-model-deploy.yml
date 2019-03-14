@@ -22,7 +22,11 @@
     file: path={{ build_dir }} state=directory
     check_mode: no
     run_once: yes
-  - name: Checking deployed directory is created
+  - name: Clearing old deployed configuration files
+    file: path={{ change_dir }} state=absent
+    changed_when: False
+    check_mode: no 
+  - name: Rebuilding deployed directory
     file: path={{ change_dir }} state=directory
     check_mode: no
     run_once: yes

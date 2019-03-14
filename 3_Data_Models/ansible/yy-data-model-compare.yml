@@ -35,6 +35,10 @@
   hosts: all
   connection: local
   tags: [ 'build','validate' ]
+  vars:
+    model_dir: "datamodel"
+  vars_files:
+    - "{{model_dir}}/node-model.yml"
   roles:
     - base
 

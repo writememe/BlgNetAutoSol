@@ -41,6 +41,17 @@ nodes:
      {{ internal_link(link.right_port,link.right_ip,link.right_description|default('CONFIGURED_BY_ANSIBLE')) }}
 {%    endif %}
 {%   endfor %}
+{%  if node.os == 'ios' %}
+     {{ internal_link('Loopback0',loopback_subnet |ipsubnet (32, (node.id | int )),'Loopback Interface') }}
+{% elif node.os == 'junos' %}
+     {{ internal_link('lo0',loopback_subnet |ipsubnet (32, (node.id | int )),'Loopback_Interface') }}
+{% elif node.os == 'eos' %}
+     {{ internal_link('Loopback0',loopback_subnet |ipsubnet (32, (node.id | int )),'Loopback Interface') }}
+{% elif node.os == 'nxos' %}
+     {{ internal_link('loopback0',loopback_subnet |ipsubnet (32, (node.id | int )),'Loopback Interface') }}
+{% endif %}
+
+
     
     peers:
 {%   for peer in routing %}

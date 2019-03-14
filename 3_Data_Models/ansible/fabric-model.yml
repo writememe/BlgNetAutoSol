@@ -41,7 +41,7 @@ bgp_base_asn: 65000
 # Specify the global route-map/export-map for advertising connected routes
 global_connected_rm: CONNECTED
 
-
+# List the nodes in your model
 nodes:
   - name: lab-iosv-01.lab.dfjt.local
     id: 12
