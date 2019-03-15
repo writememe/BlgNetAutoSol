@@ -79,7 +79,7 @@ There are four roles at present in this playbook and overall solution:
 
 `interfaces`- This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (`10-interfaces.conf`) containing the interfaces across all operating systems. Some basic standards have been enforced in the data model, namely the interface description.  
 
-`routing` - This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (`15-interfaces.conf`) containing the routing across all operating systems. BGP has been elected as the routing protocol of choice, however the structure and naming convention would allow one to elect any other routing protocol.  
+`routing` - This role uses the data model and the applicable `{{os}}` Jinja2 template to create a file (`15-routing.conf`) containing the routing across all operating systems. BGP has been elected as the routing protocol of choice, however the structure and naming convention would allow one to elect any other routing protocol.  
 Each BGP instance is configured with the following standards:
 - Loopback0 is the router-id for each device and the example 'customer route', which is subsequently advertised throughout the BGP fabric by using a route-map or export-map  
 - Every BGP neighbor session has a password set. In my example, it's 'lab' and it's across all neighbours  
@@ -115,7 +115,7 @@ Depending on the vendor, each password has a different method of encryption type
 
 There is two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, show the output and use the encrypted password as the value in your host_vars file.
 
-The second way is to modify the Jinja2 `roles/routing/templates/{{os}}/routing.j2` template to deploy your BGP password in clear-text. If you have password encryption turned on, it will then display the encrypted password for use in your host_vars file.
+The second way is to modify the Jinja2 `roles/routing/templates/{{os}}/routing.j2` template to deploy your BGP password in clear-text. If you have password encryption turned on, it will then display the encrypted password for use in your fabric-model file.
 
 
 ### IOS - `interfaces` role
