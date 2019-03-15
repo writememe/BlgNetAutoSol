@@ -29,8 +29,6 @@ nodes:
       - name: Loopback0
         ip: 192.168.40.12/32 
         description: Loopback Interface
-
-
     
     peers:
       - ip: 192.168.30.10 
@@ -42,6 +40,7 @@ nodes:
       - ip: 192.168.11.1 
         asn: 65001
         description: dfjt-r001.lab.dfjt.local
+
 
   lab-iosv-02.lab.dfjt.local:
     hostname: lab-iosv-02
@@ -70,8 +69,6 @@ nodes:
       - name: Loopback0
         ip: 192.168.40.13/32 
         description: Loopback Interface
-
-
     
     peers:
       - ip: 192.168.30.5 
@@ -83,6 +80,7 @@ nodes:
       - ip: 192.168.30.2 
         asn: 65001
         description: lab-nxos-01.lab.dfjt.local
+
 
   lab-arista-01.lab.dfjt.local:
     hostname: lab-arista-01
@@ -108,8 +106,6 @@ nodes:
       - name: Loopback0
         ip: 192.168.40.11/32 
         description: Loopback Interface
-
-
     
     peers:
       - ip: 192.168.30.14 
@@ -118,6 +114,7 @@ nodes:
       - ip: 192.168.30.9 
         asn: 65012
         description: lab-iosv-01.lab.dfjt.local
+
 
   lab-nxos-01.lab.dfjt.local:
     hostname: lab-nxos-01
@@ -143,8 +140,6 @@ nodes:
       - name: loopback0
         ip: 192.168.40.14/32 
         description: Loopback Interface
-
-
     
     peers:
       - ip: 192.168.30.13 
@@ -153,6 +148,7 @@ nodes:
       - ip: 192.168.30.1 
         asn: 65012
         description: lab-iosv-02.lab.dfjt.local
+
 
   lab-junos-01.lab.dfjt.local:
     hostname: lab-junos-01
@@ -175,13 +171,12 @@ nodes:
       - name: lo0
         ip: 192.168.40.19/32 
         description: Loopback_Interface
-
-
     
     peers:
       - ip: 192.168.12.1 
         asn: 65001
         description: dfjt-r001.lab.dfjt.local
+
 
   dfjt-r001.lab.dfjt.local:
     hostname: dfjt-r001
@@ -210,8 +205,6 @@ nodes:
       - name: Loopback0
         ip: 192.168.40.1/32 
         description: Loopback Interface
-
-
     
     peers:
       - ip: 192.168.11.12 
@@ -223,4 +216,5 @@ nodes:
       - ip: 192.168.12.19 
         asn: 65019
         description: lab-junos-01.lab.dfjt.local
+
 

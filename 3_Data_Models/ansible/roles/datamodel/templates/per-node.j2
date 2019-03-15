@@ -50,8 +50,6 @@ nodes:
 {% elif node.os == 'nxos' %}
      {{ internal_link('loopback0',loopback_subnet |ipsubnet (32, (node.id | int )),'Loopback Interface') }}
 {% endif %}
-
-
     
     peers:
 {%   for peer in routing %}
@@ -61,6 +59,7 @@ nodes:
      {{ peer_link(peer.left,peer.left_ip,peer.left_as,peer.left|default('CONFIGURED_BY_ANSIBLE')) }}
 {%    endif %}
 {%   endfor %}
+
 
 {% endfor %}
 
