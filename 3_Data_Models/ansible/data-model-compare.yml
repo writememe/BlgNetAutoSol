@@ -35,6 +35,10 @@
   hosts: all
   connection: local
   tags: [ 'build','validate' ]
+  vars:
+    model_dir: "datamodel"
+  vars_files:
+    - "{{model_dir}}/node-model.yml"
   roles:
     - base
 
@@ -49,13 +53,21 @@
   hosts: all
   tags: [ 'build','validate' ]
   connection: local
+  vars:
+    model_dir: "datamodel"
+  vars_files: 
+    - "{{ model_dir }}/node-model.yml"
   roles:
     - interfaces
 
 - name: Routing configuration
   hosts: all
   connection: local
+  vars:
+    model_dir: "datamodel"
   tags: [ 'build','validate' ]
+  vars_files:
+    - "{{ model_dir }}/node-model.yml"
   roles:
    - routing
 
