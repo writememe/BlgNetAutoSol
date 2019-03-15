@@ -55,7 +55,7 @@ Similarly, if the same node ID of 10 is used, the Jinja2 template will perform t
 
 `loopback_subnet: '192.168.40.0/24'` + `id: 10` = `loopback_ip: 192.168.40.10/32`   
 
-This allows you to simply change the subnet and Base BGP ASN if you would like to deploy the same network at another by simply changing the `bgp_base_asn` and `loopback_subnet` values.
+This allows you to simply change the subnet and Base BGP ASN if you would like to deploy the same network at another site or environment by simply changing the `bgp_base_asn` and `loopback_subnet` values.
 
 #### Abstraction vs Data Input Decisions
 
@@ -67,7 +67,7 @@ I also decided to not ask the operator to populate the loopback interface number
 
 This playbook performs a few operations.
 
-Firstly, it generates configurations from the data model file `datmodel/node-model.yml` and leverages some vendor specific information in the `group_vars/` directory using Ansible roles and Jinja2 templates and output them to the `configs/compiled/<hostname>` folder.  
+Firstly, it generates configurations from the data model file `datamodel/node-model.yml` and leverages some vendor specific information in the `group_vars/` directory using Ansible roles and Jinja2 templates and output them to the `configs/compiled/<hostname>` folder.  
 
 There are four roles at present in this playbook and overall solution:
 
