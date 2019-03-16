@@ -1,0 +1,6 @@
+napalm_lldp_neighbors:
+  FastEthernet2:
+  - hostname: lab-junos-01
+    port: '508'
+  - hostname: lab-junos-01
+    port: '517'

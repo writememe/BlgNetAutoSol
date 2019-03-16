@@ -1,0 +1,30 @@
+{
+  "napalm_bgp_neighbors": {
+    "global": {
+      "peers": {
+        "192.168.12.1": {
+          "address_family": {
+            "ipv4": {
+              "accepted_prefixes": 5,
+              "received_prefixes": 5,
+              "sent_prefixes": 1
+            },
+            "ipv6": {
+              "accepted_prefixes": -1,
+              "received_prefixes": -1,
+              "sent_prefixes": -1
+            }
+          },
+          "description": "dfjt-r001.lab.dfjt.local",
+          "is_enabled": true,
+          "is_up": true,
+          "local_as": 65019,
+          "remote_as": 65001,
+          "remote_id": "192.168.40.1",
+          "uptime": 154314
+        }
+      },
+      "router_id": "192.168.40.19"
+    }
+  }
+}
