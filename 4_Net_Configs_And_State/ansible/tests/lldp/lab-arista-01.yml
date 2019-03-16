@@ -1,7 +1,0 @@
-napalm_lldp_neighbors:
-  Ethernet2:
-  - hostname: lab-iosv-01.lab.dfjt.local
-    port: Et0/2
-  Ethernet3:
-  - hostname: lab-nxos-01.lab.dfjt.local
-    port: Ethernet1/3
