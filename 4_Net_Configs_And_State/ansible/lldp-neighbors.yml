@@ -1,31 +1,28 @@
-# This playbook gathers LLDP neighbors across all vendors and saves the output into a YAML and a JSON file, based on the hostname. 
+# This playbook gathers LLDP neighbors across all vendors and saves the output into a YAML file, based on the hostname. 
 ---
-- name: Get facts using NAPALM
+- name: Get LLDP neighbors using NAPALM
   hosts: all
   connection: local
   gather_facts: no
   vars:
-    tests: "tests"
+    facts: "facts"
     lldp_dir: "lldp"
-    bgp_dir: "bgp"
     # Strip the FDQN portion of the hostname off and save it to the hostname variable.
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
      - name: Set global facts, cleanup old files and directories
        set_fact:
-               #test_dir: "{{ tests }}"
-          lldp_tests: "{{ tests }}/{{ lldp_dir }}"
-          #bgp_tests: "{{ test_dir }}/{{ bgp_dir }}"
-     - name: Checking model directory is created
-       file: path={{ tests }} state=directory
+          lldp_fact_dir: "{{ facts }}/{{ lldp_dir }}"
+     - name: Checking facts directory is created
+       file: path={{ facts }} state=directory
        check_mode: no
        run_once: yes
-     - name: Clearing old LLDP test files
-       file: path={{ lldp_tests }} state=absent
+     - name: Clearing old LLDP fact files
+       file: path={{ lldp_fact_dir }} state=absent
        changed_when: False
        check_mode: no
-     - name: Rebuild LLDP test directories
-       file: path={{ lldp_tests }} state=directory
+     - name: Rebuild LLDP fact directories
+       file: path={{ lldp_fact_dir }} state=directory
        changed_when: False
        check_mode: no
      - name: Get LLDP neighbors from device
@@ -37,6 +34,4 @@
          filter: ['lldp_neighbors']                
        register: lldp_facts
        # Saving to YAML
-     - copy: content="{{lldp_facts.ansible_facts|to_nice_yaml(indent=2)}}" dest={{ lldp_tests }}/{{ hostname }}.yml
-      # Saving to JSON
-     - copy: content="{{lldp_facts.ansible_facts|to_nice_json(indent=2)}}" dest={{ lldp_tests }}/{{ hostname }}.json
+     - copy: content="{{lldp_facts.ansible_facts|to_nice_yaml(indent=2)}}" dest={{ lldp_fact_dir }}/{{ hostname }}.yml
