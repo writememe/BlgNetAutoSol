@@ -1,57 +1,38 @@
-napalm_interfaces:
-  Ethernet1:
-    description: ''
-    is_enabled: true
-    is_up: true
-    last_flapped: 1550738709.5188804
-    mac_address: '50:00:00:01:00:01'
-    speed: 0
-  Ethernet2:
-    description: To lab-iosv-01 - Ethernet0/2
-    is_enabled: true
-    is_up: true
-    last_flapped: 1550738709.5190678
-    mac_address: 50:00:00:D7:EE:0B
-    speed: 0
-  Ethernet3:
-    description: To lab-nxos-01 - Ethernet1/3
-    is_enabled: true
-    is_up: true
-    last_flapped: 1550738709.5191908
-    mac_address: 50:00:00:D7:EE:0B
-    speed: 0
+- get_interfaces:
+    Ethernet2:
+      description: To lab-iosv-01 - Ethernet0/2
+      is_enabled: true
+      is_up: true
+      speed: 0
+    Ethernet3:
+      description: To lab-nxos-01 - Ethernet1/3
+      is_enabled: true
+      is_up: true
+      speed: 0
   Loopback0:
-    description: Loopback Interface
-    is_enabled: true
-    is_up: true
-    last_flapped: 1550738697.4677222
-    mac_address: ''
-    speed: 0
+      description: Loopback Interface
+      is_enabled: true
+      is_up: true
+      speed: 0
   Management1:
-    description: OOB Management
-    is_enabled: true
-    is_up: true
-    last_flapped: 1550738709.5136585
-    mac_address: '50:00:00:01:00:00'
-    speed: 1000
-napalm_interfaces_ip:
-  Ethernet2:
-    ipv4:
-      192.168.30.10:
-        prefix_length: 30
-    ipv6: {}
-  Ethernet3:
-    ipv4:
-      192.168.30.13:
-        prefix_length: 30
-    ipv6: {}
-  Loopback0:
-    ipv4:
-      192.168.40.11:
-        prefix_length: 32
-    ipv6: {}
-  Management1:
-    ipv4:
-      10.0.0.11:
-        prefix_length: 24
-    ipv6: {}
+      description: OOB Management
+      is_enabled: true
+      is_up: true
+      speed: 1000
+- get_interfaces_ip:
+    Ethernet2:
+      ipv4:
+        192.168.30.10:
+          prefix_length: 30
+    Ethernet3:
+      ipv4:
+        192.168.30.13:
+          prefix_length: 30
+    Loopback0:
+      ipv4:
+        192.168.40.11:
+          prefix_length: 32
+    Management1:
+      ipv4:
+        10.0.0.11:
+          prefix_length: 24
