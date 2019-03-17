@@ -4,36 +4,26 @@
       description: OOB Management
       is_enabled: true
       is_up: true
-      last_flapped: -1.0
-      mac_address: AA:BB:CC:00:30:00
       speed: 10
     Ethernet0/1:
       description: To Internet
       is_enabled: true
       is_up: true
-      last_flapped: -1.0
-      mac_address: AA:BB:CC:00:30:10
       speed: 10
     Ethernet0/2:
       description: To lab-arista-01 - Ethernet2
       is_enabled: true
       is_up: true
-      last_flapped: -1.0
-      mac_address: AA:BB:CC:00:30:20
       speed: 10
     Ethernet0/3:
       description: To lab-iosv-02 - Ethernet0/3
       is_enabled: true
       is_up: true
-      last_flapped: -1.0
-      mac_address: AA:BB:CC:00:30:30
       speed: 10
     Loopback0:
       description: Loopback Interface
       is_enabled: true
       is_up: true
-      last_flapped: -1.0
-      mac_address: ''
       speed: 8000
 - get_interfaces_ip:
     Ethernet0/0:
