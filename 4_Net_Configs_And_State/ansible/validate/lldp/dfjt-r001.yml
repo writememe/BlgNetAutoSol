@@ -1,0 +1,7 @@
+---
+- get_lldp_neighbors:
+    FastEthernet2:
+    - hostname: lab-junos-01-fake
+      port: '508'
+    - hostname: lab-junos-01
+      port: '517'

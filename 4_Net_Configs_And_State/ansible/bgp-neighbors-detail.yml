@@ -1,0 +1,37 @@
+# This playbook gathers BGP neighbors across all vendors and saves the output into a YAML file, based on the hostname. 
+---
+- name: Get BGP neighbors using NAPALM
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars:
+    facts: "facts"
+    bgp_dir: "bgp"
+    # Strip the FDQN portion of the hostname off and save it to the hostname variable.
+    hostname: "{{ inventory_hostname.split('.')[0] }}"
+  tasks:
+     - name: Set global facts, cleanup old files and directories
+       set_fact:
+          bgp_fact_dir: "{{ facts }}/{{ bgp_dir }}"
+     - name: Checking facts directory is created
+       file: path={{ facts }} state=directory
+       check_mode: no
+       run_once: yes
+     - name: Clearing old BGP fact files
+       file: path={{ bgp_fact_dir }} state=absent
+       changed_when: False
+       check_mode: no
+     - name: Rebuild BGP fact directories
+       file: path={{ bgp_fact_dir }} state=directory
+       changed_when: False
+       check_mode: no
+     - name: Get BGP neighbors from device
+       napalm_get_facts:
+         hostname: "{{ inventory_hostname }}"
+         username: "{{ username }}"
+         dev_os: "{{ os }}"
+         password: "{{ password }}"
+         filter: ['bgp_neighbors_detail']                
+       register: bgp_facts
+       # Saving to YAML
+     - copy: content="{{bgp_facts.ansible_facts|to_nice_yaml(indent=2)}}" dest={{ bgp_fact_dir }}/{{ hostname }}.yml

@@ -1,0 +1,8 @@
+---
+- get_lldp_neighbors:
+    Ethernet0/2:
+    - hostname: lab-arista-01.lab.dfjt.local
+      port: Ethernet2
+    Ethernet0/3:
+    - hostname: lab-iosv-02.lab.dfjt.local
+      port: Et0/3
