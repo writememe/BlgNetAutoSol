@@ -1,0 +1,257 @@
+napalm_interfaces:
+  .local.:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: Unspecified
+    speed: -1
+  dsc:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: Unspecified
+    speed: -1
+  ge-0/0/0:
+    description: OOB_Management
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352996.0
+    mac_address: 00:0C:29:65:D1:DE
+    speed: 1000
+  ge-0/0/0.0:
+    description: BoB
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352997.0
+    mac_address: 00:0C:29:65:D1:DE
+    speed: 1000
+  ge-0/0/1:
+    description: Lab_Interface
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352996.0
+    mac_address: 00:0C:29:65:D1:E8
+    speed: 1000
+  ge-0/0/1.0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352997.0
+    mac_address: 00:0C:29:65:D1:E8
+    speed: 1000
+  gr-0/0/0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: 800
+  gre:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  ip-0/0/0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: 800
+  ipip:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  lo0:
+    description: Loopback_Interface
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: Unspecified
+    speed: -1
+  lo0.0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  lo0.16384:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  lo0.16385:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  lo0.32768:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  lsi:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: Unspecified
+    speed: -1
+  lsq-0/0/0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352997.0
+    mac_address: None
+    speed: -1
+  lt-0/0/0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 02:05:86:71:53:33
+    speed: 800
+  mt-0/0/0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: 800
+  mtun:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  pimd:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  pime:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  pp0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: Unspecified
+    speed: -1
+  ppd0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: 800
+  ppe0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: 800
+  sp-0/0/0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352997.0
+    mac_address: Unspecified
+    speed: 800
+  sp-0/0/0.0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352998.0
+    mac_address: None
+    speed: 800
+  sp-0/0/0.16383:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: 4352998.0
+    mac_address: None
+    speed: 800
+  st0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: None
+    speed: -1
+  tap:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: Unspecified
+    speed: -1
+  vlan:
+    description: ''
+    is_enabled: true
+    is_up: false
+    last_flapped: 4353007.0
+    mac_address: 00:00:00:00:00:00
+    speed: 1000
+napalm_interfaces_ip:
+  ge-0/0/0.0:
+    ipv4:
+      10.0.0.19:
+        prefix_length: 24
+  ge-0/0/1.0:
+    ipv4:
+      192.168.12.19:
+        prefix_length: 24
+  lo0.0:
+    ipv4:
+      192.168.40.19:
+        prefix_length: 32
+  lo0.16384:
+    ipv4:
+      127.0.0.1:
+        prefix_length: 32
+  lo0.16385:
+    ipv4:
+      10.0.0.1:
+        prefix_length: 32
+      10.0.0.16:
+        prefix_length: 32
+      128.0.0.1:
+        prefix_length: 32
+      128.0.0.4:
+        prefix_length: 32
+      128.0.1.16:
+        prefix_length: 32
+  sp-0/0/0.16383:
+    ipv4:
+      10.0.0.1:
+        prefix_length: 32
+      10.0.0.6:
+        prefix_length: 32
+      128.0.0.1:
+        prefix_length: 32
+      128.0.0.6:
+        prefix_length: 32

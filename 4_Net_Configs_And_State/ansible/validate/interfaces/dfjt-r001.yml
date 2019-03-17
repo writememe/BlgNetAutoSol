@@ -1,0 +1,143 @@
+napalm_interfaces:
+  FastEthernet0:
+    description: To DFJT-NAS
+    is_enabled: true
+    is_up: false
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  FastEthernet1:
+    description: User Port
+    is_enabled: true
+    is_up: false
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:71
+    speed: 100
+  FastEthernet2:
+    description: To ESX
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:72
+    speed: 100
+  FastEthernet3:
+    description: To NAS
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:73
+    speed: 100
+  FastEthernet4:
+    description: WAN Connection
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:74
+    speed: 100
+  Loopback0:
+    description: Loopback Interface
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: ''
+    speed: 8000
+  NVI0:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: ''
+    speed: 0
+  Vlan1:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  Vlan100:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  Vlan101:
+    description: External Lab Network
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  Vlan102:
+    description: Alternate Lab Network
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  Vlan200:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  Vlan300:
+    description: ''
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:70
+    speed: 100
+  Wlan-GigabitEthernet0:
+    description: Internal switch interface connecting to the embedded AP
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: 58:F3:9C:7C:8B:74
+    speed: 1000
+  wlan-ap0:
+    description: Embedded Service module interface to manage the embedded AP
+    is_enabled: true
+    is_up: true
+    last_flapped: -1.0
+    mac_address: ''
+    speed: 8000
+napalm_interfaces_ip:
+  FastEthernet4:
+    ipv4:
+      192.168.1.253:
+        prefix_length: 24
+  Loopback0:
+    ipv4:
+      192.168.40.1:
+        prefix_length: 32
+  Vlan1:
+    ipv4:
+      192.168.101.1:
+        prefix_length: 24
+  Vlan100:
+    ipv4:
+      10.0.0.1:
+        prefix_length: 24
+  Vlan101:
+    ipv4:
+      192.168.11.1:
+        prefix_length: 24
+  Vlan102:
+    ipv4:
+      192.168.12.1:
+        prefix_length: 24
+  Vlan200:
+    ipv4:
+      192.168.200.1:
+        prefix_length: 24
+  Vlan300:
+    ipv4:
+      192.168.199.1:
+        prefix_length: 24
+  wlan-ap0:
+    ipv4:
+      192.168.201.1:
+        prefix_length: 24
