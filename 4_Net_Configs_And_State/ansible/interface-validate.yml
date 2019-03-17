@@ -7,7 +7,7 @@
     # Strip the FDQN portion of the hostname off and save it to the hostname variable.
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
-  - name: Use Napalm to automatically validate LLDP neighbours
+  - name: Use Napalm to automatically validate interfaces
     napalm_validate:
       hostname: "{{ inventory_hostname }}"
       username: "{{ username }}"

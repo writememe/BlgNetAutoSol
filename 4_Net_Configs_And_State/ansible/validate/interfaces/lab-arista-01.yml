@@ -9,12 +9,12 @@
       is_enabled: true
       is_up: true
       speed: 0
-  Loopback0:
+    Loopback0:
       description: Loopback Interface
       is_enabled: true
       is_up: true
       speed: 0
-  Management1:
+    Management1:
       description: OOB Management
       is_enabled: true
       is_up: true

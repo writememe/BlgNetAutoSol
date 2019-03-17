@@ -19,13 +19,6 @@
       is_enabled: true
       is_up: true
       speed: 1000
-  gr-0/0/0:
-    description: ''
-    is_enabled: true
-    is_up: true
-    last_flapped: -1.0
-    mac_address: None
-    speed: 800
     lo0:
       description: Loopback_Interface
       is_enabled: true

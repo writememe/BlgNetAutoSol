@@ -19,16 +19,6 @@
       is_enabled: true
       is_up: true
       speed: 100
-    Vlan200:
-      description: ''
-      is_enabled: true
-      is_up: true
-      speed: 100
-  Vlan300:
-      description: ''
-      is_enabled: true
-      is_up: true
-      speed: 100
 - get_interfaces_ip:
     Loopback0:
       ipv4:
