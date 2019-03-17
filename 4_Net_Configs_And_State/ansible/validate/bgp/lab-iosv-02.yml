@@ -1,0 +1,38 @@
+napalm_bgp_neighbors_detail:
+  global:
+    '65001':
+    - accepted_prefix_count: 4
+      active_prefix_count: 2
+      advertised_prefix_count: 6
+      configured_holdtime: 0
+      configured_keepalive: 0
+      connection_state: Established
+      export_policy: ''
+      flap_count: 1
+      holdtime: 180
+      import_policy: ''
+      input_messages: 34620
+      input_updates: 30
+      keepalive: 60
+      last_event: 3w0d, due to Active open failed
+      local_address: 192.168.11.13
+      local_address_configured: false
+      local_as: 65013
+      local_as_prepend: false
+      local_port: 41594
+      messages_queued_out: 0
+      multihop: false
+      multipath: false
+      output_messages: 34620
+      output_updates: 30
+      previous_connection_state: ''
+      received_prefix_count: 19
+      remote_address: 192.168.11.1
+      remote_as: 65001
+      remote_port: 179
+      remove_private_as: false
+      router_id: 192.168.40.1
+      routing_table: global
+      suppress_4byte_as: false
+      suppressed_prefix_count: 15
+      up: true
