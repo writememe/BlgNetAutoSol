@@ -1,8 +1,0 @@
-# This is a playbook which performs validation based on static files.
----
-- name: Simple Static Validation
-  hosts: all
-  connection: local
-  gather_facts: no
-  roles:
-    - validate_manual
