@@ -1,110 +1,41 @@
-napalm_bgp_neighbors_detail:
-  global:
-    '65001':
-    - accepted_prefix_count: 4
-      active_prefix_count: 2
-      advertised_prefix_count: 6
-      configured_holdtime: 0
-      configured_keepalive: 0
-      connection_state: Established
-      export_policy: ''
-      flap_count: 2
-      holdtime: 180
-      import_policy: ''
-      input_messages: 34626
-      input_updates: 30
-      keepalive: 60
-      last_event: 3w0d, due to Active open failed
-      local_address: 192.168.11.12
-      local_address_configured: false
-      local_as: 65012
-      local_as_prepend: false
-      local_port: 179
-      messages_queued_out: 0
-      multihop: false
-      multipath: false
-      output_messages: 34619
-      output_updates: 30
-      previous_connection_state: ''
-      received_prefix_count: 19
-      remote_address: 192.168.11.1
-      remote_as: 65001
-      remote_port: 20424
-      remove_private_as: false
-      router_id: 192.168.40.1
-      routing_table: global
-      suppress_4byte_as: false
-      suppressed_prefix_count: 15
-      up: true
-    '65011':
-    - accepted_prefix_count: 2
-      active_prefix_count: 2
-      advertised_prefix_count: 6
-      configured_holdtime: 0
-      configured_keepalive: 0
-      connection_state: Established
-      export_policy: ''
-      flap_count: 1
-      holdtime: 180
-      import_policy: ''
-      input_messages: 28426
-      input_updates: 4
-      keepalive: 60
-      last_event: 2w5d, due to Active open failed
-      local_address: 192.168.30.9
-      local_address_configured: false
-      local_as: 65012
-      local_as_prepend: false
-      local_port: 179
-      messages_queued_out: 0
-      multihop: false
-      multipath: false
-      output_messages: 31288
-      output_updates: 13
-      previous_connection_state: ''
-      received_prefix_count: 2
-      remote_address: 192.168.30.10
-      remote_as: 65011
-      remote_port: 37851
-      remove_private_as: false
-      router_id: 192.168.40.11
-      routing_table: global
-      suppress_4byte_as: false
-      suppressed_prefix_count: 0
-      up: true
-    '65013':
-    - accepted_prefix_count: 4
-      active_prefix_count: 1
-      advertised_prefix_count: 6
-      configured_holdtime: 0
-      configured_keepalive: 0
-      connection_state: Established
-      export_policy: ''
-      flap_count: 0
-      holdtime: 180
-      import_policy: ''
-      input_messages: 36097
-      input_updates: 30
-      keepalive: 60
-      last_event: ''
-      local_address: 192.168.30.5
-      local_address_configured: false
-      local_as: 65012
-      local_as_prepend: false
-      local_port: 179
-      messages_queued_out: 0
-      multihop: false
-      multipath: false
-      output_messages: 36113
-      output_updates: 36
-      previous_connection_state: ''
-      received_prefix_count: 16
-      remote_address: 192.168.30.6
-      remote_as: 65013
-      remote_port: 48533
-      remove_private_as: false
-      router_id: 192.168.40.13
-      routing_table: global
-      suppress_4byte_as: false
-      suppressed_prefix_count: 12
-      up: true
+---
+- get_bgp_neighbors:
+    global:
+      peers:
+        192.168.11.1:
+          address_family:
+            ipv4:
+              accepted_prefixes: 4
+              received_prefixes: 4
+              sent_prefixes: 6
+          description: dfjt-r001
+          is_enabled: true
+          is_up: true
+          local_as: 65012
+          remote_as: 65001
+          remote_id: 192.168.40.1
+        192.168.30.10:
+          address_family:
+            ipv4:
+              accepted_prefixes: 2
+              received_prefixes: 2
+              sent_prefixes: 6
+          description: lab-arista-01
+          is_enabled: true
+          is_up: true
+          local_as: 65012
+          remote_as: 65011
+          remote_id: 192.168.40.11
+        192.168.30.6:
+          address_family:
+            ipv4:
+              accepted_prefixes: 4
+              received_prefixes: 4
+              sent_prefixes: 6
+          description: lab-iosv-02
+          is_enabled: true
+          is_up: true
+          local_as: 65012
+          remote_as: 65013
+          remote_id: 192.168.40.13
+      router_id: 192.168.40.12
