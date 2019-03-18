@@ -1,0 +1,38 @@
+- get_interfaces:
+    Loopback0:
+      description: Loopback Interface
+      is_enabled: true
+      is_up: true
+      speed: 8000
+    Vlan100:
+      description: ''
+      is_enabled: true
+      is_up: true
+      speed: 100
+    Vlan101:
+      description: External Lab Network
+      is_enabled: true
+      is_up: true
+      speed: 100
+    Vlan102:
+      description: Alternate Lab Network
+      is_enabled: true
+      is_up: true
+      speed: 100
+- get_interfaces_ip:
+    Loopback0:
+      ipv4:
+        192.168.40.1:
+          prefix_length: 32
+    Vlan100:
+      ipv4:
+        10.0.0.1:
+          prefix_length: 24
+    Vlan101:
+      ipv4:
+        192.168.11.1:
+          prefix_length: 24
+    Vlan102:
+      ipv4:
+        192.168.12.1:
+          prefix_length: 24

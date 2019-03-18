@@ -1,0 +1,26 @@
+- get_interfaces:
+    Ethernet1/1:
+      description: ''
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    Ethernet1/2:
+      description: To lab-iosv-02 - Ethernet0/2
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    Ethernet1/3:
+      description: To lab-arista-01 - Ethernet3
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    loopback0:
+      description: Loopback Interface
+      is_enabled: true
+      is_up: true
+      speed: 8000
+    mgmt0:
+      description: OOB Management
+      is_enabled: true
+      is_up: true
+      speed: 1000

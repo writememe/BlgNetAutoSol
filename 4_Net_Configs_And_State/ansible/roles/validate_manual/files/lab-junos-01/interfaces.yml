@@ -1,0 +1,45 @@
+- get_interfaces:
+    ge-0/0/0:
+      description: OOB_Management
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    ge-0/0/0.0:
+      description: BoB
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    ge-0/0/1:
+      description: Lab_Interface
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    ge-0/0/1.0:
+      description: ''
+      is_enabled: true
+      is_up: true
+      speed: 1000
+    lo0:
+      description: Loopback_Interface
+      is_enabled: true
+      is_up: true
+      speed: -1
+    lo0.0:
+      description: ''
+      is_enabled: true
+      is_up: true
+      speed: -1
+- get_interfaces_ip:
+    ge-0/0/0.0:
+      ipv4:
+        10.0.0.19:
+          prefix_length: 24
+    ge-0/0/1.0:
+      ipv4:
+        192.168.12.19:
+          prefix_length: 24
+    lo0.0:
+      ipv4:
+        192.168.40.19:
+          prefix_length: 32
+
