@@ -1,19 +1,19 @@
 ---
-- name: Validate interfaces
+- name: Validate BGP neighbors
   hosts: all
   connection: local
   vars:
-    interface_val_dir: "{{ playbook_dir }}/validate/interfaces/"
+    bgp_val_dir: "{{ playbook_dir }}/validate/bgp/"
     # Strip the FDQN portion of the hostname off and save it to the hostname variable.
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
-  - name: Use NAPALM to automatically validate interfaces
+  - name: Use NAPALM to automatically validate BGP neighbors
     napalm_validate:
       hostname: "{{ inventory_hostname }}"
       username: "{{ username }}"
       dev_os: "{{ os }}"
       password: "{{ password }}"
-      validation_file: "{{ interface_val_dir }}/{{ hostname }}.yml"
+      validation_file: "{{ bgp_val_dir }}/{{ hostname }}.yml"
     register: validation
   - name: "Failed Compliance Report"
     fail:
