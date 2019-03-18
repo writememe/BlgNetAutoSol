@@ -1,3 +1,4 @@
+---
 - get_bgp_neighbors:
     global:
       peers:
