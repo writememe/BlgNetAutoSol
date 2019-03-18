@@ -1,74 +1,27 @@
-napalm_bgp_neighbors_detail:
-  default:
-    '65012':
-    - accepted_prefix_count: 4
-      active_prefix_count: 0
-      advertised_prefix_count: 2
-      configured_holdtime: 180
-      configured_keepalive: 60
-      connection_state: Established
-      export_policy: ''
-      flap_count: 0
-      holdtime: 180
-      import_policy: ''
-      input_messages: 37602
-      input_updates: 32
-      keepalive: 60
-      last_event: RecvKeepAlive
-      local_address: 192.168.30.10
-      local_address_configured: true
-      local_as: 65011
-      local_as_prepend: false
-      local_port: 37851
-      messages_queued_out: 0
-      multihop: true
-      multipath: false
-      output_messages: 34179
-      output_updates: 15
-      previous_connection_state: OpenConfirm
-      received_prefix_count: 4
-      remote_address: 192.168.30.9
-      remote_as: 65012
-      remote_port: 179
-      remove_private_as: false
-      router_id: 192.168.40.12
-      routing_table: default
-      suppress_4byte_as: false
-      suppressed_prefix_count: 0
-      up: true
-    '65014':
-    - accepted_prefix_count: 4
-      active_prefix_count: 0
-      advertised_prefix_count: 5
-      configured_holdtime: 180
-      configured_keepalive: 60
-      connection_state: Established
-      export_policy: ''
-      flap_count: 0
-      holdtime: 180
-      import_policy: ''
-      input_messages: 34080
-      input_updates: 34
-      keepalive: 60
-      last_event: RecvKeepAlive
-      local_address: 192.168.30.13
-      local_address_configured: true
-      local_as: 65011
-      local_as_prepend: false
-      local_port: 179
-      messages_queued_out: 0
-      multihop: true
-      multipath: false
-      output_messages: 34125
-      output_updates: 40
-      previous_connection_state: OpenConfirm
-      received_prefix_count: 4
-      remote_address: 192.168.30.14
-      remote_as: 65014
-      remote_port: 25281
-      remove_private_as: false
-      router_id: 192.168.40.14
-      routing_table: default
-      suppress_4byte_as: false
-      suppressed_prefix_count: 0
-      up: true
+- get_bgp_neighbors:
+    global:
+      peers:
+        192.168.30.14:
+          address_family:
+            ipv4:
+              accepted_prefixes: -1
+              received_prefixes: 4
+          description: lab-nxos-01.lab.dfjt.local
+          is_enabled: true
+          is_up: true
+          local_as: 65011
+          remote_as: 65014
+          remote_id: 192.168.40.14
+        192.168.30.9:
+          address_family:
+            ipv4:
+              accepted_prefixes: -1
+              received_prefixes: 4
+              sent_prefixes: 2
+          description: lab-iosv-01.lab.dfjt.local
+          is_enabled: true
+          is_up: true
+          local_as: 65011
+          remote_as: 65012
+          remote_id: 192.168.40.12
+      router_id: 192.168.40.11
