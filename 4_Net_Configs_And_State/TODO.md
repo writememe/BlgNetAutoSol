@@ -20,5 +20,5 @@ Some tasks which need working on:
 - [x] Gather facts for BGP
 - [x] Gather facts for interfaces
 - [x] Create LLDP validation files for all devices
-- [ ] Create BGP validation files for all devices
-- [ ] Create interface validation files for all devices
+- [x] Create BGP validation files for all devices
+- [x] Create interface validation files for all devices
