@@ -1,37 +1,37 @@
-# This playbook gathers LLDP neighbors across all vendors and saves the output into a YAML file, based on the hostname. 
+# This playbook gathers the SNMP information across all vendors and saves the output into a YAML file, based on the hostname. 
 ---
-- name: Gather LLDP neighbors using NAPALM
+- name: Gather SNMP facts using NAPALM
   hosts: all
   connection: local
   gather_facts: no
   vars:
     facts: "facts"
-    lldp_dir: "lldp"
+    snmp_dir: "snmp"
     # Strip the FDQN portion of the hostname off and save it to the hostname variable.
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
      - name: Set global facts, cleanup old files and directories
        set_fact:
-          lldp_fact_dir: "{{ facts }}/{{ lldp_dir }}"
+          snmp_fact_dir: "{{ facts }}/{{ snmp_dir }}"
      - name: Checking facts directory is created
        file: path={{ facts }} state=directory
        check_mode: no
        run_once: yes
-     - name: Clearing old LLDP fact files
-       file: path={{ lldp_fact_dir }} state=absent
+     - name: Clearing SNMP fact files
+       file: path={{ snmp_fact_dir }} state=absent
        changed_when: False
        check_mode: no
-     - name: Rebuild LLDP fact directories
-       file: path={{ lldp_fact_dir }} state=directory
+     - name: Rebuild SNMP fact directories
+       file: path={{ snmp_fact_dir }} state=directory
        changed_when: False
        check_mode: no
-     - name: Get LLDP neighbors from device
+     - name: Get SNMP information from device
        napalm_get_facts:
          hostname: "{{ inventory_hostname }}"
          username: "{{ username }}"
          dev_os: "{{ os }}"
          password: "{{ password }}"
-         filter: ['lldp_neighbors']                
-       register: lldp_facts
+         filter: [ 'snmp_information' ]                
+       register: snmp_facts
        # Saving to YAML
-     - copy: content="{{lldp_facts.ansible_facts|to_nice_yaml(indent=2)}}" dest={{ lldp_fact_dir }}/{{ hostname }}.yml
+     - copy: content="{{snmp_facts.ansible_facts|to_nice_yaml(indent=2)}}" dest={{ snmp_fact_dir }}/{{ hostname }}.yml

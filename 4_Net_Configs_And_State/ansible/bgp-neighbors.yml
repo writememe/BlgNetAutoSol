@@ -1,6 +1,6 @@
 # This playbook gathers BGP neighbors across all vendors and saves the output into a YAML file, based on the hostname. 
 ---
-- name: Get BGP neighbors using NAPALM
+- name: Gather BGP neighbors using NAPALM
   hosts: all
   connection: local
   gather_facts: no

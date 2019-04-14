@@ -1,6 +1,6 @@
 # This playbook gathers LLDP neighbors across all vendors and saves the output into a YAML file, based on the hostname. 
 ---
-- name: Get LLDP neighbors using NAPALM
+- name: Gather LLDP detail neighbors using NAPALM
   hosts: all
   connection: local
   gather_facts: no
@@ -18,15 +18,15 @@
        file: path={{ facts }} state=directory
        check_mode: no
        run_once: yes
-     - name: Clearing old LLDP fact files
+     - name: Clearing old LLDP detail fact files
        file: path={{ lldp_det_fact_dir }} state=absent
        changed_when: False
        check_mode: no
-     - name: Rebuild LLDP fact directories
+     - name: Rebuild LLDP detail fact directories
        file: path={{ lldp_det_fact_dir }} state=directory
        changed_when: False
        check_mode: no
-     - name: Get LLDP neighbors from device
+     - name: Get LLDP detail neighbors from device
        napalm_get_facts:
          hostname: "{{ inventory_hostname }}"
          username: "{{ username }}"
