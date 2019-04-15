@@ -22,3 +22,4 @@ Some tasks which need working on:
 - [x] Create LLDP validation files for all devices
 - [ ] Create BGP validation files for all devices
 - [ ] Create interface validation files for all devices
+- [ ] Work on node-model to validate-datmodel.yml Jinja2 template
