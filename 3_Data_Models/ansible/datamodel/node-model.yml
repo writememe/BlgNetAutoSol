@@ -19,13 +19,13 @@ nodes:
     interfaces:
       - name: Ethernet0/2
         ip: 192.168.30.9/30 
-        description: To lab-arista-01 - Ethernet2
+        description: To lab-arista-01.lab.dfjt.local - Ethernet2
       - name: Ethernet0/3
         ip: 192.168.30.5/30 
-        description: To lab-iosv-02 - Ethernet0/3
+        description: To lab-iosv-02.lab.dfjt.local - Ethernet0/3
       - name: Ethernet0/1
         ip: 192.168.11.12/24 
-        description: External Lab Network
+        description: To dfjt-r001.lab.dfjt.local - Vlan101
       - name: Loopback0
         ip: 192.168.40.12/32 
         description: Loopback Interface
@@ -59,13 +59,13 @@ nodes:
     interfaces:
       - name: Ethernet0/3
         ip: 192.168.30.6/30 
-        description: To lab-iosv-01 - Ethernet0/3
+        description: To lab-iosv-01.lab.dfjt.local - Ethernet0/3
       - name: Ethernet0/1
         ip: 192.168.11.13/24 
-        description: External Lab Network
+        description: To dfjt-r001.lab.dfjt.local - Vlan101
       - name: Ethernet0/2
         ip: 192.168.30.1/30 
-        description: To lab-nxos-01 - Ethernet1/2
+        description: To lab-nxos-01.lab.dfjt.local - Ethernet1/2
       - name: Loopback0
         ip: 192.168.40.13/32 
         description: Loopback Interface
@@ -99,10 +99,10 @@ nodes:
     interfaces:
       - name: Ethernet3
         ip: 192.168.30.13/30 
-        description: To lab-nxos-01 - Ethernet1/3
+        description: To lab-nxos-01.lab.dfjt.local - Ethernet1/3
       - name: Ethernet2
         ip: 192.168.30.10/30 
-        description: To lab-iosv-01 - Ethernet0/2
+        description: To lab-iosv-01.lab.dfjt.local - Ethernet0/2
       - name: Loopback0
         ip: 192.168.40.11/32 
         description: Loopback Interface
@@ -133,10 +133,10 @@ nodes:
     interfaces:
       - name: Ethernet1/3
         ip: 192.168.30.14/30 
-        description: To lab-arista-01 - Ethernet3
+        description: To lab-arista-01.lab.dfjt.local - Ethernet3
       - name: Ethernet1/2
         ip: 192.168.30.2/30 
-        description: To lab-iosv-02 - Ethernet0/2
+        description: To lab-iosv-02.lab.dfjt.local - Ethernet0/2
       - name: loopback0
         ip: 192.168.40.14/32 
         description: Loopback Interface
@@ -167,7 +167,7 @@ nodes:
     interfaces:
       - name: ge-0/0/1
         ip: 192.168.12.19/24 
-        description: Lab_Interface
+        description: To dfjt-r001.lab.dfjt.local - Vlan102
       - name: lo0
         ip: 192.168.40.19/32 
         description: Loopback_Interface

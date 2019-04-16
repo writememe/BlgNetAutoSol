@@ -55,7 +55,9 @@ Similarly, if the same node ID of 10 is used, the Jinja2 template will perform t
 
 `loopback_subnet: '192.168.40.0/24'` + `id: 10` = `loopback_ip: 192.168.40.10/32`   
 
-This allows you to simply change the subnet and Base BGP ASN if you would like to deploy the same network at another site or environment by simply changing the `bgp_base_asn` and `loopback_subnet` values.
+This allows you to simply change the subnet and Base BGP ASN if you would like to deploy the same network at another site or environment by simply changing the `bgp_base_asn` and `loopback_subnet` values.  
+
+Finally, I have implemented interface description default to be `To <remote_hostname> - <remote_interface>` so that unless there is a legitimate exception, this standard can be applied by default without asking the operator to provide this value.
 
 #### Abstraction vs Data Input Decisions
 
@@ -113,7 +115,7 @@ Depending on the vendor, each password has a different method of encryption type
 | EOS     | Type 0                  |
 ^ Unsure, tested on version junosv-firefly 12.1X44-D20.3.
 
-There is two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, show the output and use the encrypted password as the value in your host_vars file.
+There is two ways to get the encrypted passwords. The first and easiest way is to configure a dummy BGP neighbor with your desired clear-text password. Then, show the output and use the encrypted password as the value in your data model file.
 
 The second way is to modify the Jinja2 `roles/routing/templates/{{os}}/routing.j2` template to deploy your BGP password in clear-text. If you have password encryption turned on, it will then display the encrypted password for use in your fabric-model file.
 
