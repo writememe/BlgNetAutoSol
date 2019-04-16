@@ -1,0 +1,52 @@
+---
+- name: Compliance check for the base config
+  hosts: all
+  connection: local
+  vars:
+    validate_dir: "{{ playbook_dir }}/validate/files"
+    datamodel_dir: "{{ playbook_dir }}/datamodel"
+  tasks:
+    - name: Prepare validate datamodel directory
+      set_fact:
+        val_dir: "{{ validate_dir }}"
+      changed_when: False
+    - name: Ensure there are no files from previous runs
+      file:
+        path: "{{ val_dir }}"
+        state: absent
+      changed_when: False
+    - name: Create dir where assembled validation rule file is stored
+      file:
+        path: "{{ val_dir }}"
+        state: directory
+      changed_when: False
+- name: Perform Validation from dynamically generated validation files
+  hosts: all
+  vars:
+    datamodel_dir: "{{ playbook_dir }}/datamodel"
+  connection: local
+  gather_facts: no
+  vars_files: [ "{{ datamodel_dir }}/node-model.yml" ]
+  roles:
+    - validate
+
+        # - name: Use Napalm to automatically validate configuration
+        #napalm_validate:
+        #hostname: "{{ inventory_hostname }}"
+        #username: "{{ username }}"
+        #dev_os: "{{ os }}"
+        #password: "{{ password }}"
+        #validation_file: "{{ host_val_dir }}/validate.yml"
+        #tags: [print_action]
+        #with_items: ["interfaces", "bgp", "lldp"]
+        #register: validate_results
+
+        #- name: Compliance check failed
+        #fail:
+        # msg: "{{ validate_results.compliance_report }}"
+        #when: not validate_results.compliance_report.complies
+
+        #- name: Full compliance report
+        #debug:
+        #msg: "{{ validate_results.compliance_report }}"
+        #when: validate_results.compliance_report.complies
