@@ -1,6 +1,6 @@
-# This playbook gathers interfaces across all vendors and saves the output into a YAML file, based on the hostname. 
+# This playbook gathers interface information across all vendors and saves the output into a YAML file, based on the hostname. 
 ---
-- name: Get interfaces using NAPALM
+- name: Gather interface facts using NAPALM
   hosts: all
   connection: local
   gather_facts: no

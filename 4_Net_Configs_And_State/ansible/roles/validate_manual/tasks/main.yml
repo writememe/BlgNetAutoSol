@@ -21,3 +21,7 @@
       debug:
         msg: "{{ report|to_nice_json }}"
       tags: [print_action]
+# This is a raw format output, needs cleaning up and formatting
+- copy: content="{{report|to_nice_json(indent=2)}}" dest="report.json"
+
+ 

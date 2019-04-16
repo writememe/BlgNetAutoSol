@@ -1,0 +1,219 @@
+# Automatically created from data model
+---
+
+nodes:
+  lab-iosv-01.lab.dfjt.local:
+    hostname: lab-iosv-01
+    mgmt: 10.0.0.12
+    rid: 192.168.40.12/32
+    id: 12
+    os: ios
+    loopback_ip: 192.168.40.12/32
+    asn: 65012
+    auth: 060A0E23
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
+    interfaces:
+      - name: Ethernet0/2
+        ip: 192.168.30.9/30 
+        description: To lab-arista-01.lab.dfjt.local - Ethernet2
+      - name: Ethernet0/3
+        ip: 192.168.30.5/30 
+        description: To lab-iosv-02.lab.dfjt.local - Ethernet0/3
+      - name: Ethernet0/1
+        ip: 192.168.11.12/24 
+        description: To dfjt-r001.lab.dfjt.local - Vlan101
+      - name: Loopback0
+        ip: 192.168.40.12/32 
+        description: Loopback Interface
+    
+    peers:
+      - ip: 192.168.30.10 
+        asn: 65011
+        description: lab-arista-01.lab.dfjt.local
+      - ip: 192.168.30.6 
+        asn: 65013
+        description: lab-iosv-02.lab.dfjt.local
+      - ip: 192.168.11.1 
+        asn: 65001
+        description: dfjt-r001.lab.dfjt.local
+
+
+  lab-iosv-02.lab.dfjt.local:
+    hostname: lab-iosv-02
+    mgmt: 10.0.0.13
+    rid: 192.168.40.13/32
+    id: 13
+    os: ios
+    loopback_ip: 192.168.40.13/32
+    asn: 65013
+    auth: 060A0E23
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
+    interfaces:
+      - name: Ethernet0/3
+        ip: 192.168.30.6/30 
+        description: To lab-iosv-01.lab.dfjt.local - Ethernet0/3
+      - name: Ethernet0/1
+        ip: 192.168.11.13/24 
+        description: To dfjt-r001.lab.dfjt.local - Vlan101
+      - name: Ethernet0/2
+        ip: 192.168.30.1/30 
+        description: To lab-nxos-01.lab.dfjt.local - Ethernet1/2
+      - name: Loopback0
+        ip: 192.168.40.13/32 
+        description: Loopback Interface
+    
+    peers:
+      - ip: 192.168.30.5 
+        asn: 65012
+        description: lab-iosv-01.lab.dfjt.local
+      - ip: 192.168.11.1 
+        asn: 65001
+        description: dfjt-r001.lab.dfjt.local
+      - ip: 192.168.30.2 
+        asn: 65014
+        description: lab-nxos-01.lab.dfjt.local
+
+
+  lab-arista-01.lab.dfjt.local:
+    hostname: lab-arista-01
+    mgmt: 10.0.0.11
+    rid: 192.168.40.11/32
+    id: 11
+    os: eos
+    loopback_ip: 192.168.40.11/32
+    asn: 65011
+    auth: lab
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
+    interfaces:
+      - name: Ethernet3
+        ip: 192.168.30.13/30 
+        description: To lab-nxos-01.lab.dfjt.local - Ethernet1/3
+      - name: Ethernet2
+        ip: 192.168.30.10/30 
+        description: To lab-iosv-01.lab.dfjt.local - Ethernet0/2
+      - name: Loopback0
+        ip: 192.168.40.11/32 
+        description: Loopback Interface
+    
+    peers:
+      - ip: 192.168.30.14 
+        asn: 65014
+        description: lab-nxos-01.lab.dfjt.local
+      - ip: 192.168.30.9 
+        asn: 65012
+        description: lab-iosv-01.lab.dfjt.local
+
+
+  lab-nxos-01.lab.dfjt.local:
+    hostname: lab-nxos-01
+    mgmt: 10.0.0.14
+    rid: 192.168.40.14/32
+    id: 14
+    os: nxos
+    loopback_ip: 192.168.40.14/32
+    asn: 65014
+    auth: 57a158d981181c20
+
+    connected_rm:
+      name: CONNECTED
+      interface: loopback0
+
+    interfaces:
+      - name: Ethernet1/3
+        ip: 192.168.30.14/30 
+        description: To lab-arista-01.lab.dfjt.local - Ethernet3
+      - name: Ethernet1/2
+        ip: 192.168.30.2/30 
+        description: To lab-iosv-02.lab.dfjt.local - Ethernet0/2
+      - name: loopback0
+        ip: 192.168.40.14/32 
+        description: Loopback Interface
+    
+    peers:
+      - ip: 192.168.30.13 
+        asn: 65011
+        description: lab-arista-01.lab.dfjt.local
+      - ip: 192.168.30.1 
+        asn: 65013
+        description: lab-iosv-02.lab.dfjt.local
+
+
+  lab-junos-01.lab.dfjt.local:
+    hostname: lab-junos-01
+    mgmt: 10.0.0.19
+    rid: 192.168.40.19/32
+    id: 19
+    os: junos
+    loopback_ip: 192.168.40.19/32
+    asn: 65019
+    auth: $9$rwxlMX7NbY2a
+
+    connected_rm:
+      name: CONNECTED
+      interface: lo0
+
+    interfaces:
+      - name: ge-0/0/1
+        ip: 192.168.12.19/24 
+        description: To dfjt-r001.lab.dfjt.local - Vlan102
+      - name: lo0
+        ip: 192.168.40.19/32 
+        description: Loopback_Interface
+    
+    peers:
+      - ip: 192.168.12.1 
+        asn: 65001
+        description: dfjt-r001.lab.dfjt.local
+
+
+  dfjt-r001.lab.dfjt.local:
+    hostname: dfjt-r001
+    mgmt: 10.0.0.1
+    rid: 192.168.40.1/32
+    id: 1
+    os: ios
+    loopback_ip: 192.168.40.1/32
+    asn: 65001
+    auth: 060A0E23
+
+    connected_rm:
+      name: CONNECTED
+      interface: Loopback0
+
+    interfaces:
+      - name: Vlan101
+        ip: 192.168.11.1/24 
+        description: External Lab Network
+      - name: Vlan101
+        ip: 192.168.11.1/24 
+        description: External Lab Network
+      - name: Vlan102
+        ip: 192.168.12.1/24 
+        description: Alternate Lab Network
+      - name: Loopback0
+        ip: 192.168.40.1/32 
+        description: Loopback Interface
+    
+    peers:
+      - ip: 192.168.11.12 
+        asn: 65012
+        description: lab-iosv-01.lab.dfjt.local
+      - ip: 192.168.11.13 
+        asn: 65013
+        description: lab-iosv-02.lab.dfjt.local
+      - ip: 192.168.12.19 
+        asn: 65019
+        description: lab-junos-01.lab.dfjt.local
+
