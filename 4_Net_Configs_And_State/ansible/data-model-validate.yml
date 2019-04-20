@@ -29,7 +29,7 @@
   vars_files: [ "{{ datamodel_dir }}/node-model.yml" ]
   roles:
     - validate
-- name: Validate interfaces
+- name: Set validate directory facts
   hosts: all
   connection: local
   vars:
