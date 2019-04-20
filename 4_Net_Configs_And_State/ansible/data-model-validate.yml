@@ -1,0 +1,53 @@
+---
+- name: Perform automated validation from the data model
+  hosts: all
+  connection: local
+  vars:
+    validate_dir: "{{ playbook_dir }}/validate/files"
+    datamodel_dir: "{{ playbook_dir }}/datamodel"
+  tasks:
+    - name: Prepare validate datamodel directory
+      set_fact:
+        val_dir: "{{ validate_dir }}/{{ inventory_hostname }}"
+      changed_when: False
+    - name: Ensure there are no files from previous runs
+      file:
+        path: "{{ val_dir }}"
+        state: absent
+      changed_when: False
+    - name: Create directory where assembled validation rule file is stored
+      file:
+        path: "{{ val_dir }}"
+        state: directory
+      changed_when: False
+- name: Create validation files, based on the datamodel
+  hosts: all
+  vars:
+    datamodel_dir: "{{ playbook_dir }}/datamodel"
+  connection: local
+  gather_facts: no
+  vars_files: [ "{{ datamodel_dir }}/node-model.yml" ]
+  roles:
+    - validate
+- name: Validate interfaces
+  hosts: all
+  connection: local
+  vars:
+    val_dir: "validate/files"
+  tasks:
+  - name: Use Napalm to automatically validate existing interfaces
+    napalm_validate:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      dev_os: "{{ os }}"
+      password: "{{ password }}"
+      validation_file: "validate/files/{{ inventory_hostname }}/automated-validation.yml"
+    register: val_intf
+    ignore_errors: yes
+  - name: Display full compliance report
+    debug:
+      var: val_intf.compliance_report
+  - name: Compliance check failed
+    fail:
+      msg: "Non-compliant state encountered. Refer to the full report."
+    when: not val_intf.compliance_report.complies
