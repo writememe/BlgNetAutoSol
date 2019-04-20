@@ -3,8 +3,8 @@
 {% for interface in node.interfaces %}
 interfaces {
     {{ interface.name }} {
-        description "{{ interface.description }}";
 	unit 0 {
+            description "{{ interface.description }}"
             family inet {
                 address {{ interface.ip }};
             }
