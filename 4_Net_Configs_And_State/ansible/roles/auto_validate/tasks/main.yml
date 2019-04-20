@@ -1,0 +1,26 @@
+# Static validation playbook, based on static validation files.
+---
+- pause:
+    seconds: 3
+- block:
+  - name: "Validate network and device deployment"
+    vars:
+       # Strip the FDQN portion of the hostname off and save it to the hostname variable.
+      hostname: "{{ inventory_hostname.split('.')[0] }}"
+    napalm_validate:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      dev_os: "{{ os }}"
+      password: "{{ password }}"
+      validation_file: "{{ playbook_dir }}/validate/files/{{ inventory_hostname }}/automated-validation.yml"
+    register: report
+    tags: [print_action]
+  rescue:
+    - name: "Report"
+      debug:
+        msg: "{{ report|to_nice_json }}"
+      tags: [print_action]
+# This is a raw format output, needs cleaning up and formatting
+- copy: content="{{report|to_nice_json(indent=2)}}" dest="bgp-report.json"
+
+ 
