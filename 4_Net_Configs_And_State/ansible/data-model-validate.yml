@@ -35,19 +35,19 @@
   vars:
     val_dir: "validate/files"
   tasks:
-  - name: Use Napalm to automatically validate existing interfaces
+  - name: Use NAPALM to automatically validate configuration
     napalm_validate:
       hostname: "{{ inventory_hostname }}"
       username: "{{ username }}"
       dev_os: "{{ os }}"
       password: "{{ password }}"
       validation_file: "validate/files/{{ inventory_hostname }}/automated-validation.yml"
-    register: val_intf
+    register: val_results
     ignore_errors: yes
-  - name: Display full compliance report
+  - name: Display compliance results
     debug:
-      var: val_intf.compliance_report
-  - name: Compliance check failed
+      var: val_results.compliance_report
+  - name: Compliance check failure
     fail:
-      msg: "Non-compliant state encountered. Refer to the full report."
-    when: not val_intf.compliance_report.complies
+      msg: "Results do not comply against validation rules. Refer to the full report."
+    when: not val_results.compliance_report.complies
