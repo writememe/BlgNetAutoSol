@@ -1,0 +1,15 @@
+{% set node = nodes[inventory_hostname] %}
+
+{% for interface in node.interfaces %}
+interfaces {
+    {{ interface.name }} {
+	unit 0 {
+            description "{{ interface.description }}"
+            family inet {
+                address {{ interface.ip }};
+            }
+        }    
+    } 
+}
+
+{% endfor %}

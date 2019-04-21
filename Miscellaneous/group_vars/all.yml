@@ -1,0 +1,10 @@
+---
+ip_domain_name: lab.dfjt.local
+ntp_servers:
+  - 10.0.0.1
+  - 8.8.8.8
+dns_servers:
+  - 10.0.0.1
+  - 8.8.8.8
+syslog_servers:
+  - 10.0.0.101
