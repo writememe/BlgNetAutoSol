@@ -8,9 +8,11 @@ Some ideas for validating network configurations and state:
 
  - [ ] Create a list of validation tests from the `fabric-model.yml` model
  - [x] Use NAPALM facts to retrieve the validation data for now, to use for validation
- - [ ] Perform all validation tests using Ansible roles
+ - [x] Perform all validation tests using Ansible roles
  - [ ] Write a playbook to break the data on the device, so that you can see test failures
  - [ ] Update the `fabric-model.yml` model to deal with additional field such as state= enabled or disabled  
+ - [ ] Work out whether all vendors provide a configuration replace option.
+
 
 ## Tasks
 
@@ -22,4 +24,4 @@ Some tasks which need working on:
 - [x] Create LLDP validation files for all devices
 - [x] Create BGP validation files for all devices
 - [x] Create interface validation files for all devices
-- [ ] Work on node-model to validate-datmodel.yml Jinja2 template
+- [x] Work on node-model to validate-datmodel.yml Jinja2 template
