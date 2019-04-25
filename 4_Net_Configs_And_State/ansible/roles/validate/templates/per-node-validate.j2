@@ -3,6 +3,7 @@
 {% set node = nodes[inventory_hostname] %}
 - get_facts:
     fqdn: {{ inventory_hostname }}
+    hostname: {{ node.hostname }}
 - get_bgp_neighbors:
     global:
       peers:
