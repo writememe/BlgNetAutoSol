@@ -1,0 +1,6 @@
+---
+- name: Prepare master datamodel validation rules from initial data model.
+  template:
+   src: "../templates/all-node-validate.j2"
+   dest: "{{ dm_val_dir }}/master-node-model-validation.yml"
+  changed_when: no
