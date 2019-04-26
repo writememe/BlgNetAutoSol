@@ -134,7 +134,7 @@ At the time of writing, napalm=2.4.0 did not correctly process the `get_interfac
 
 [https://github.com/napalm-automation/napalm/issues/964](https://github.com/napalm-automation/napalm/issues/964)
 
-It's anticipated that this will be resolved in the next release.
+It's anticipated that this will be resolved in the next release. There is a workaround in the above link.
 
 ### NAPALM Validate - nxos - get_bgp_neighbors 
 
@@ -153,22 +153,23 @@ This basically sets the validation rules to not check the BGP peer description f
 
 NAPALM validate verifies Junos devices based on <interface_name>.0. For example, interface ge-0/0/1 is verified using ge-0/0/1.0. To workaround this, the [Validate File Generate Jinja2 Template](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State#rolesdatamodetemplatesper-nodej2---data-model-transformation-jinja2-template) has the following in it:
 
-'''
+```
 - get_interfaces:
 {% for interface in node.interfaces %}
 {%  if node.os == 'junos' %}
     {{ interface.name }}.0:
 {%  elif node.os != 'junos' %}
     {{ interface.name }}:
-'''
-'''
+```
+And this as well:
+```
 - get_interfaces_ip:
 {% for interface in node.interfaces %}
 {%   if node.os == 'junos' %}
     {{ interface.name }}.0:
 {%   elif node.os != 'junos' %}
     {{ interface.name }}:
-'''
+```
 This appends the .0 to the end of the interface name to ensure that the NAPALM Validate works.
 
 
