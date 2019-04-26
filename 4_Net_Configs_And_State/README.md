@@ -46,7 +46,8 @@ As this is an extension on the existing functionality [Module 3 - Data Models](h
 
 Below is a diagram which depicts the workflows and dependencies of each playbook:  
 
-![Project Workflow](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State/Module%204%20-%20Change%20Net%20Configs%20and%20State.png)
+![Project Workflow](https://github.com/writememe/BlgNetAutoSol/blob/master/4_Net_Configs_And_State/Module%204%20-%20Change%20Net%20Configs%20and%20State.png)
+
 
 Starting from the top-left, the description of the appropriate components are described below.  
 
