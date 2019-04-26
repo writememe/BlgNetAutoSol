@@ -188,7 +188,7 @@ Reflecting on the learning that I have made between module three and module four
 I learned some other lessons from this module as well:
 
 - Initially, I was trying to manually generate my validation files to use in NAPALM validate. While this worked, it certainly would not be scalable.
-- Open source software is great. Kudos to those who support and contribute to projects like NAPALM. I've used paid software with inferior support or response in comparison this project.
+- Open source software is great. Kudos to those who support and contribute to projects like NAPALM. I've used paid software with inferior support or response in comparison to this project.
 - I struggled with where I should source my data to generate the validation files. I did get an Ansible role `roles/datamodel-validate/templates/all-node-validate.j2` to process the `fabric-model.yml` to generate one big validation file and spent a lot of time on this Jinja2 template. However, I couldn't work out how to split the file, based on {{ inventory_hostname }} which is the value of nodes dictionary. If anyone could work that out or show me how, that would be great. As a result, I reverted to the solution in this Module which still meets the requirements.
 
 ## Summary
