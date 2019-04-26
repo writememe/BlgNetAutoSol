@@ -2,6 +2,7 @@
 
 {% for interface in node.interfaces %}
 interfaces {
+    replace:
     {{ interface.name }} {
 	unit 0 {
             description "{{ interface.description }}"
