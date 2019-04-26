@@ -140,18 +140,20 @@ It's anticipated that this will be resolved in the next release. There is a work
 
 At the time of writing, the underlying `get_bgp_neighbors` function does not process the BGP description configuration correctly. It's currently hard coded to "". To workaround this, the [Validate File Generate Jinja2 Template](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State#rolesdatamodetemplatesper-nodej2---data-model-transformation-jinja2-template) has the following in it:
 
-'''
+```
 {% for peer in node.peers %}
         {{ peer.ip }}:
 {%      if node.os == 'nxos' %}
 {%      elif node.os != 'nxos' %}
           description: {{ peer.description }}
-'''
-This basically sets the validation rules to not check the BGP peer description for nxos devices.
+```
+This sets the validation rules to not check the BGP peer description for nxos devices.
 
 ### NAPALM Validate - junos - interfaces
 
-NAPALM validate verifies Junos devices based on <interface_name>.0. For example, interface ge-0/0/1 is verified using ge-0/0/1.0. To workaround this, the [Validate File Generate Jinja2 Template](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State#rolesdatamodetemplatesper-nodej2---data-model-transformation-jinja2-template) has the following in it:
+NAPALM validate verifies Junos devices based on `<interface_name>.0`. For example, interface `ge-0/0/1 unit 0` is verified using `ge-0/0/1.0`. 
+
+To workaround this, the [Validate File Generate Jinja2 Template](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State#rolesdatamodetemplatesper-nodej2---data-model-transformation-jinja2-template) has the following in it:
 
 ```
 - get_interfaces:
@@ -170,8 +172,7 @@ And this as well:
 {%   elif node.os != 'junos' %}
     {{ interface.name }}:
 ```
-This appends the .0 to the end of the interface name to ensure that the NAPALM Validate works.
-
+This appends the .0 to the end of the interface name to ensure that the NAPALM Validation works.
 
 
 This assignment in under construction. Refer to [TODO.md](https://github.com/writememe/BlgNetAutoSol/blob/master/4_Net_Configs_And_State/TODO.md) for progress.
