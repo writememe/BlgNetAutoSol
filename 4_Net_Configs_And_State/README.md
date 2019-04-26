@@ -42,9 +42,11 @@ The following assumptions are made when using these playbooks:
 
 ## Project Structure
 
-As this is an extension on the existing functionality [Module 3 - Data Models](https://github.com/writememe/BlgNetAutoSol/tree/master/3_Data_Models). Below is a diagram which depicts the workflows and dependencies of each playbook:  
+As this is an extension on the existing functionality [Module 3 - Data Models](https://github.com/writememe/BlgNetAutoSol/tree/master/3_Data_Models). 
 
-![Project Workflow](https://github.com/writememe/BlgNetAutoSol/blob/module-4-dev-4/4_Net_Configs_And_State/Module%204%20-%20Change%20Net%20Configs%20and%20State.png)
+Below is a diagram which depicts the workflows and dependencies of each playbook:  
+
+![Project Workflow](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State/Module%204%20-%20Change%20Net%20Configs%20and%20State.png)
 
 Starting from the top-left, the description of the appropriate components are described below.  
 
@@ -120,8 +122,54 @@ This file contains a collation of all host compliance reports in a single report
 
 Each host either has passed or failed all it's compliance checks.
 
-Then, additional high-level information indicates which aspect of the validation had failed. For a detailed analysis, refer to the `reports/debug/` for the exact reason for non-compliance..
+Then, additional high-level information indicates which aspect of the validation had failed. For a detailed analysis, refer to the `reports/debug/`directory for the exact reason for non-compliance.
 
+## Known Issues
+
+At the time of writing the known issues in [Module 3 - Data Models](https://github.com/writememe/BlgNetAutoSol/tree/master/3_Data_Models#known-issues) still apply. Other than that, the following known issues were encountered:
+
+### NAPALM Validate - nxos - get_interfaces_ip
+
+At the time of writing, napalm=2.4.0 did not correctly process the `get_interfaces_ip` function for nxos device. Below is a link to the issue raised, which seems to be resolved in the `develop` branch of this version:  
+
+[https://github.com/napalm-automation/napalm/issues/964](https://github.com/napalm-automation/napalm/issues/964)
+
+It's anticipated that this will be resolved in the next release.
+
+### NAPALM Validate - nxos - get_bgp_neighbors 
+
+At the time of writing, the underlying `get_bgp_neighbors` function does not process the BGP description configuration correctly. It's currently hard coded to "". To workaround this, the [Validate File Generate Jinja2 Template](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State#rolesdatamodetemplatesper-nodej2---data-model-transformation-jinja2-template) has the following in it:
+
+'''
+{% for peer in node.peers %}
+        {{ peer.ip }}:
+{%      if node.os == 'nxos' %}
+{%      elif node.os != 'nxos' %}
+          description: {{ peer.description }}
+'''
+This basically sets the validation rules to not check the BGP peer description for nxos devices.
+
+### NAPALM Validate - junos - interfaces
+
+NAPALM validate verifies Junos devices based on <interface_name>.0. For example, interface ge-0/0/1 is verified using ge-0/0/1.0. To workaround this, the [Validate File Generate Jinja2 Template](https://github.com/writememe/BlgNetAutoSol/tree/master/4_Net_Configs_And_State#rolesdatamodetemplatesper-nodej2---data-model-transformation-jinja2-template) has the following in it:
+
+'''
+- get_interfaces:
+{% for interface in node.interfaces %}
+{%  if node.os == 'junos' %}
+    {{ interface.name }}.0:
+{%  elif node.os != 'junos' %}
+    {{ interface.name }}:
+'''
+'''
+- get_interfaces_ip:
+{% for interface in node.interfaces %}
+{%   if node.os == 'junos' %}
+    {{ interface.name }}.0:
+{%   elif node.os != 'junos' %}
+    {{ interface.name }}:
+'''
+This appends the .0 to the end of the interface name to ensure that the NAPALM Validate works.
 
 
 
