@@ -66,7 +66,7 @@ This Jinja2 template is called from the `create-data-model.yml` playbook and per
 
 This YAML file contains the node-friendly data model. As shown in the picture above, this data model is used by three playbooks to perform various functions.
 
-#### data-model-compare.yml and data-model-deploy.yml - Compare and Deploy Playbooks
+### data-model-compare.yml and data-model-deploy.yml - Compare and Deploy Playbooks
 
 These playbooks perform comparision and deployment functions for the solution. They utilise the `common`, `base`, `interface` and `routing` roles where applicable. More information on these playbooks can be found in [Module 3 - Data Models](https://github.com/writememe/BlgNetAutoSol/tree/master/3_Data_Models).  
 
