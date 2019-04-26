@@ -175,4 +175,23 @@ And this as well:
 This appends the .0 to the end of the interface name to ensure that the NAPALM Validation works.
 
 
-This assignment in under construction. Refer to [TODO.md](https://github.com/writememe/BlgNetAutoSol/blob/master/4_Net_Configs_And_State/TODO.md) for progress.
+## Learnings
+
+Reflecting on the learning that I have made between module three and module four, I have been able to upskill my playbooks in the following areas:
+
+- Conditional Jinja2 templating, to get around inconsistencies in NAPALM module support between vendors.
+- Multi-function playbook, which generates validation data and then reads that data to perform another function. Previously, I would have had this in two seperate playbooks.
+- Increased of the run_once option, to speed up my playbook without losing functionality.
+- Consider and appropriately workflow my project, so it's as efficent as possible.
+
+I learned some other lessons from this module as well:
+
+- Initially, I was trying to manually generate my validation files to use in NAPALM validate. While this worked, it certainly would not be scalable.
+- Open source software is great. Kudos to those who support and contribute to projects like NAPALM. I've used paid software with inferior support or response in comparison this project.
+- I struggled with where I should source my data to generate the validation files. I did get an Ansible role `roles/datamodel-validate/templates/all-node-validate.j2` to process the `fabric-model.yml` to generate one big validation file and spent a lot of time on this Jinja2 template. However, I couldn't work out how to split the file, based on {{ inventory_hostname }} which is the value of nodes dictionary. If anyone could work that out or show me how, that would be great. As a result, I reverted to the solution in this Module which still meets the requirements.
+
+## Summary
+
+I'm mostly satisfied with this solution, if time permitted in future I would look to add `state` to the routing block in `fabric-model.yml` and disable/enable BGP neighbors and validate appropriately.
+
+It was already obvious but you can't really deploy configurations without validating it! It's added more robustness to the overall solution and closes the loop of automating solutions.
