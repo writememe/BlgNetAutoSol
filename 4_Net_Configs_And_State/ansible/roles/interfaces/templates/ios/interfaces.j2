@@ -1,6 +1,7 @@
 {% set node = nodes[inventory_hostname] %}
 
 {% for interface in node.interfaces %}
+default interface {{ interface.name }}
 interface {{ interface.name }}
  {{ 'no shutdown' if interface.name.startswith("Et") else "" }}
  {{ 'no switchport' if interface.name.startswith("Et")  else "" }}

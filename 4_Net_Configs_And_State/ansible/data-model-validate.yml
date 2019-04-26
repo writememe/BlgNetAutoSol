@@ -16,13 +16,11 @@
         path: "{{ val_dir }}"
         state: absent
       changed_when: False
-      run_once: True
     - name: Create directory where assembled validation rule file is stored
       file:
         path: "{{ val_dir }}"
         state: directory
       changed_when: False
-      run_once: True
     - name: Prepare reports directory
       file:
         path: "{{ raw_report_dir }}"
@@ -70,11 +68,6 @@
         path: "{{ debug_report_dir }}"
         state: directory
       run_once: True
-    - name: Create Summary Report output directory
-      file:
-        path: "{{ report_dir }}/{{ inventory_hostname }}"
-        state: directory
-      changed_when: False
     - name: Use NAPALM to automatically validate configuration
       napalm_validate:
         hostname: "{{ inventory_hostname }}"
