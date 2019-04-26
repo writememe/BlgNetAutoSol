@@ -27,6 +27,8 @@
         state: directory
       changed_when: False
       run_once: True
+ 
+
 - name: Create validation files, based on the datamodel
   hosts: all
   vars:
@@ -95,10 +97,12 @@
         src: "{{ report_dir }}"
         dest: "{{ report_dir }}/All-Host-Validation-Report.txt"
       run_once: True
+    # Always display the successful compliance results
     - name: Display compliance results
       debug:
         var: val_results.compliance_report.complies
+    # When a host fails compliance, fail the play and display the exact file which the user will need to review.
     - name: Compliance check failure
       fail:
-        msg: "Checks do not comply against validation rules. Refer to the full report at {{ debug_report_dir }}/{{ inventory_hostname }}-Validation-Compliance-Report.json"
+        msg: "{{ inventory_hostname }} failed compliance. Refer to the full report at {{ debug_report_dir }}/{{ inventory_hostname }}-Validation-Compliance-Report.json"
       when: not val_results.compliance_report.complies

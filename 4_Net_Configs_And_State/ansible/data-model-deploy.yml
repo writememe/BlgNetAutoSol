@@ -30,6 +30,13 @@
     file: path={{ host_dir }} state=directory
     changed_when: False
     check_mode: no
+  - name: Checking that configuration file(s) for deployment exist
+    stat:
+      path: "{{ host_dir }}/assembled.conf"
+    register: config_file
+  - fail: 
+      msg: "Configuration file {{ host_dir }}/assembled.conf does not exist. Please review and resolve" 
+    when: config_file.stat.exists == False
 
 - name: Deploy configuration
   hosts: all

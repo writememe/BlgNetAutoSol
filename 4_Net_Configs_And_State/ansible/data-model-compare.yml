@@ -8,7 +8,7 @@
       config_dir: "configs"
       build_dir: "compiled"
       hostname: "{{ inventory_hostname.split('.')[0] }}"
-  tasks:
+  pre_tasks:
      - name: Set global facts, cleanup old files and directories
        set_fact:
           host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
@@ -23,7 +23,7 @@
        changed_when: False
        check_mode: no
 
-- name: Base configuration
+- name: Building configuration components
   hosts: all
   connection: local
   tags: [ 'build','validate' ]
@@ -33,59 +33,29 @@
     - "{{model_dir}}/node-model.yml"
   roles:
     - base
-
-- name: Common configuration
-  hosts: all
-  connection: local
-  tags: [ 'build','validate' ]
-  roles:
     - common
-
-- name: Interface configuration
-  hosts: all
-  tags: [ 'build','validate' ]
-  connection: local
-  vars:
-    model_dir: "datamodel"
-  vars_files: 
-    - "{{ model_dir }}/node-model.yml"
-  roles:
     - interfaces
+    - routing
 
-- name: Routing configuration
-  hosts: all
-  connection: local
-  vars:
-    model_dir: "datamodel"
-  tags: [ 'build','validate' ]
-  vars_files:
-    - "{{ model_dir }}/node-model.yml"
-  roles:
-   - routing
-
-- name: Assembling configuration components
-  hosts: all
-  tags: [ 'build','validate' ]
-  tasks:
-  - assemble:
-     src: "{{ host_dir }}"
-     dest: "{{ host_dir }}/assembled.conf"
-    changed_when: False
-
-- name: Compare data model with configuration on device, report the differences
-  hosts: all
-  tags: [ 'validate' ]
-  tasks:
-  - napalm_install_config:
-      hostname: "{{ inventory_hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      dev_os: "{{ os }}"
-      config_file: "{{ host_dir }}/assembled.conf"
-      replace_config: False
-      get_diffs: True
-      commit_changes: False
-      diff_file: "{{ host_dir }}/config-diff"
+  post_tasks:
+    - name: Assembling configuration components
+      tags: [ 'build','validate' ]
+      assemble:
+         src: "{{ host_dir }}"
+         dest: "{{ host_dir }}/assembled.conf"
+      changed_when: False
+    - name: Compare data model with configuration on device, report the differences
+      tags: [ 'validate' ]
+      napalm_install_config:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: "{{ os }}"
+        config_file: "{{ host_dir }}/assembled.conf"
+        replace_config: False
+        get_diffs: True
+        commit_changes: False
+        diff_file: "{{ host_dir }}/config-diff"
       
       
       
