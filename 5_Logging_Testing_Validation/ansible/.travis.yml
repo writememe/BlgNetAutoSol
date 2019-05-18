@@ -1,12 +1,7 @@
 ---
 language: python
-
-env:
-  global:
-    - YAML_VER=1.10.0
-
 install:
-  - sudo pip install yamllint=="${YAML_VER}"
-
+  - pip install ansible-lint
+  - ansible-lint --version
 script:
-  - yamllint -c .yamllint.yml $(find . -type f -name "data-model-compare.yml")
+  - ansible-lint data-model-compare.yml
