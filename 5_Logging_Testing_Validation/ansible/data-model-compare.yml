@@ -30,7 +30,7 @@
   vars:
     model_dir: "datamodel"
   vars_files:
-    - "{{model_dir}}/node-model.yml"
+    - "{{ model_dir }}/node-model.yml"
   roles:
     - base
     - common
@@ -56,6 +56,3 @@
         get_diffs: True
         commit_changes: False
         diff_file: "{{ host_dir }}/config-diff"
-      
-      
-      

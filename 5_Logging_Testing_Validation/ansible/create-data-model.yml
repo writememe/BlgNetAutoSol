@@ -2,7 +2,7 @@
 - name: Building configuration from data model
   hosts: localhost
   gather_facts: no
-  tags: [ 'build','validate' ]
+  tags: ['build', 'validate']
   vars:
      model_dir: "datamodel"
      hostname: "{{ inventory_hostname.split('.')[0] }}"
@@ -26,6 +26,6 @@
 - name: Render data model
   hosts: localhost
   gather_facts: no
-  vars_files: [ fabric-model.yml ]
+  vars_files: [fabric-model.yml]
   roles:
-    - datamodel
+     - datamodel

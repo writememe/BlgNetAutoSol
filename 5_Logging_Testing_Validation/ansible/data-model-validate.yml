@@ -27,7 +27,6 @@
         state: directory
       changed_when: False
       run_once: True
- 
 
 - name: Create validation files, based on the datamodel
   hosts: all
@@ -81,7 +80,7 @@
       ignore_errors: yes
     - name: Dump results to debug files
       local_action: >
-        copy content="{{val_results|to_nice_json}}"
+        copy content="{{ val_results | to_nice_json }}"
           dest="{{ debug_report_dir }}/{{ inventory_hostname }}-Validation-Compliance-Report.json"
     - name: Render Individual Summary Reports
       template:
