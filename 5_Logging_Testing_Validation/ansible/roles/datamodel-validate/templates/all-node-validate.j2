@@ -1,0 +1,138 @@
+# Validation Rules - Automatically created from data model
+{% set node = nodes[inventory_hostname] %}
+---
+
+nodes:
+{%   for node in nodes %}
+  {{ node.name }}:
+  - get_facts:
+      fqdn: {{ node.name }}
+      hostname: {{ node.name.partition('.')[0] }}
+  - get_lldp neighbors:
+{%     for link in fabric %}
+{%      if link.left == node.name %}
+{%     if node.os == 'junos' %}
+      {{ link.left_port }}.0:
+{%     elif node.os != 'junos' %}
+      {{ link.left_port }}:
+{%    endif %}
+      -  hostname: {{ link.right }}
+         port: {{link.right_port }}
+{%      elif link.right == node.name %}
+{%     if node.os == 'junos' %}
+      {{ link.right_port }}.0:
+{%     elif node.os != 'junos' %}
+      {{ link.right_port }}:
+{%    endif %}
+      -  hostname: {{ link.left }}
+         port: {{link.left_port }}
+{%      endif %}{%   endfor %}
+  - get_interfaces:
+{%     for link in fabric %}
+{%      if link.left == node.name %}
+{%     if node.os == 'junos' %}
+      {{ link.left_port }}.0:
+{%     elif node.os != 'junos' %}
+      {{ link.left_port }}:
+{%    endif %}
+         description: {{ link.left_description|default( 'To ' +  link.right + ' - ' + link.right_port) }}
+         is_enabled: true
+         is_up: true
+{%      elif link.right == node.name %}
+{%     if node.os == 'junos' %}
+      {{ link.right_port }}.0:
+{%     elif node.os != 'junos' %}
+      {{ link.right_port }}:
+{%    endif %}
+         description: {{ link.right_description|default( 'To ' + link.left + ' - ' + link.left_port) }} 
+         is_enabled: true
+         is_up: true
+{%      endif %}
+{%     endfor %}
+{%   if node.os == 'ios' %}
+      Loopback0:
+        description: Loopback Interface
+        is_enabled: true
+        is_up: true
+{%   elif node.os == 'junos' %}
+      lo0.0:
+        description: Loopback_Interface
+        is_enabled: true
+        is_up: true
+{%   elif node.os == 'eos' %}
+      Loopback0:
+        description: Loopback Interface
+        is_enabled: true
+        is_up: true
+{%   elif node.os == 'nxos' %}
+      loopback0:
+        description: Loopback Interface
+        is_enabled: true
+        is_up: true
+{%   endif %}
+  - get_interfaces_ip:
+{%     for link in fabric %}
+{%      if link.left == node.name %}
+{%     if node.os == 'junos' %}
+      {{ link.left_port }}.0:
+{%     elif node.os != 'junos' %}
+      {{ link.left_port }}:
+{%    endif %}
+        ipv4:
+          {{ link.left_ip | ipaddr('address') }}:
+            prefix_length: {{ link.left_ip | ipaddr('prefix') }}
+{%    elif link.right == node.name %}
+{%     if node.os == 'junos' %}
+      {{ link.right_port }}.0:
+{%     elif node.os != 'junos' %}
+      {{ link.right_port }}:
+{%    endif %}
+        ipv4:
+          {{ link.right_ip | ipaddr('address') }}:
+            prefix_length: {{ link.right_ip | ipaddr('prefix') }}
+{%    endif %}
+{%   endfor %}
+{%   if node.os == 'ios' %}
+      Loopback0:
+        ipv4:      
+          {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('address')) }}
+            prefix_length: {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('prefix')) }}
+{%   elif node.os == 'junos' %}
+      lo0.0:
+        ipv4:
+          {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('address')) }}
+            prefix_length: {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('prefix')) }}
+{%   elif node.os == 'eos' %}
+      Loopback0:
+        ipv4:
+          {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('address')) }}
+            prefix_length: {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('prefix')) }}
+{%   elif node.os == 'nxos' %}
+      loopback0:
+        ipv4:
+          {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('address')) }}
+            prefix_length: {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('prefix')) }}
+{%   endif %}
+  - get_bgp_neighbors:
+      global:
+      router_id: {{ (loopback_subnet |ipsubnet (32,(node.id | int )) | ipaddr('address')) }}
+        peers:
+{%     for peer in routing %}
+{%      if peer.left == node.name %}
+          {{ peer.right_ip }}:
+            description: {{ peer.right }}
+            is_enabled: true
+            is_up: true
+            local_as: {{ peer.left_as }}
+            remote_as: {{ peer.right_as }}
+{%     elif peer.right == node.name %}
+          {{ peer.left_ip }}:
+            description: {{ peer.left }}
+            is_enabled: true
+            is_up: true
+            local_as: {{ peer.right_as }}
+            remote_as: {{ peer.left_as }} 
+{%    endif %}
+{%   endfor %}
+
+{%   endfor %}
