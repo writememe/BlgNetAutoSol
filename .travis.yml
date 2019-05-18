@@ -4,4 +4,4 @@ install:
   - pip install ansible-lint
   - ansible-lint --version
 script:
-  - ansible-lint ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml
+  - ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml
