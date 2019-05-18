@@ -8,52 +8,49 @@
     deploy_dir: "deployed"
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
-  - name: Set global facts
-    set_fact:
-      host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
-      change_dir: "{{ config_dir }}/{{ deploy_dir }}"
-    changed_when: False
-    check_mode: yes
-  - name: Checking config directory is created
-    file: path={{ config_dir }} state=directory
-    check_mode: no
-    run_once: yes
-  - name: Clearing old deployed configuration files
-    file: path={{ change_dir }} state=absent
-    changed_when: False
-    check_mode: no 
-  - name: Rebuilding deployed directory
-    file: path={{ change_dir }} state=directory
-    check_mode: no
-    run_once: yes
-  - name: Checking host directory is created
-    file: path={{ host_dir }} state=directory
-    changed_when: False
-    check_mode: no
-  - name: Checking that configuration file(s) for deployment exist
-    stat:
-      path: "{{ host_dir }}/assembled.conf"
-    register: config_file
-  - fail: 
-      msg: "Configuration file {{ host_dir }}/assembled.conf does not exist. Please review and resolve" 
-    when: config_file.stat.exists == False
+    - name: Set global facts
+      set_fact:
+        host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
+        change_dir: "{{ config_dir }}/{{ deploy_dir }}"
+      changed_when: False
+      check_mode: yes
+    - name: Checking config directory is created
+      file: path={{ config_dir }} state=directory
+      check_mode: no
+      run_once: yes
+    - name: Clearing old deployed configuration files
+      file: path={{ change_dir }} state=absent
+      changed_when: False
+      check_mode: no
+    - name: Rebuilding deployed directory
+      file: path={{ change_dir }} state=directory
+      check_mode: no
+      run_once: yes
+    - name: Checking host directory is created
+      file: path={{ host_dir }} state=directory
+      changed_when: False
+      check_mode: no
+    - name: Checking that configuration file(s) for deployment exist
+      stat:
+        path: "{{ host_dir }}/assembled.conf"
+      register: config_file
+    - fail:
+        msg: "Configuration file {{ host_dir }}/assembled.conf does not exist. Please review and resolve"
+      when: config_file.stat.exists == False
 
 - name: Deploy configuration
   hosts: all
   vars:
     hostname: "{{ inventory_hostname.split('.')[0] }}"
-  tags: [ 'deploy' ]
+  tags: ['deploy']
   tasks:
-  - napalm_install_config:
-      hostname: "{{ inventory_hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      dev_os: "{{ os }}"
-      config_file: "{{ host_dir }}/assembled.conf"
-      replace_config: False
-      get_diffs: True
-      commit_changes: True
-      diff_file: "{{ change_dir }}/{{ hostname }}-deployed-config-diff"
-
-
-
+    - napalm_install_config:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: "{{ os }}"
+        config_file: "{{ host_dir }}/assembled.conf"
+        replace_config: False
+        get_diffs: True
+        commit_changes: True
+        diff_file: "{{ change_dir }}/{{ hostname }}-deployed-config-diff"
