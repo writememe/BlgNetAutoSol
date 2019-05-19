@@ -33,7 +33,7 @@
   vars:
     datamodel_dir: "{{ playbook_dir }}/datamodel"
   connection: local
-  gather_facts: no
+  gather_facts: false
   vars_files: ["{{ datamodel_dir }}/node-model.yml"]
   roles:
     - validate
@@ -78,11 +78,13 @@
         validation_file: >
           "validate/files/{{ inventory_hostname }}/automated-validation.yml"
       register: val_results
-      ignore_errors: yes
+      ignore_errors: true
     - name: Dump results to debug files
       delegate_to: localhost
-      copy: content="{{ val_results | to_nice_json }}"
-          dest="{{ debug_report_dir }}/{{ inventory_hostname }}-Validation-Compliance-Report.json"
+      copy: >
+        content="{{ val_results | to_nice_json }}"
+          dest="{{ debug_report_dir }}/
+          {{ inventory_hostname }}-Validation-Compliance-Report.json"
     - name: Render Individual Summary Reports
       template:
         src: "templates/report-validation.j2"
@@ -101,10 +103,11 @@
     - name: Display compliance results
       debug:
         var: val_results.compliance_report.complies
-    # When a host fails compliance, fail the play and display the exact file which the user will need to review.
+    # If a host fails compliance, fail the play and display the file to review
     - name: Compliance check failure
       fail:
         msg: >
-              "{{ inventory_hostname }} failed compliance. Refer to the full report at
-               {{ debug_report_dir }}/{{ inventory_hostname }}-Validation-Compliance-Report.json"
+              "{{ inventory_hostname }} failed compliance. Refer to the full
+              report at {{ debug_report_dir }}/{{ inventory_hostname }}
+              -Validation-Compliance-Report.json"
       when: not val_results.compliance_report.complies
