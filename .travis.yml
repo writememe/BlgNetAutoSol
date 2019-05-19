@@ -3,5 +3,11 @@ language: python
 install:
   - pip install ansible-lint
   - ansible-lint --version
-script:
-  - ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml
+jobs:
+  include:
+    - stage: ansible-lint-1
+      name: ansible-lint-1
+      script: ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml 1
+    - stage: ansible-lint-2
+      name: ansible-lint-2
+      script: ansible-lint 5_Logging_Testing_Validation/ansible/data-model-validate.yml 2
