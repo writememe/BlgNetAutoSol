@@ -9,7 +9,7 @@ jobs:
   include:
     - stage: ansible-lint
       name: ansible-lint-1
-      script: yamllint 5_Logging_Testing_Validation/ansible/create-data-model.yml 1
+      script: ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml 1
     - stage: yamllint
       name: yamllint-1
       script: yamllint 5_Logging_Testing_Validation/ansible/data-model-validate.yml 2
