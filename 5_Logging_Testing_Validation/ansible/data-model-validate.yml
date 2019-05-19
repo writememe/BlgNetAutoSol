@@ -10,23 +10,23 @@
     - name: Prepare validate datamodel directory
       set_fact:
         val_dir: "{{ validate_dir }}/{{ inventory_hostname }}"
-      changed_when: False
+      changed_when: false
     - name: Ensure there are no files from previous runs
       file:
         path: "{{ val_dir }}"
         state: absent
-      changed_when: False
+      changed_when: false
     - name: Create directory where assembled validation rule file is stored
       file:
         path: "{{ val_dir }}"
         state: directory
-      changed_when: False
+      changed_when: false
     - name: Prepare reports directory
       file:
         path: "{{ raw_report_dir }}"
         state: directory
-      changed_when: False
-      run_once: True
+      changed_when: false
+      run_once: true
 
 - name: Create validation files, based on the datamodel
   hosts: all
@@ -34,9 +34,9 @@
     datamodel_dir: "{{ playbook_dir }}/datamodel"
   connection: local
   gather_facts: no
-  vars_files: [ "{{ datamodel_dir }}/node-model.yml" ]
+  vars_files: ["{{ datamodel_dir }}/node-model.yml"]
   roles:
-     - validate
+    - validate
 
 - name: Perform automated validation and produce compliance report
   hosts: all
@@ -50,32 +50,33 @@
       file:
         path: "{{ report_dir }}"
         state: absent
-      changed_when: False
-      run_once: True
+      changed_when: false
+      run_once: true
     - name: Recreate report directory
       file:
         path: "{{ report_dir }}"
         state: directory
-      changed_when: False
-      run_once: True
+      changed_when: false
+      run_once: true
     - name: Ensure that no debug report files are present from previous runs
       file:
         path: "{{ debug_report_dir }}"
         state: absent
-      changed_when: False
-      run_once: True
+      changed_when: false
+      run_once: true
     - name: Recreate debug report directory
       file:
         path: "{{ debug_report_dir }}"
         state: directory
-      run_once: True
+      run_once: true
     - name: Use NAPALM to automatically validate configuration
       napalm_validate:
         hostname: "{{ inventory_hostname }}"
         username: "{{ username }}"
         dev_os: "{{ os }}"
         password: "{{ password }}"
-        validation_file: "validate/files/{{ inventory_hostname }}/automated-validation.yml"
+        validation_file: >
+          "validate/files/{{ inventory_hostname }}/automated-validation.yml"
       register: val_results
       ignore_errors: yes
     - name: Dump results to debug files
@@ -90,12 +91,12 @@
       file:
         path: "{{ report_dir }}/All-Host-Validation-Report.txt"
         state: absent
-      run_once: True
+      run_once: true
     - name: Compile Individual summary reports into single report
       assemble:
         src: "{{ report_dir }}"
         dest: "{{ report_dir }}/All-Host-Validation-Report.txt"
-      run_once: True
+      run_once: true
     # Always display the successful compliance results
     - name: Display compliance results
       debug:
