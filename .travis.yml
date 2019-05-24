@@ -15,5 +15,4 @@ jobs:
     - stage: ansible-lint
       name: ansible-linting-playbooks-2
       script:
-        - cd 5_Logging_Testing_Validation/ansible/     
-        - ansible-lint *data-model*.yml
+        - ansible-lint 5_Logging_Testing_Validation/ansible/*data-model*.yml
