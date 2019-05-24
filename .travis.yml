@@ -1,5 +1,9 @@
 ---
 language: python
+python:
+  - "2.7"
+  - "3.6"
+  - "3.7"
 install:
   - pip install ansible-lint
   - ansible-lint --version
@@ -9,7 +13,8 @@ jobs:
   include:
     - stage: ansible-lint
       name: ansible-lint-1
-      script: ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml
+    - script: ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml
+    - script: ansible-lint 5_Logging_Testing_Validation/ansible/data-model-compare.yml
     - stage: yamllint
       name: yamllint-2
       script: yamllint 5_Logging_Testing_Validation/ansible/data-model-validate.yml

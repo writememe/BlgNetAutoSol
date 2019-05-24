@@ -1,7 +1,7 @@
 ---
 - name: Building configuration from data model
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
   tags: ['build', 'validate']
   vars:
      model_dir: "datamodel"
@@ -12,20 +12,20 @@
           data_dir: "{{ model_dir }}"
      - name: Checking model directory is created
        file: path={{ model_dir }} state=directory
-       check_mode: no
-       run_once: yes
+       check_mode: false
+       run_once: true
      - name: Clearing old data model configuration files
        file: path={{ data_dir }} state=absent
-       changed_when: False
-       check_mode: no
+       changed_when: false
+       check_mode: true
      - name: Rebuild data model configuration directories
        file: path={{ data_dir }} state=directory
-       changed_when: False
-       check_mode: no
+       changed_when: false
+       check_mode: true
 
 - name: Render data model
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
   vars_files: [fabric-model.yml]
   roles:
      - datamodel
