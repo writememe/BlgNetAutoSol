@@ -5,6 +5,8 @@ install:
   - ansible-lint --version
   - pip install yamllint
   - yamllint --version
+  - pip install napalm-ansible
+  - napalm-ansible --version
 jobs:
   include:
     - stage: yaml-lint
