@@ -13,7 +13,7 @@ jobs:
   include:
     - stage: yaml-lint
       name: yamllint playbooks
-    - script: yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml
+      script: yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml
     - stage: ansible-lint
       name: ansible-linting playbooks
       script: yamllint 5_Logging_Testing_Validation/ansible/data-model-validate.yml
