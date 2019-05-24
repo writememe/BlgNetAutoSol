@@ -12,31 +12,34 @@
       set_fact:
         host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
         change_dir: "{{ config_dir }}/{{ deploy_dir }}"
-      changed_when: False
-      check_mode: yes
+      changed_when: false
+      check_mode: true
     - name: Checking config directory is created
       file: path={{ config_dir }} state=directory
-      check_mode: no
-      run_once: yes
+      check_mode: false
+      run_once: true
     - name: Clearing old deployed configuration files
       file: path={{ change_dir }} state=absent
-      changed_when: False
-      check_mode: no
+      changed_when: false
+      check_mode: false
     - name: Rebuilding deployed directory
       file: path={{ change_dir }} state=directory
-      check_mode: no
-      run_once: yes
+      check_mode: false
+      run_once: true
     - name: Checking host directory is created
       file: path={{ host_dir }} state=directory
-      changed_when: False
-      check_mode: no
+      changed_when: false
+      check_mode: false
     - name: Checking that configuration file(s) for deployment exist
       stat:
         path: "{{ host_dir }}/assembled.conf"
       register: config_file
-    - fail:
-        msg: "Configuration file {{ host_dir }}/assembled.conf does not exist. Please review and resolve"
-      when: config_file.stat.exists == False
+    - name: Failure message, file does not exist
+      fail:
+        msg: >
+              "Configuration file {{ host_dir }}/assembled.conf does not exist.
+               Please review and resolve"
+      when: not config_file.stat.exists
 
 - name: Deploy configuration
   hosts: all
@@ -44,13 +47,14 @@
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tags: ['deploy']
   tasks:
-    - napalm_install_config:
+    - name: Deploying configuration
+      napalm_install_config:
         hostname: "{{ inventory_hostname }}"
         username: "{{ username }}"
         password: "{{ password }}"
         dev_os: "{{ os }}"
         config_file: "{{ host_dir }}/assembled.conf"
-        replace_config: False
-        get_diffs: True
-        commit_changes: True
+        replace_config: false
+        get_diffs: true
+        commit_changes: true
         diff_file: "{{ change_dir }}/{{ hostname }}-deployed-config-diff"

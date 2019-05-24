@@ -5,11 +5,14 @@ install:
   - ansible-lint --version
   - pip install yamllint
   - yamllint --version
+  - pip install napalm-ansible
+  - napalm-ansible --version
 jobs:
   include:
+    - stage: yaml-lint
+      name: Yamllint Playbooks-1
+      script: yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml
     - stage: ansible-lint
-      name: ansible-lint-1
-      script: ansible-lint 5_Logging_Testing_Validation/ansible/create-data-model.yml
-    - stage: yamllint
-      name: yamllint-2
-      script: yamllint 5_Logging_Testing_Validation/ansible/data-model-validate.yml
+      name: Ansible-lint Playbooks-2
+      script:
+        - ansible-lint 5_Logging_Testing_Validation/ansible/*data-model*.yml
