@@ -46,7 +46,7 @@ The command which is executed is:
 This command ensures that the following playbooks are checked:   
 `create-data-model.yml`    
 `data-model-compare.yml`  
-`data-model-deploy.yml` 
+`data-model-deploy.yml`  
 `data-model-validate.yml`  
 
 Most importantly, it doesn't check `fabric-model.yml`. This is intentional as I have deliberately excepted this from yamllint. The main reason is I intentionally want my `fabric-model.yml` file to be readable, rather than cosmetically correct as per yamllint enforcement.
@@ -61,17 +61,41 @@ The command which is executed is:
 This command ensures that the following playbooks are checked:  
 `create-data-model.yml`    
 `data-model-compare.yml`  
-`data-model-deploy.yml` 
+`data-model-deploy.yml`  
 `data-model-validate.yml`  
 
 Finally, it doesn't check `fabric-model.yml`, given it's not an Ansible playbook.
 
+## Known Issues ##
 
-This assignment is under construction.
+At the time of writing, all the known issues encountered in [Module 3 - Data Models](https://github.com/writememe/BlgNetAutoSol/tree/master/3_Data_Models) and [Module 4 - Changing Network Configurations and State](https://github.com/writememe/BlgNetAutoSol/blob/master/4_Net_Configs_And_State), still apply. The following known issues were encountered in this module.
 
-Completed
+### Placement of .travis.yml file ###
 
-- Integrated Travis CI pipeline, with two build stages (yamllint and ansible-lint)
-- Custom `ansible.cfg` file added for the CI pipeline, so that napalm-ansible modules will pass the ansible-lint requirements.
-- Conditional debug output for the `data-model-deploy.yml` playbook so that a running set of logs can be kept if needed when making changes to devices.
+Due to the way Travis CI works, your `.travis.yml` file must be in the root of your repository directory. Initially, I had it at the root of the `5_Logging_Testing_Validation/ansible/` directory. To migitate this, I have placed at the root of my repository, but have ensured both my `yamllint` and `ansible-lint` stages refer to the specific playbook directory.
+
+### napalm-ansible modules failing ansible-lint ###
+
+When Travis CI, builds the test environment, ansible-lint fails every playbook with napalm-ansible modules because it can't find the  napalm-ansible library or the action plugins. In order to get around this, I have created a custom `ansible.cfg` directory in the root of the repository to give the Travis CI environment the location for these variables. Below is the excerpt of the file:  
+```
+# Due to the vagaries of the CI pipeline, this ansible config file is present and is purely used for Travis CI testing
+[defaults]
+library = /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/napalm_ansible/modules
+action_plugins = /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/napalm_ansible/plugins/action
+````
+You will notice that the library and action_plugins refer the virtualenv created under the user travis which is used by Travis CI.
+
+## Learnings
+
+Using the `--extra-vars` option in Ansible playbooks is a graceful way to toggle debugging on and off on playbooks. Using the date command to ascertain a timestamp for use to appending to a log file name is a nice way of creating an audit trail on debug logs.  
+
+Building a CI pipeline took some significant time to integrate and understand. Initially I got my CI pipeline to pass with only one stage testing a single file using yamllint. Then, I moved to adding a single file in a second stage using ansible-lint. My next approach was to yamllint and ansible-lint all my playbooks locally, then resolve the issues with those playbooks. At this point, I thought that testing all my playbooks using yamllint and ansible-lint would work after that.  
+
+That's when I encountered the napalm-ansible modules issue which took me a significant amount of time to identify and resolve the problem, given that they were working locally and not in Travis CI. 
+
+The best thing about the CI pipeline is that all tests are binary. There is no room for partial success. The worst thing about the CI pipeline is that all tests are binary. These is no rooom for partial failure! If you look through my [build history](https://travis-ci.org/writememe/BlgNetAutoSol/builds), you will gain an insight into how long it took.
+
+## Summary
+
+Adding conditional logging and CI to my overall solution has added another level of reliability and rigour to the solution. Learning how to use and interact with Travis CI has been a worthwhile process. When attempt to scale a git project over multiple developers, CI providers a way to automating testing of the code prior to being pushed to production. It forces you and your colleagues to write better code and have greater confidence when performing proactive testing.
 
