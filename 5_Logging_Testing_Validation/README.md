@@ -44,27 +44,27 @@ The command which is executed is:
 `yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml` 
 
 This command ensures that the following playbooks are checked:   
-*create-data-model.yml*  
-*data-model-compare.yml*
-*data-model-deploy.yml*
-*data-model-validate.yml*
+`create-data-model.yml`    
+`data-model-compare.yml`  
+`data-model-deploy.yml` 
+`data-model-validate.yml`  
 
-Most importantly, it doesn't check *fabric-model.yml*. This is intentional as I have deliberately excepted this from yamllint. The main reason is I intentionally want my *fabric-model.yml* file to be readable, rather than cosmetically correct as per yamllint enforcement.
+Most importantly, it doesn't check `fabric-model.yml`. This is intentional as I have deliberately excepted this from yamllint. The main reason is I intentionally want my `fabric-model.yml` file to be readable, rather than cosmetically correct as per yamllint enforcement.
 
 ### Stage Two - ansible-lint ###
 
 The second stage uses [ansible-lint](https://github.com/ansible/ansible-lint) to check playbooks for practices and behaviour that could potentially be improved.
 
 The command which is executed is:  
-`yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml
+`yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml`  
 
 This command ensures that the following playbooks are checked:  
-*create-data-model.yml*
-*data-model-compare.yml*
-*data-model-deploy.yml*
-*data-model-validate.yml*
+`create-data-model.yml`    
+`data-model-compare.yml`  
+`data-model-deploy.yml` 
+`data-model-validate.yml`  
 
-Finally, it doesn't check *fabric-model.yml*, given it's not an Ansible playbook.
+Finally, it doesn't check `fabric-model.yml`, given it's not an Ansible playbook.
 
 
 This assignment is under construction.
