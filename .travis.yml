@@ -10,9 +10,9 @@ install:
 jobs:
   include:
     - stage: yaml-lint
-      name: Yamllint Playbooks-1
+      name: yamllint data model playbooks-1
       script: yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml
     - stage: ansible-lint
-      name: Ansible-lint Playbooks-2
+      name: ansible-lint data model playbooks-2
       script:
         - ansible-lint 5_Logging_Testing_Validation/ansible/*data-model*.yml
