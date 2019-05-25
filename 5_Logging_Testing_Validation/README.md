@@ -32,16 +32,18 @@ This allows the operator to repeatedly execute configuration changes over time, 
 
 ## CI Pipeline ##
 
-This module has a CI pipeline using [Travis CI](https://travis-ci.org/). Given that I have already performed validation testing using NAPALM Validate in [Module 4 - Changing Network  
-Configurations and State](https://github.com/writememe/BlgNetAutoSol/blob/master/4_Net_Configs_And_State), this CI pipeline will focus on ensuring all future changes to the project are automatically built and testing, when a pull request is created.
+This module has a CI pipeline using [Travis CI](https://travis-ci.org/). Given that I have already performed validation testing using NAPALM Validate in [Module 4](https://github.com/writememe/BlgNetAutoSol/blob/master/4_Net_Configs_And_State), this CI pipeline will focus on ensuring all future changes to the project are automatically built and tested, when a pull request is created.
 
 The pipeline has two stages which are described in order below:
 
 ### Stage One - yamllint ###
 
-This first stage uses [yamllint](https://github.com/adrienverge/yamllint) to check for syntax validity, key repitition, line length, trailing spaces and identation of the playbooks, being YAML files. The command which is executed is:
-`yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml`
-This command ensures that the following playbooks are checked: 
+This first stage uses [yamllint](https://github.com/adrienverge/yamllint) to check for syntax validity, key repitition, line length, trailing spaces and identation of the playbooks, being YAML files.
+
+The command which is executed is:  
+`yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml` 
+
+This command ensures that the following playbooks are checked:   
 *create-data-model.yml*  
 *data-model-compare.yml*
 *data-model-deploy.yml*
@@ -53,9 +55,10 @@ Most importantly, it doesn't check *fabric-model.yml*. This is intentional as I 
 
 The second stage uses [ansible-lint](https://github.com/ansible/ansible-lint) to check playbooks for practices and behaviour that could potentially be improved.
 
-The command which is executed is:
-`yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml`
-This command ensures that the following playbooks are checked:
+The command which is executed is:  
+`yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml
+
+This command ensures that the following playbooks are checked:  
 *create-data-model.yml*
 *data-model-compare.yml*
 *data-model-deploy.yml*
