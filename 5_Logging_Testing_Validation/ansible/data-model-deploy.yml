@@ -6,12 +6,14 @@
     config_dir: "configs"
     build_dir: "compiled"
     deploy_dir: "deployed"
+    debug_dir: "debugs"
     hostname: "{{ inventory_hostname.split('.')[0] }}"
   tasks:
     - name: Set global facts
       set_fact:
         host_dir: "{{ config_dir }}/{{ build_dir }}/{{ hostname }}"
         change_dir: "{{ config_dir }}/{{ deploy_dir }}"
+        debug_deploy_dir: "{{ debug_dir }}/{{ deploy_dir }}"
       changed_when: false
       check_mode: true
     - name: Checking config directory is created
@@ -34,6 +36,21 @@
       stat:
         path: "{{ host_dir }}/assembled.conf"
       register: config_file
+    - name: Checking for debug directory folder
+      file: path={{ debug_deploy_dir }} state=directory
+      check_mode: false
+      run_once: true
+      when: debug is defined
+    - name: Gather current time and format as a timestamp
+      command: "date +%Y-%m-%d-%H-%M-%S"
+      register: current_time
+      run_once: true
+      when: debug is defined
+    - name: Set time fact for debugging
+      set_fact:
+        time: "{{ current_time.stdout }}"
+      run_once: true
+      when: debug is defined
     - name: Failure message, file does not exist
       fail:
         msg: >
@@ -58,3 +75,9 @@
         get_diffs: true
         commit_changes: true
         diff_file: "{{ change_dir }}/{{ hostname }}-deployed-config-diff"
+      register: debug_deployment
+    - name: Dump debug outputs for analysis, when requested
+      copy:
+        content: "{{ debug_deployment.msg }}"
+        dest: "{{ debug_deploy_dir }}/{{ hostname }}-{{ time }}.log"
+      when: debug is defined
