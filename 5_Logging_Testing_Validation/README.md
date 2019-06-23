@@ -24,7 +24,7 @@ By activating the `debug` variable, the playbook will log all configuration chan
 
 *hostname-yy-mm-dd-hh-mm-ss.log*  
 
-For example, a hostname of 'lab-router' which had configuration changes deployed on the 3th of May, 2019 at 19:38:00 would generate the log file of:  
+For example, a hostname of 'lab-router' which had configuration changes deployed on the 30th of May, 2019 at 19:38:00 would generate the log file of:  
 
 *lab-router-2019-05-30-19-38-00.log*
 
@@ -38,7 +38,7 @@ The pipeline has two stages which are described in order below:
 
 ### Stage One - yamllint ###
 
-This first stage uses [yamllint](https://github.com/adrienverge/yamllint) to check for syntax validity, key repitition, line length, trailing spaces and identation of the playbooks, being YAML files.
+This first stage uses [yamllint](https://github.com/adrienverge/yamllint) to check for syntax validity, key repetition, line length, trailing spaces and identation of the playbooks, being YAML files.
 
 The command which is executed is:  
 `yamllint 5_Logging_Testing_Validation/ansible/*data-model*.yml` 
@@ -76,7 +76,7 @@ Due to the way Travis CI works, your `.travis.yml` file must be in the root of y
 
 ### napalm-ansible modules failing ansible-lint ###
 
-When Travis CI, builds the test environment, ansible-lint fails every playbook with napalm-ansible modules because it can't find the  napalm-ansible library or the action plugins. In order to get around this, I have created a custom `ansible.cfg` directory in the root of the repository to give the Travis CI environment the location for these variables. Below is the excerpt of the file:  
+When Travis CI builds the test environment, ansible-lint fails every playbook with napalm-ansible modules because it can't find the  napalm-ansible library or the action plugins. In order to get around this, I have created a custom `ansible.cfg` directory in the root of the repository to give the Travis CI environment the location for these variables. Below is the excerpt of the file:  
 ```
 # Due to the vagaries of the CI pipeline, this ansible config file is present and is purely used for Travis CI testing
 [defaults]
@@ -93,9 +93,12 @@ Building a CI pipeline took some significant time to integrate and understand. I
 
 That's when I encountered the napalm-ansible modules issue which took me a significant amount of time to identify and resolve the problem, given that they were working locally and not in Travis CI. 
 
-The best thing about the CI pipeline is that all tests are binary. There is no room for partial success. The worst thing about the CI pipeline is that all tests are binary. These is no rooom for partial failure! If you look through my [build history](https://travis-ci.org/writememe/BlgNetAutoSol/builds), you will gain an insight into how long it took.
+The best thing about the CI pipeline is that all tests are binary. There is no room for partial success. The worst thing about the CI pipeline is that all tests are binary. These is no room for partial failure! If you look through my [build history](https://travis-ci.org/writememe/BlgNetAutoSol/builds), you will gain an insight into how long it took.
+
+I also worked out how to embed the build status of Travis CI into this README page as well
 
 ## Summary
 
-Adding conditional logging and CI to my overall solution has added another level of reliability and rigour to the solution. Learning how to use and interact with Travis CI has been a worthwhile process. When attempt to scale a git project over multiple developers, CI providers a way to automating testing of the code prior to being pushed to production. It forces you and your colleagues to write better code and have greater confidence when performing proactive testing.
+Adding conditional logging and CI to my overall solution has added another level of reliability and rigour to the solution. Learning how to use and interact with Travis CI has been a worthwhile process.  
+When attempting to scale a git project over multiple developers, CI providers a way to automating testing of the code prior to being pushed to production. It forces you and your colleagues to write better code and have greater confidence when performing proactive testing.
 

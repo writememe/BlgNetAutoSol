@@ -10,4 +10,4 @@ The lab network information and criteria can be found [here](https://github.com/
 ## Network Topology
 The network physical and topology for the setup is shown below:
 
-![Network Topology](https://github.com/writememe/BlgNetAutoSol/blob/master/Lab/Lab%20Diagram%20-%20v1.0.jpg)
+![Network Topology](https://github.com/writememe/BlgNetAutoSol/blob/master/Lab/Lab%20Diagram%20-%20v1.1.png)
