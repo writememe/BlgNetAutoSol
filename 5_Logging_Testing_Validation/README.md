@@ -18,7 +18,7 @@ In this module, there is only one playbook which deploys configuration changes w
 
 The playbook has been configured with a `debug` variable interpersed throughout the playbook. To activate the logging of the configuration changes, use the following command:
 
-`ansible-playbook data-model-deploy -e "debug=yes"`
+`ansible-playbook data-model-deploy.yml -e "debug=yes"`
 
 By activating the `debug` variable, the playbook will log all configuration changes in the `debugs/` directory. The formatting of the log files within the directory are as follows:  
 

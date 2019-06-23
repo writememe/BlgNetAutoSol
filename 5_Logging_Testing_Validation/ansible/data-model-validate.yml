@@ -75,8 +75,7 @@
         username: "{{ username }}"
         dev_os: "{{ os }}"
         password: "{{ password }}"
-        validation_file: >
-          "validate/files/{{ inventory_hostname }}/automated-validation.yml"
+        validation_file: "{{ val_dir }}/automated-validation.yml"
       register: val_results
       ignore_errors: true
     - name: Dump results to debug files
